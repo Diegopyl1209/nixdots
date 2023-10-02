@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+
+# Import Current Theme
+DIR="$HOME/.config/rofi"
+RASI="$DIR/screenshot.rasi"
+
+# Theme Elements
+prompt='Screenshot'
+mesg="Directory :: Imágenes/Screenshots"
+
+# Options
+layout=`cat ${RASI} | grep 'USE_ICON' | cut -d'=' -f2`
+if [[ "$layout" == 'NO' ]]; then
+	option_1=" Capture Desktop"
+	option_2=" Capture All Monitor"
+	option_3=" Capture Area"
+	option_4=" Capture Window"
+	option_5=" Capture in 5s"
+	option_6=" Capture in 10s"
+else
+	option_1=""
+	option_2="+"
+	option_3=""
+	option_4=""
+	option_5=""
+	option_6=""
+fi
+
+# Rofi CMD
+rofi_cmd() {
+	rofi -dmenu \
+		-p "$prompt" \
+		-mesg "$mesg" \
+		-markup-rows \
+		-theme ${RASI}
+}
+
+# Pass variables to rofi dmenu
+run_rofi() {
+	echo -e "$option_1\n$option_2\n$option_3\n$option_4\n$option_5\n$option_6" | rofi_cmd
+}
+
+# Screenshot
+time=`date +%Y-%m-%d-%H-%M-%S`
+dir="$HOME/Imágenes/Screenshots"
+file="Screenshot_${time}.png"
+
+# Directory
+if [[ ! -d "$dir" ]]; then
+	mkdir -p "$dir"
+fi
+
+# notify and view screenshot
+notify_cmd_shot="dunstify -u low -h string:x-dunst-stack-tag:obscreenshot -i $HOME/.local/share/icons/dunst/picture.png"
+notify_view() {
+	$notify_cmd_shot "Copied to clipboard."
+	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga &>/dev/null &
+	viewnior ${dir}/"$file"
+	if [[ -e "$dir/$file" ]]; then
+		${notify_cmd_shot} "Screenshot Saved."
+	else
+		${notify_cmd_shot} "Screenshot Deleted."
+	fi
+}
+
+# Copy screenshot to clipboard
+copy_shot () {
+	wl-copy
+}
+
+# countdown
+countdown () {
+	for sec in `seq $1 -1 1`; do
+		dunstify -t 1000 -h string:x-dunst-stack-tag:screenshottimer -i /usr/share/icons/dunst/timer.png "Taking shot in : $sec"
+		sleep 1
+	done
+}
+
+# take shots
+shotall () {
+	sleep 0.5 && grim "$dir/$file"
+	copy_shot < "$dir/$file"
+	notify_view
+}
+
+shot () {
+	sleep 0.5 && grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true)' | jq -r '.name')" "$dir/$file"
+	copy_shot < "$dir/$file"
+	notify_view
+}
+
+shot5 () {
+	countdown '5'
+	sleep 0.5 && grim "$dir/$file"
+	copy_shot < "$dir/$file"
+	notify_view
+}
+
+shot10 () {
+	countdown '10'
+	sleep 0.5 && grim "$dir/$file"
+	copy_shot < "$dir/$file"
+	notify_view
+}
+
+shotwin () {
+	sleep 0.5 && grim -g "$(hyprctl activewindow -j | jq -r '"\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"')" "$dir/$file"
+	copy_shot < "$dir/$file"
+	notify_view
+}
+
+shotarea () {
+	work="$(hyprctl monitors -j | jq -r 'map(.activeWorkspace.id)')"
+	win="$(hyprctl clients -j | jq -r --argjson workspaces "$work" 'map(select([.workspace.id] | inside($workspaces)))')"
+	grim -t png -g "$(echo "$win" | jq -r '.[] | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"' | slurp)" "$dir/$file"
+	copy_shot < "$dir/$file"
+	notify_view
+}
+
+copy () {
+	grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused == true)' | jq -r '.name')" - | copy_shot
+	${notify_cmd_shot} "Copied to clipboard."
+	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga &>/dev/null &
+}
+
+# Execute Command
+run_cmd() {
+	if [[ "$1" == '--opt1' ]]; then
+		shot
+	elif [[ "$1" == '--opt2' ]]; then
+		shotall
+	elif [[ "$1" == '--opt3' ]]; then
+		shotarea
+	elif [[ "$1" == '--opt4' ]]; then
+		shotwin
+	elif [[ "$1" == '--opt5' ]]; then
+		shot5
+	elif [[ "$1" == '--opt6' ]]; then
+		shot10
+	fi
+}
+
+# Actions
+rofi_sel() {
+	chosen="$(run_rofi)"
+	case ${chosen} in
+    $option_1)
+		run_cmd --opt1
+        ;;
+    $option_2)
+		run_cmd --opt2
+        ;;
+    $option_3)
+		run_cmd --opt3
+        ;;
+    $option_4)
+		run_cmd --opt4
+        ;;
+    $option_5)
+		run_cmd --opt5
+        ;;
+    $option_6)
+		run_cmd --opt6
+        ;;
+	esac
+}
+
+
+# Exec script
+if [ "$1" == "shot" ];
+then
+	shot
+elif [ "$1" == "copy" ];
+then
+	copy
+elif [ "$1" == "rofi" ];
+then
+	rofi_sel
+fi
+
+
+

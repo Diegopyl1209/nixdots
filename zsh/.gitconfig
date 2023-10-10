@@ -8,7 +8,7 @@
 	defaultBranch = main
 [user]
 	email = diegopyl1209@gmail.com
-	name = diegopyl1209
+	name = Diego Peña y Lillo
 	signingkey = ~/.ssh/id_rsa.pub
 [gpg]
 	format = ssh
@@ -46,3 +46,8 @@
 	hunk-header-decoration-style = box
 [color]
 	ui = auto
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f

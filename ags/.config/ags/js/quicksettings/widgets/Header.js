@@ -1,79 +1,30 @@
 import icons from '../../icons.js';
 import PowerMenu from '../../services/powermenu.js';
 import Theme from '../../services/theme/theme.js';
+import Lockscreen from '../../services/lockscreen.js';
+import Avatar from '../../misc/Avatar.js';
 import { uptime } from '../../variables.js';
-import MicMute from './MicMute.js';
-const { Battery } = ags.Service;
-const { Box, Label, Button, Icon, Overlay, ProgressBar } = ags.Widget;
+import { Widget } from '../../imports.js';
 
-const Avatar = () => Box({
-    className: 'avatar',
-    halign: 'start',
-    hexpand: false,
-    connections: [[Theme, box => {
-        box.setStyle(`
-            background-image: url('${Theme.getSetting('avatar')}');
-            background-size: cover;
-        `);
-    }]],
-    children: [
-        Box({
-            className: 'shader',
-            vexpand: true,
-            hexpand: true,
-        }),
-    ],
-});
 
-export const BatteryProgress = () => Box({
-    className: 'battery-progress',
-    vexpand: true,
-    connections: [[Battery, w => {
-        w.toggleClassName('half', Battery.percent < 46);
-        w.toggleClassName('low', Battery.percent < 30);
-    }]],
-    children: [Overlay({
-        vexpand: true,
-        child: ProgressBar({
-            hexpand: true,
-            vexpand: true,
-            connections: [[Battery, progress => {
-                progress.fraction = Battery.percent / 100;
-            }]],
-        }),
-        overlays: [Label({
-            connections: [[Battery, l => {
-                l.label = Battery.charging || Battery.charged
-                    ? icons.battery.charging
-                    : `${Battery.percent}%`;
-            }]],
-        })],
-    })],
-});
-
-export const MicToggle = () => Box({
-	className: 'mic-mute',
-	vexpand: true,
-	children: [ MicMute() ],	
-});
-
-export default () => Box({
+export default () => Widget.Box({
     className: 'header',
     children: [
         Avatar(),
-        Box({
+        Widget.Box({
             className: 'system-box',
             vertical: true,
             hexpand: true,
+            spacing: 10,
             children: [
-                Box({
+                Widget.Box({
                     children: [
-                        Button({
+                        Widget.Button({
                             valign: 'center',
-                            onClicked: Theme.openSettings,
-                            child: Icon(icons.settings),
+                            onClicked: () => Theme.openSettings(),
+                            child: Widget.Icon(icons.settings),
                         }),
-                        Label({
+                        Widget.Label({
                             className: 'uptime',
                             hexpand: true,
                             valign: 'center',
@@ -81,20 +32,35 @@ export default () => Box({
                                 label.label = `uptime: ${uptime.value}`;
                             }]],
                         }),
-                        Button({
+                        Widget.Button({
                             valign: 'center',
-                            onClicked: () => PowerMenu.action('logout'),
-                            child: Icon(icons.powermenu.logout),
+                            onClicked: () => Lockscreen.lockscreen(),
+                            child: Widget.Icon(icons.lock),
                         }),
-                        Button({
+                        Widget.Button({
                             valign: 'center',
                             onClicked: () => PowerMenu.action('shutdown'),
-                            child: Icon(icons.powermenu.shutdown),
+                            child: Widget.Icon(icons.powermenu.shutdown),
                         }),
                     ],
                 }),
-                MicToggle(),
-                //BatteryProgress(),
+
+                //TODO: change this to another thing
+                Widget.Box({
+                    children: [
+                        Widget.Button({
+                            valign: 'center',
+                            onClicked: () => Lockscreen.lockscreen(),
+                            child: Widget.Icon(icons.lock),
+                        }),
+                        Widget.Button({
+                            valign: 'center',
+                            onClicked: () => PowerMenu.action('shutdown'),
+                            child: Widget.Icon(icons.powermenu.shutdown),
+                        }),
+                    ],
+                }),
+
             ],
         }),
     ],

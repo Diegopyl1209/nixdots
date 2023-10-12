@@ -37,7 +37,7 @@
 
 window#dashboard .dashboard {
     @include floating_widget;
-	
+
     .notifications {
         min-width: 450px;
 
@@ -107,7 +107,7 @@ window#dashboard .dashboard {
     .clock {
         font-size: 5em;
     }
-    
+
     .uptime {
         font-size: 2em;
         color: transparentize($fg_color, 0.2);

@@ -2,64 +2,54 @@ import HoverRevealer from '../../misc/HoverRevealer.js';
 import PanelButton from '../PanelButton.js';
 import Indicator from '../../services/onScreenIndicator.js';
 import icons from '../../icons.js';
-const { App } = ags;
-const { Bluetooth, Audio, Notifications, Network } = ags.Service;
-const { Box, Label, Icon, Stack, CenterBox } = ags.Widget;
+import { App, Widget } from '../../imports.js';
+import { Bluetooth, Audio, Notifications, Network } from '../../imports.js';
 
-
-const MicrophoneMuteIndicator = () => Icon({
+const MicrophoneMuteIndicator = () => Widget.Icon({
     icon: icons.audio.mic.muted,
     connections: [[Audio, icon => {
         icon.visible = Audio.microphone?.isMuted;
     }, 'microphone-changed']],
 });
 
-const DNDIndicator = () => Icon({
+const DNDIndicator = () => Widget.Icon({
     icon: icons.notifications.silent,
-    connections: [[Notifications, icon => {
-        icon.visible = Notifications.dnd;
-    }]],
+    binds: [['visible', Notifications, 'dnd']],
 });
 
-const BluetoothDevicesIndicator = () => CenterBox({
-	centerWidget: Box({
-		vertical:true,
-	    connections: [[Bluetooth, box => {
-	        box.children = Bluetooth.connectedDevices
-	            .map(({ iconName, name }) => Box({
-	                child: Icon(iconName + '-symbolic'),
-	            }));
-	
-	        box.visible = Bluetooth.connectedDevices.length > 0;
-	    }]],
-	}),
+const BluetoothDevicesIndicator = () => Widget.Box({
+    vertical: true,
+    connections: [[Bluetooth, box => {
+        box.children = Bluetooth.connectedDevices
+            .map(({ iconName, name }) => Widget.Icon(iconName + '-symbolic'))
+
+        box.visible = Bluetooth.connectedDevices.length > 0;
+    }, 'notify::connected-devices']],
 });
 
-const BluetoothIndicator = () => Icon({
+const BluetoothIndicator = () => Widget.Icon({
     className: 'bluetooth',
     icon: icons.bluetooth.enabled,
     binds: [['visible', Bluetooth, 'enabled']],
 });
 
-const NetworkIndicator = () => Stack({
+const NetworkIndicator = () => Widget.Stack({
     items: [
-        ['wifi', Icon({
+        ['wifi', Widget.Icon({
             connections: [[Network, icon => {
                 icon.icon = Network.wifi?.iconName;
             }]],
         })],
-        ['wired', Icon({
+        ['wired', Widget.Icon({
             connections: [[Network, icon => {
                 icon.icon = Network.wired?.iconName;
             }]],
         })],
     ],
-    connections: [[Network, stack => {
-        stack.shown = Network.primary || 'wifi';
-    }]],
+    binds: [['shown', Network, 'primary']],
 });
 
-const AudioIndicator = () => Icon({
+const AudioIndicator = () => Widget.Icon({
     connections: [[Audio, icon => {
         if (!Audio.speaker)
             return;
@@ -75,7 +65,6 @@ const AudioIndicator = () => Icon({
 
 export default () => PanelButton({
     className: 'quicksettings panel-button',
-    style: "margin: 5px;",
     onClicked: () => App.toggleWindow('quicksettings'),
     onScrollUp: () => {
         Audio.speaker.volume += 0.02;
@@ -88,10 +77,9 @@ export default () => PanelButton({
     connections: [[App, (btn, win, visible) => {
         btn.toggleClassName('active', win === 'quicksettings' && visible);
     }]],
-    child: Box({
-    	vertical:true,
-    	spacing: 20,
-    	style: "margin:0;",
+    child: Widget.Box({
+        vertical: true,
+        spacing: 25,
         children: [
             MicrophoneMuteIndicator(),
             DNDIndicator(),

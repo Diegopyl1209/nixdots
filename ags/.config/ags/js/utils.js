@@ -2,6 +2,12 @@ import Cairo from 'cairo';
 import options from './options.js';
 import icons from './icons.js';
 import Theme from './services/theme/theme.js';
+import { Utils, App, Battery } from './imports.js';
+
+export function forMonitors(widget) {
+    const ws = JSON.parse(Utils.exec('hyprctl -j monitors'));
+    return ws.map(mon => widget(mon.id));
+}
 
 export function createSurfaceFromWidget(widget) {
     const alloc = widget.get_allocation();
@@ -20,11 +26,10 @@ export function createSurfaceFromWidget(widget) {
 }
 
 export function warnOnLowBattery() {
-    const { Battery } = ags.Service;
-    Battery.instance.connect('changed', () => {
+    Battery.connect('changed', () => {
         const { low } = options.battaryBar;
         if (Battery.percentage < low || Battery.percentage < low / 2) {
-            ags.Utils.execAsync([
+            Utils.execAsync([
                 'notify-send',
                 `${Battery.percentage}% Battery Percentage`,
                 '-i', icons.battery.warning,
@@ -50,10 +55,20 @@ export function getAudioTypeIcon(icon) {
 }
 
 export function scssWatcher() {
-    return ags.Utils.subprocess([
+    return Utils.subprocess([
         'inotifywait',
         '--recursive',
         '--event', 'create,modify',
-        '-m', ags.App.configDir + '/scss',
-    ], Theme.setup);
+        '-m', App.configDir + '/scss',
+    ], () => Theme.setup());
+}
+
+export async function globalServices() {
+    globalThis.ags = await import('./imports.js');
+    globalThis.recorder = (await import('./services/screenrecord.js')).default;
+    globalThis.brightness = (await import('./services/brightness.js')).default;
+    globalThis.indicator = (await import('./services/onScreenIndicator.js')).default;
+    globalThis.theme = (await import('./services/theme/theme.js')).default;
+    globalThis.audio = globalThis.ags.Audio;
+    globalThis.mpris = globalThis.ags.Mpris;
 }

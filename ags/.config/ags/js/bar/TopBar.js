@@ -1,6 +1,5 @@
 import OverviewButton from './buttons/OverviewButton.js';
 import Workspaces from './buttons/Workspaces.js';
-import FocusedClient from './buttons/FocusedClient.js';
 import MediaIndicator from './buttons/MediaIndicator.js';
 import DateButton from './buttons/DateButton.js';
 import NotificationIndicator from './buttons/NotificationIndicator.js';
@@ -10,82 +9,74 @@ import SystemIndicators from './buttons/SystemIndicators.js';
 import PowerMenu from './buttons/PowerMenu.js';
 import Separator from '../misc/Separator.js';
 import ScreenRecord from './buttons/ScreenRecord.js';
-import BatteryBar from './buttons/BatteryBar.js';
 import SubMenu from './buttons/SubMenu.js';
-const { Window, CenterBox, Box, Label } = ags.Widget;
-const { SystemTray } = ags.Service;
+import { SystemTray, Widget, Variable } from '../imports.js';
+import { Notifications, Mpris, Battery } from '../imports.js';
+import Recorder from '../services/screenrecord.js';
 
-
-const submenuItems = ags.Variable(1);
-SystemTray.instance.connect('changed', () => {
+const submenuItems = Variable(1);
+SystemTray.connect('changed', () => {
     submenuItems.setValue(SystemTray.items.length + 1);
 });
 
 const SeparatorDot = (service, condition) => Separator({
     orientation: 'vertical',
     valign: 'center',
-    connections: service && [[ags.Service[service], dot => {
-        dot.visible = condition(ags.Service[service]);
+    connections: service && [[service, dot => {
+        dot.visible = condition(service);
     }]],
 });
 
-const Start = () => Box({
+const Start = () => Widget.Box({
     className: 'start',
     vertical: true,
     children: [
         OverviewButton(),
+        SeparatorDot(),
         Workspaces(),
-        //SeparatorDot(),
-        //FocusedClient(),
-        //Box({ hexpand: true }),
+        Widget.Box({ hexpand: true }),
     ],
 });
 
-const Center = () => Box({
+const Center = () => Widget.Box({
     className: 'center',
     vertical: true,
-    homogeneous: false,
-
     children: [
-    	NotificationIndicator(),
-    	//SeparatorDot('Notifications', n => n.notifications.length > 0 || n.dnd),
+        NotificationIndicator(),
+        SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
         DateButton(),
-        SeparatorDot('Mpris', m => m.players.length > 0),
+        SeparatorDot(Mpris, m => m.players.length > 0),
         MediaIndicator(),
-        Box({ hexpand: true }),
     ],
 });
 
-const End = () => Box({
+const End = () => Widget.Box({
     className: 'end',
     vertical: true,
-    homogeneous: false,
     children: [
-    	Box({ vexpand: true }),
+        Widget.Box({ vexpand: true }),
         SubMenu({
             items: submenuItems,
             children: [
                 SysTray(),
-               // ColorPicker(),
+                //ColorPicker(),
             ],
         }),
-                
-        
         SeparatorDot(),
         ScreenRecord(),
-        SeparatorDot('Recorder', r => r.recording),
+        SeparatorDot(Recorder, r => r.recording),
         SystemIndicators(),
         SeparatorDot(),
         PowerMenu(),
     ],
 });
 
-export default monitor => Window({
+export default monitor => Widget.Window({
     name: `bar${monitor}`,
     exclusive: true,
     monitor,
-    anchor: 'top left bottom',
-    child: CenterBox({
+    anchor: ['top', 'left', 'bottom'],
+    child: Widget.CenterBox({
         className: 'panel',
         vertical: true,
         startWidget: Start(),
@@ -93,4 +84,3 @@ export default monitor => Window({
         endWidget: End(),
     }),
 });
-

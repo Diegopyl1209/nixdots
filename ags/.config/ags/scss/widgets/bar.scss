@@ -1,6 +1,5 @@
 $float: $spacing * 0.7;
 
-
 @mixin panel_button($flat: false, $reactive: true){
     all: unset;
 
@@ -28,7 +27,7 @@ $float: $spacing * 0.7;
         &:active > *, &.active > * {
             label, image { color: $accent_fg; }
             background-image: $active_gradient;
-            background-color: $blue;
+            background-color: $accent;
         }
     } @else {
         @include accs_button($flat, $reactive);
@@ -43,9 +42,8 @@ $float: $spacing * 0.7;
         font-size: $font-size * 1.2;
     }
 
-
     > * {
-        padding: 0;
+        padding: .3em .5em;
     }
 }
 
@@ -91,30 +89,33 @@ $float: $spacing * 0.7;
 
     .quicksettings > box > * {
         margin: 0 $spacing/2;
-        &:last-child { margin-bottom: 5px; }
-        &:first-child { margin-top: 5px; }
+        &:last-child { margin-bottom: 8; }
+        &:first-child { margin-top: 8; }
     }
 
     .overview {
-    	padding-bottom:15px;
-    	padding-top: 10px;
         label { color: transparentize($accent, 0.2); }
+        padding-bottom: 8px;
+        padding-left: 8px;
+        padding-right: 5px;
+        margin-top: 10px;
         &:hover label { color: $accent; }
         &:active label, &.active label { color: $accent_fg; }
     }
 
     .powermenu, .recorder {
-    	padding-bottom: 20px;
         image { color: transparentize($red, 0.3); }
+        padding-top: 8px;
+        padding-left: 8px;
+        padding-right: 5px;
+        margin-bottom: 10px;
         &:hover image { color: transparentize($red, 0.15); }
         &:active image { color: $red; }
     }
 
     /* stylelint-disable-next-line selector-not-notation */
     .quicksettings:not(.active):not(:active) {
-    	background-color: transparentize($fg_color, 0.95);
-    	margin: 5px;
-        .bluetooth { color: $green; }
+        .bluetooth { color: $blue; }
 
         .battery {
             &.low { color: $red; }
@@ -123,13 +124,13 @@ $float: $spacing * 0.7;
     }
 
     .media {
-   	    background-color: transparentize($fg_color, 0.95);
+        background-color: transparentize($fg_color, 0.95);
 		padding: 0;
 		margin: 8px;
     }
 
     .media-icon {
-    	&.spotify image { color: $green; }
+        &.spotify image { color: $green; }
         &.firefox image { color: $orange; }
         &.mpv image { color: $magenta; }
     }
@@ -171,16 +172,14 @@ $float: $spacing * 0.7;
         > * { padding: 0; }
 
         .eventbox {
-        	
             transition: $transition;
 
             @if $bar_style == 'separated' {
                 border-radius: max($radii - $border_width, 0);
                 &:hover { background-color: $hover; }
             } @else {
-               background-color: transparentize($fg_color, 0.95);
-               border-radius: $radii*0.6;
-               
+                @include button($flat: true);
+                background-color: transparentize($fg_color, 0.92);
             }
         }
 
@@ -205,10 +204,6 @@ $float: $spacing * 0.7;
                 background-color: transparentize($fg_color, 0.2);
                 min-width: 8px;
                 min-height: 8px;
-            }
-
-            &:hover .indicator {
-                box-shadow: inset 0 0 0 10px transparentize($fg_color, 0.8);
             }
 
             &.active .indicator, &:active .indicator {

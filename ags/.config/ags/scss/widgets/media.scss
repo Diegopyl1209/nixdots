@@ -1,5 +1,4 @@
 @mixin player_color($color) {
-
     button {
         .shuffle.enabled {
             color: $color;
@@ -91,11 +90,10 @@
 
     .controls button {
         all: unset;
-
+        min-width: 50px;
 
         label {
             font-size: 2em;
-            margin: 10px;
             color: transparentize($shader_fg, 0.2);
             transition: $transition;
 

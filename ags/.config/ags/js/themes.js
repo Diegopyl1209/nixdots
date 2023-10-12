@@ -1,4 +1,5 @@
-const WP = `/home/${ags.Utils.USER}/.wallpapers/`;
+import { Utils } from './imports.js';
+const WP = `/home/${Utils.USER}/Pictures/Wallpapers/`;
 
 const editScheme = (scheme, edit) => {
     const obj = {};
@@ -17,9 +18,9 @@ const gnome = {
 };
 
 const charm = {
-    red: '#e67090',
-    green: '#43c383',
-    yellow: '#d8e77b',
+    red: '#e55f86',
+    green: '#00D787',
+    yellow: '#EBFF71',
     blue: '#51a4e7',
     magenta: '#9077e7',
     teal: '#51e6e6',
@@ -53,12 +54,15 @@ const misc = {
     bar_style: 'normal',
     layout: 'topbar',
     desktop_clock: 'center center',
+    font: 'Ubuntu Nerd Font',
+    mono_font: 'Mononoki Nerd Font',
+    font_size: 16,
 };
 
 const colors = {
     wallpaper_fg: 'white',
     hypr_active_border: 'rgba(3f3f3fFF)',
-    hypr_inactive_border: 'rgba(1e1e2eFF)',
+    hypr_inactive_border: 'rgba(3f3f3fDD)',
     accent: '$blue',
     accent_fg: '#141414',
     widget_bg: '$fg_color',
@@ -66,7 +70,7 @@ const colors = {
     active_gradient: 'to right, $accent, lighten($accent, 6%)',
     border_color: '$fg_color',
     border_opacity: 97,
-    border_width: 3,
+    border_width: 1,
 };
 
 // themes
@@ -79,9 +83,21 @@ const kitty_dark = {
     ...colors,
 };
 
+const kitty_light = {
+    wallpaper: WP + 'kitty.jpeg',
+    name: 'kitty_light',
+    icon: '󰄛',
+    ...light,
+    ...misc,
+    ...colors,
+    widget_bg: '$accent',
+    widget_opacity: 84,
+};
+
 const me_dark = {
 	... kitty_dark,
 	wallpaper: WP + 'starfield.png',
+	avatar: "/home/${Utils.USER}/profile.png",
 	name: 'me_dark',
 	icon: '󰇺',
     hypr_active_border: 'rgba(F38BA8FF) rgba(A6E3A1FF) rgba(F9E2AFFF) rgba(89B4FAFF) rgba(F5C2E7FF) rgba(94E2D5FF) 45deg',
@@ -95,17 +111,6 @@ const me_dark = {
     border_opacity: 97,
     border_width: 2.5,
 	
-};
-
-const kitty_light = {
-    wallpaper: WP + 'kitty.jpeg',
-    name: 'kitty_light',
-    icon: '󰄛',
-    ...light,
-    ...misc,
-    ...colors,
-    widget_bg: '$accent',
-    widget_opacity: 84,
 };
 
 const leaves_dark = {
@@ -191,9 +196,9 @@ const cherry = {
 };
 
 export default [
-	me_dark,
     kitty_dark,
     kitty_light,
+    me_dark,
     leaves_dark,
     leaves_light,
     ivory,

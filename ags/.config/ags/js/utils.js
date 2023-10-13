@@ -66,7 +66,6 @@ export function scssWatcher() {
 export async function globalServices() {
     globalThis.ags = await import('./imports.js');
     globalThis.recorder = (await import('./services/screenrecord.js')).default;
-    globalThis.brightness = (await import('./services/brightness.js')).default;
     globalThis.indicator = (await import('./services/onScreenIndicator.js')).default;
     globalThis.theme = (await import('./services/theme/theme.js')).default;
     globalThis.audio = globalThis.ags.Audio;

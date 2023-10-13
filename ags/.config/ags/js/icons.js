@@ -33,11 +33,6 @@ export default {
         enabled: 'bluetooth-active-symbolic',
         disabled: 'bluetooth-disabled-symbolic',
     },
-    brightness: {
-        indicator: 'display-brightness-symbolic',
-        keyboard: 'keyboard-brightness-symbolic',
-        screen: 'display-brightness-symbolic',
-    },
     powermenu: {
         sleep: 'weather-clear-night-symbolic',
         reboot: 'system-reboot-symbolic',

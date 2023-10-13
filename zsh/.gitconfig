@@ -7,7 +7,7 @@
 [init]
 	defaultBranch = main
 [user]
-	email = diegopyl1209@gmail.com
+	email = 80992641+Diegopyl1209@users.noreply.github.com
 	name = Diego Peña y Lillo
 	signingkey = ~/.ssh/id_rsa.pub
 [gpg]

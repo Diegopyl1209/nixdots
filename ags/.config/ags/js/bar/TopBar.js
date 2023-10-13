@@ -35,6 +35,9 @@ const Start = () => Widget.Box({
         SeparatorDot(),
         Workspaces(),
         Widget.Box({ hexpand: true }),
+        SeparatorDot(Recorder, r => r.recording),
+        ScreenRecord(),
+        
     ],
 });
 
@@ -63,8 +66,6 @@ const End = () => Widget.Box({
             ],
         }),
         SeparatorDot(),
-        ScreenRecord(),
-        SeparatorDot(Recorder, r => r.recording),
         SystemIndicators(),
         SeparatorDot(),
         PowerMenu(),

@@ -13,8 +13,8 @@ export default () => PanelButton({
             Widget.Icon(icons.recorder.recording),
             Widget.Label({
             	style: `
-					padding: 8px;
 					font-size: 16px;
+					padding-top: 5px;
 					font-weight: bold;
 					font-family: FiraCode Nerd Font Mono;
 					margin:0;

@@ -96,6 +96,7 @@ const kitty_light = {
 
 const me_dark = {
 	... kitty_dark,
+	//bg_color : "#101419",
 	wallpaper: WP + 'starfield.png',
 	avatar: "/home/${Utils.USER}/profile.png",
 	name: 'me_dark',

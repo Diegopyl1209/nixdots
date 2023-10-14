@@ -11,7 +11,6 @@ const MediaController = ({player} = {}) => Widget.Box({
     children: [
         Widget.Box({
             className: 'media panel-button',
-            style: "border:0;",
             vertical: true,
             children: [
                 PreviousButton(player),

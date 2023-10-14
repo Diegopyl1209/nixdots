@@ -133,8 +133,8 @@ $float: $spacing * 0.7;
 
     .media {
         background-color: transparentize($fg_color, 0.95);
-		padding: 0;
-		margin-left: 4px;
+		padding: 0px;
+		margin: 6px;
     }
 
     .media-icon {

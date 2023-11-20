@@ -1,0 +1,20 @@
+@mixin rounding {
+  border-radius: 4px;
+}
+
+
+.themes {
+  margin-right: 1rem;
+}
+
+@import "style/colors";
+@import "style/bar/init";
+@import "style/control/init";
+@import "style/exit/init";
+@import "style/dash/init";
+@import "style/moment/init";
+
+* {
+  all: unset;
+  transition: 100ms ease;
+}

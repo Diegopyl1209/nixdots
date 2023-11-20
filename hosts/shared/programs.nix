@@ -10,6 +10,7 @@
     unzip
     killall
     xdg-utils
+    #spotdl
     gtk3
     lutgen
     home-manager
@@ -19,14 +20,26 @@
     git
     jq
     rxfetch
+    pamixer
+    nix-prefetch-git
+    eww-wayland
     usb-reset
     procps
-    
+    hdos
+    bolt-launcher
+    #vesktop
+    (pkgs.discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+      }
+    )
+
 
     #gui
     firefox
     armcord
     (mpv.override { scripts = [mpvScripts.mpris]; })
+    flatpak
 
     # gaming
     wineWowPackages.staging

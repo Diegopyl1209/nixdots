@@ -10,8 +10,17 @@
 
   boot.initrd.availableKernelModules = [ "ehci_pci" "ahci" "usb_storage" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-intel" "amdgpu" ];
   boot.extraModulePackages = [ ];
+  boot.loader.grub.gfxmodeEfi="1280x800";
+  boot.loader.grub.gfxmodeBios="1280x800";
+  
+  hardware.opengl.extraPackages = with pkgs; [
+    amdvlk
+    rocm-opencl-icd
+    rocm-opencl-runtime
+  ];
+  hardware.opengl.driSupport = true;
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/b91c023d-60aa-434f-9c45-40520ca07f17";

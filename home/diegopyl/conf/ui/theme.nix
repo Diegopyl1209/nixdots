@@ -9,28 +9,25 @@ let
       "FiraCode"
       "Mononoki"
     ]; });
-  cursor-theme = "phinger-cursors";
-  cursor-package = pkgs.phinger-cursors;
-  #carburetor = (pkgs.callPackage ../../.../shared/gtk/carburetor.nix );
 
 in {
 
     
   home.packages = [ nerdfonts ];
+  
+  home.pointerCursor = {
+    x11.enable = true;
+    name = "phinger-cursors";
+    package = pkgs.phinger-cursors;
+    size = 16;
+    gtk.enable = true;
+  };
 
     gtk = {
         enable = true;
-        #iconTheme = {
-        #    name = "Papirus-Dark";
-        #    package = pkgs.catppuccin-papirus-folders;
-        #};
         theme = {
-            name = "Carburetor";
-            package = pkgs.mythemes.carburetor;
-        };
-        cursorTheme = {
-          name = cursor-theme;
-          package = cursor-package;
+            name = "phocus";
+            package = pkgs.mythemes.phocus;
         };
         iconTheme = {
           #name = "Tela-dark";

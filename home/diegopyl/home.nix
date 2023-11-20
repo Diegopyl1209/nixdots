@@ -1,5 +1,9 @@
-{ config, pkgs, inputs, outputs, ... }:
+{ config, pkgs, inputs, outputs, colors, ... }:
 
+let
+  
+
+in
 {
   home.username = "diegopyl";
   home.homeDirectory = "/home/diegopyl";
@@ -8,6 +12,8 @@
     [
       ./conf
       ./misc
+      ../shared/bin/default.nix
+      ../shared/lock.nix
       ./programs.nix
     ];
   
@@ -19,6 +25,19 @@
     config = {
       allowUnfree = true;
       allowUnfreePredicate = (_: true);
+    };
+  };
+  
+  home = {
+    activation = {
+      installConfig = ''
+        if [ ! -d "${config.home.homeDirectory}/.config/eww" ]; then
+          ${pkgs.stow}/bin/stow -d ./.dotfiles/stow -t ~/ eww
+        fi
+        if [ ! -d "${config.home.homeDirectory}/.wallpapers" ]; then
+          ${pkgs.stow}/bin/stow -d ./.dotfiles/stow -t ~/ wallpapers
+        fi
+      '';
     };
   };
   

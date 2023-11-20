@@ -7,6 +7,7 @@
       ../shared
       ./hyprland.nix
       ./gnome.nix
+      ./awesome.nix
     ];
   
   # Bootloader.
@@ -19,6 +20,7 @@
       devices = [ "nodev" ];
       efiSupport = true;
       enable = true;
+      gfxmodeEfi = "1280x800";
       extraEntries = ''
         menuentry "Windows" {
           insmod part_gpt
@@ -31,7 +33,6 @@
       '';
     };
   };
-  
 
   users.users.diegopyl = {
     isNormalUser = true;
@@ -42,9 +43,12 @@
 
   nixpkgs.overlays = [
      outputs.overlays.additions
-     #outputs.overlays.modifications
-  ];
+     outputs.overlays.modifications
+     inputs.rust-overlay.overlays.default
+     inputs.eww-tray.overlays.default
 
+  ];
+  
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;

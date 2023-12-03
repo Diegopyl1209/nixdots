@@ -1,5 +1,12 @@
-{ pkgs, lib, stdenv, makeDesktopItem, fetchurl, makeWrapper, xorg, }:
-
+{
+  pkgs,
+  lib,
+  stdenv,
+  makeDesktopItem,
+  fetchurl,
+  makeWrapper,
+  xorg,
+}:
 stdenv.mkDerivation rec {
   pname = "hdos";
   version = "8";
@@ -24,10 +31,10 @@ stdenv.mkDerivation rec {
     comment = "Open source Old School RuneScape client";
     desktopName = "HDOS";
     genericName = "HD Oldschool Runescape Client";
-    categories = [ "Game" ];
+    categories = ["Game"];
   };
 
-  nativeBuildInputs = [ makeWrapper pkgs.openjdk11 ];
+  nativeBuildInputs = [makeWrapper pkgs.openjdk11];
   installPhase = ''
     mkdir -p $out/share/hdos
     mkdir -p $out/share/applications
@@ -49,7 +56,7 @@ stdenv.mkDerivation rec {
       binaryNativeCode
     ];
     license = licenses.bsd2;
-    maintainers = with maintainers; [ diegopyl1209 ];
-    platforms = [ "x86_64-linux" ];
+    maintainers = with maintainers; [diegopyl1209];
+    platforms = ["x86_64-linux"];
   };
 }

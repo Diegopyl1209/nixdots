@@ -1,14 +1,14 @@
-{ stdenv
-, lib
-, fetchzip
-, copyDesktopItems
-, makeDesktopItem
-, makeWrapper
-, runCommand
-, appimageTools
-, icu
-}:
-let
+{
+  stdenv,
+  lib,
+  fetchzip,
+  copyDesktopItems,
+  makeDesktopItem,
+  makeWrapper,
+  runCommand,
+  appimageTools,
+  icu,
+}: let
   pname = "jetbrains-toolbox";
   version = "2.0.5.17700";
 
@@ -18,9 +18,10 @@ let
     stripRoot = false;
   };
 
-  appimageContents = runCommand "${pname}-extracted"
+  appimageContents =
+    runCommand "${pname}-extracted"
     {
-      nativeBuildInputs = [ appimageTools.appimage-exec ];
+      nativeBuildInputs = [appimageTools.appimage-exec];
     }
     ''
       appimage-exec.sh -x $out ${src}/${pname}-${version}/${pname}
@@ -40,37 +41,37 @@ let
     type = "Application";
     icon = "jetbrains-toolbox";
     terminal = false;
-    categories = [ "Development" ];
+    categories = ["Development"];
     startupWMClass = "jetbrains-toolbox";
     startupNotify = false;
   };
 in
-stdenv.mkDerivation {
-  inherit pname version src appimage;
+  stdenv.mkDerivation {
+    inherit pname version src appimage;
 
-  nativeBuildInputs = [ makeWrapper copyDesktopItems ];
+    nativeBuildInputs = [makeWrapper copyDesktopItems];
 
-  installPhase = ''
-    runHook preInstall
+    installPhase = ''
+      runHook preInstall
 
-    install -Dm644 ${appimageContents}/.DirIcon $out/share/icons/hicolor/scalable/apps/jetbrains-toolbox.svg
-    makeWrapper ${appimage}/bin/${pname}-${version} $out/bin/${pname} \
-      --append-flags "--update-failed" \
-      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [icu]}
+      install -Dm644 ${appimageContents}/.DirIcon $out/share/icons/hicolor/scalable/apps/jetbrains-toolbox.svg
+      makeWrapper ${appimage}/bin/${pname}-${version} $out/bin/${pname} \
+        --append-flags "--update-failed" \
+        --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [icu]}
 
-    runHook postInstall
-  '';
+      runHook postInstall
+    '';
 
-  desktopItems = [ desktopItem ];
+    desktopItems = [desktopItem];
 
-  # Disabling the tests, this seems to be very difficult to test this app.
-  doCheck = false;
+    # Disabling the tests, this seems to be very difficult to test this app.
+    doCheck = false;
 
-  meta = with lib; {
-    description = "Jetbrains Toolbox";
-    homepage = "https://jetbrains.com/";
-    license = licenses.unfree;
-    maintainers = with maintainers; [ AnatolyPopov ];
-    platforms = [ "x86_64-linux" ];
-  };
-}
+    meta = with lib; {
+      description = "Jetbrains Toolbox";
+      homepage = "https://jetbrains.com/";
+      license = licenses.unfree;
+      maintainers = with maintainers; [AnatolyPopov];
+      platforms = ["x86_64-linux"];
+    };
+  }

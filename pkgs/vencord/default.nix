@@ -5,7 +5,7 @@
   esbuild,
   buildWebExtension ? false,
 }: let
-  version = "1.6.1";
+  version = "1.6.4";
   gitHash = "a9e67e2";
 in
   buildNpmPackage rec {

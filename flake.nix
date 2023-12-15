@@ -3,11 +3,13 @@
 
   inputs = {
     # Nixpkgs
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # Home manager
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    
+
+    hardware.url = "github:nixos/nixos-hardware";
     stylix.url = "github:danth/stylix";
     base16.url = "github:SenchoPens/base16.nix";
     base16-schemes = {
@@ -15,18 +17,23 @@
       flake = false;
     };
     base16-kitty = {
-      url = "github:kdrag0n/base16-kitty";
+      url = "github:diegopyl1209/base16-kitty";
+      flake = false;
+    };
+    base16-biscuit = {
+      url = "github:Diegopyl1209/biscuit";
       flake = false;
     };
 
-    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    hyprland.url = "github:hyprwm/Hyprland";
+    nur.url = "github:nix-community/NUR";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     nix-gaming.url = "github:fufexan/nix-gaming";
-    nur.url = "github:nix-community/NUR";
-    hyprland.url = "github:hyprwm/Hyprland";
-    eww-tray.url = "github:ralismark/eww/tray-3";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -37,16 +44,13 @@
   } @ inputs: let
     inherit (self) outputs;
     system = "x86_64-linux";
-    colors = import ./modules/home-manager/verdant.nix {};
-    scheme = "${inputs.base16-schemes}/gruvbox-dark-medium.yaml";
-    
+
+    #scheme = "${inputs.base16-schemes}/default-dark.yaml";
+    scheme = "${inputs.base16-biscuit}/biscuit-dark-base16.yaml";
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.alejandra;
-
-    overlays = import ./overlays {
-      inherit inputs;
-      inherit colors;
-    };
+    # Your custom packages and modifications, exported as overlays
+    overlays = import ./overlays {inherit inputs;};
     nixosModules = import ./modules/nixos;
     homeManagerModules = import ./modules/home-manager;
 
@@ -54,6 +58,7 @@
       diegopyl = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs outputs;};
         modules = [
+          # > Our main nixos configuration file <
           ./nixos/configuration.nix
         ];
       };
@@ -61,13 +66,13 @@
 
     homeConfigurations = {
       "diegopyl" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs colors;};
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
         modules = [
           inputs.stylix.homeManagerModules.stylix
           inputs.base16.nixosModule
           {inherit scheme;}
-          {stylix.image = ./stow/wallpapers/.wallpapers/aaaaa.jpg;}
+          # > Our main home-manager configuration file <
           ./home-manager/home.nix
         ];
       };

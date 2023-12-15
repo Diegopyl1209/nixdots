@@ -10,10 +10,15 @@
 }: {
   # You can import other home-manager modules here
   imports = [
+    # If you want to use modules your own flake exports (from modules/home-manager):
     outputs.homeManagerModules
-    ./programs.nix
+
+    # Or modules exported from other flakes (such as nix-colors):
+    # inputs.nix-colors.homeManagerModules.default
+
+    # You can also split up your configuration and import pieces of it here:
+    # ./nvim.nix
   ];
-  stylix.autoEnable = false;
 
   nixpkgs = {
     # You can add overlays here
@@ -21,6 +26,7 @@
       # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
+      outputs.overlays.stable-packages
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -44,17 +50,6 @@
   home = {
     username = "diegopyl";
     homeDirectory = "/home/diegopyl";
-
-    activation = {
-      installConfig = ''
-        if [ ! -d "${config.home.homeDirectory}/.config/eww" ]; then
-          ${pkgs.stow}/bin/stow -d ./.dotfiles/stow -t ~/ eww
-        fi
-        if [ ! -d "${config.home.homeDirectory}/.wallpapers" ]; then
-          ${pkgs.stow}/bin/stow -d ./.dotfiles/stow -t ~/ wallpapers
-        fi
-      '';
-    };
   };
 
   # Add stuff for your user as you see fit:

@@ -17,7 +17,7 @@ stdenv.mkDerivation rec {
     rev = "024685f1fed60b861e4589993c98103c6af6d906";
     hash = "sha256-lEUqube0mvPLhN1prQ5IypspnJ244byu2IQSn6Vr8QE=";
   };
-  
+
   propagatedBuildInputs = [
     hicolor-icon-theme
   ];

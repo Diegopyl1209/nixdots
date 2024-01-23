@@ -24,14 +24,6 @@ in {
   };
 
   environment = {
-    sessionVariables = {
-      NAUTILUS_EXTENSION_DIR = "${config.system.path}/lib/nautilus/extensions-4";
-    };
-
-    pathsToLink = [
-      "/share/nautilus-python/extensions"
-    ];
-
     systemPackages = with pkgs; [
       configure-terminal-nemo
       cinnamon.nemo-with-extensions

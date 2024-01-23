@@ -6,301 +6,166 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
-    extraConfig = ''
-      $mainMod = SUPER
-      # env = GTK_THEME,Carburetor:dark
-      # $scripts=$HOME/.config/hypr/scripts
-      monitor=,preferred,auto,1
-      input {
-        kb_layout = latam
-        kb_variant =
-        kb_model =
-        kb_rules =
-        follow_mouse = 1 # 0|1|2|3
-        float_switch_override_focus = 2
-        numlock_by_default = true
-        sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-      }
-      general {
-        gaps_in = 8
-        gaps_out = 8
-        border_size = 3
+    xwayland.enable = true;
 
-        col.inactive_border = rgba(595959aa)
-        layout = dwindle # master|dwindle
-      }
-      dwindle {
-        no_gaps_when_only = false
-        force_split = 0
-        special_scale_factor = 0.8
-        split_width_multiplier = 1.0
-        use_active_for_splits = true
-        pseudotile = yes
-        preserve_split = yes
-      }
-      master {
-        new_is_master = true
-        special_scale_factor = 0.8
-        new_is_master = true
-        no_gaps_when_only = false
-      }
-      # cursor_inactive_timeout = 0
-      decoration {
-      #  multisample_edges = true
-        active_opacity = 1
-        inactive_opacity = 1
-        fullscreen_opacity = 1.0
-        rounding = 3
-        drop_shadow = true
-        shadow_range = 4
-        shadow_render_power = 3
-        shadow_ignore_window = true
-      # col.shadow =
-      # col.shadow_inactive
-      # shadow_offset
-        dim_inactive = false
-      # dim_strength = #0.0 ~ 1.0
-        blur {
-          enabled: true
-          size = 20
-          passes = 4
-          new_optimizations = true
-        }
-      }
-      animations {
-        enabled=1
-        bezier = md3_standard, 0.2, 0, 0, 1
-        bezier = md3_decel, 0.05, 0.7, 0.1, 1
-        bezier = md3_accel, 0.3, 0, 0.8, 0.15
-        bezier = overshot, 0.05, 0.9, 0.1, 1.1
-        bezier = crazyshot, 0.1, 1.5, 0.76, 0.92
-        bezier = hyprnostretch, 0.05, 0.9, 0.1, 1.0
-        bezier = fluent_decel, 0.1, 1, 0, 1
-        # Animation configs
-        animation = windows, 1, 2, md3_decel, popin 80%
-        animation = border, 1, 10, default
-        animation = fade, 1, 2, default
-        animation = workspaces, 1, 3, md3_decel
-        animation = specialWorkspace, 1, 3, md3_decel, slidevert
-      }
-      gestures {
-        workspace_swipe = true
-        workspace_swipe_fingers = 4
-        workspace_swipe_distance = 250
-        workspace_swipe_invert = true
-        workspace_swipe_min_speed_to_force = 15
-        workspace_swipe_cancel_ratio = 0.5
-        workspace_swipe_create_new = true
-      }
-      misc {
-        disable_autoreload = true
-        disable_hyprland_logo = true
-        always_follow_on_dnd = true
-        layers_hog_keyboard_focus = true
-        animate_manual_resizes = false
-        enable_swallow = true
-        swallow_regex =
-        focus_on_activate = false
-      }
+    settings = {
+      exec-once = [
+        "swaync"
+        "ags -b hypr"
+        ''hyprctl dispatch exec "sleep 10s && discord --enable-features=UseOzonePlatform --ozone-platform=wayland" ''
+        ''swaybg -i "${config.stylix.image}" ''
+        "copyq --start-server"
+        ''wl-paste -t text -w sh -c 'v=$(cat); cmp -s <(xclip -selection clipboard -o)  <<< "$v" || xclip -selection clipboard <<< "$v"' ''
+      ];
 
-      bind = $mainMod, c, togglespecialworkspace, chat
-      bind = $mainMod, Return, exec, kitty -c ~/.config/kitty/kitty.conf
-      bind = $mainMod SHIFT, Return, exec, kitty
-      bind = $mainMod SHIFT, Q, killactive,
-      bind = $mainMod CTRL,  Q, exit,
-      bind = $mainMod SHIFT, Space, togglefloating,
-      bind = $mainMod,F,fullscreen
-      bind = $mainMod,Y,pin
-      bind = $mainMod, P, pseudo, # dwindle
-      bind = $mainMod, J, togglesplit, # dwindle
-      #-----------------------#
-      # Toggle grouped layout #
-      #-----------------------#
-      bind = $mainMod, K, togglegroup,
-      bind = $mainMod, Tab, changegroupactive, f
-      #------------#
-      # change gap #
-      #------------#
-      bind = $mainMod SHIFT, G,exec,hyprctl --batch "keyword general:gaps_out 5;keyword general:gaps_in 3"
-      bind = $mainMod , G,exec,hyprctl --batch "keyword general:gaps_out 0;keyword general:gaps_in 0"
-      #--------------------------------------#
-      # Move focus with mainMod + arrow keys #
-      #--------------------------------------#
-      bind = $mainMod, left, movefocus, l
-      bind = $mainMod, right, movefocus, r
-      bind = $mainMod, up, movefocus, u
-      bind = $mainMod, down, movefocus, d
-      #----------------------------------------#
-      # Switch workspaces with mainMod + [0-9] #
-      #----------------------------------------#
-      bind = $mainMod, 1, workspace, 1
-      bind = $mainMod, 2, workspace, 2
-      bind = $mainMod, 3, workspace, 3
-      bind = $mainMod, 4, workspace, 4
-      bind = $mainMod, 5, workspace, 5
-      bind = $mainMod, 6, workspace, 6
-      bind = $mainMod, 7, workspace, 7
-      bind = $mainMod, 8, workspace, 8
-      bind = $mainMod, 9, workspace, 9
-      bind = $mainMod, 0, workspace, 10
-      bind = $mainMod, L, workspace, +1
-      bind = $mainMod, H, workspace, -1
-      bind = $mainMod, period, workspace, e+1
-      bind = $mainMod, comma, workspace,e-1
-      bind = $mainMod, Q, workspace,QQ
-      bind = $mainMod, T, workspace,TG
-      bind = $mainMod, M, workspace,Music
-      #-------------------------------#
-      # special workspace(scratchpad) #
-      #-------------------------------#
-      bind = $mainMod SHIFT, s, movetoworkspace,special
-      bind = $mainMod, s, togglespecialworkspace
-      #----------------------------------#
-      # move window in current workspace #
-      #----------------------------------#
-      bind = $mainMod SHIFT,left ,movewindow, l
-      bind = $mainMod SHIFT,right ,movewindow, r
-      bind = $mainMod SHIFT,up ,movewindow, u
-      bind = $mainMod SHIFT,down ,movewindow, d
+      monitor = [
+        ",preferred,auto,1"
+      ];
 
-      #---------------------------------------------------------------#
-      # Move active window to a workspace with mainMod + ctrl + [0-9] #
-      #---------------------------------------------------------------#
-      bind = $mainMod CTRL, 1, movetoworkspace, 1
-      bind = $mainMod CTRL, 2, movetoworkspace, 2
-      bind = $mainMod CTRL, 3, movetoworkspace, 3
-      bind = $mainMod CTRL, 4, movetoworkspace, 4
-      bind = $mainMod CTRL, 5, movetoworkspace, 5
-      bind = $mainMod CTRL, 6, movetoworkspace, 6
-      bind = $mainMod CTRL, 7, movetoworkspace, 7
-      bind = $mainMod CTRL, 8, movetoworkspace, 8
-      bind = $mainMod CTRL, 9, movetoworkspace, 9
-      bind = $mainMod CTRL, 0, movetoworkspace, 10
-      bind = $mainMod CTRL, left, movetoworkspace, -1
-      bind = $mainMod CTRL, right, movetoworkspace, +1
-      # same as above, but doesnt switch to the workspace
-      bind = $mainMod SHIFT, 1, movetoworkspacesilent, 1
-      bind = $mainMod SHIFT, 2, movetoworkspacesilent, 2
-      bind = $mainMod SHIFT, 3, movetoworkspacesilent, 3
-      bind = $mainMod SHIFT, 4, movetoworkspacesilent, 4
-      bind = $mainMod SHIFT, 5, movetoworkspacesilent, 5
-      bind = $mainMod SHIFT, 6, movetoworkspacesilent, 6
-      bind = $mainMod SHIFT, 7, movetoworkspacesilent, 7
-      bind = $mainMod SHIFT, 8, movetoworkspacesilent, 8
-      bind = $mainMod SHIFT, 9, movetoworkspacesilent, 9
-      bind = $mainMod SHIFT, 0, movetoworkspacesilent, 10
-      # Scroll through existing workspaces with mainMod + scroll
-      bind = $mainMod, mouse_down, workspace, e+1
-      bind = $mainMod, mouse_up, workspace, e-1
-      #-------------------------------------------#
-      # switch between current and last workspace #
-      #-------------------------------------------#
-      binds {
-           workspace_back_and_forth = 1
-           allow_workspace_cycles = 1
-      }
-      bind=$mainMod,slash,workspace,previous
-      #------------------------#
-      # quickly launch program #
-      #------------------------#
-      bind=$mainMod,D,exec, rofi -show drun
-      #-----------------------------------------#
-      # control volume,media players            #
-      #-----------------------------------------#
-      bind=,XF86AudioRaiseVolume,exec, $HOME/.local/bin/changevolume  up
-      bind=,XF86AudioLowerVolume,exec, $HOME/.local/bin/changevolume  down
-      bind=,XF86AudioMute,exec, $HOME/.local/bin/changevolume  mute
-      bind=,XF86AudioMicMute,exec, pamixer --default-source -t
-      bind=,XF86AudioPlay,exec, mpc -q toggle
-      bind=,XF86AudioNext,exec, mpc -q next
-      bind=,XF86AudioPrev,exec, mpc -q prev
-      #--------------------------#
-      # screenshot, screenrecord #
-      # -------------------------#
-      bind = , PRINT, exec, wayshot --stdout | wl-copy
-      bind = $mainMod SHIFT, PRINT, exec, wayshot -s "$(slurp)" --stdout | wl-copy
-      #---------------#
-      # resize window #
-      #---------------#
-      bind=ALT,R,submap,resize
-      submap=resize
-      binde=,right,resizeactive,15 0
-      binde=,left,resizeactive,-15 0
-      binde=,up,resizeactive,0 -15
-      binde=,down,resizeactive,0 15
-      binde=,l,resizeactive,15 0
-      binde=,h,resizeactive,-15 0
-      binde=,k,resizeactive,0 -15
-      binde=,j,resizeactive,0 15
-      bind=,escape,submap,reset
-      submap=reset
-      bind=CTRL SHIFT, left, resizeactive,-15 0
-      bind=CTRL SHIFT, right, resizeactive,15 0
-      bind=CTRL SHIFT, up, resizeactive,0 -15
-      bind=CTRL SHIFT, down, resizeactive,0 15
-      bind=CTRL SHIFT, l, resizeactive, 15 0
-      bind=CTRL SHIFT, h, resizeactive,-15 0
-      bind=CTRL SHIFT, k, resizeactive, 0 -15
-      bind=CTRL SHIFT, j, resizeactive, 0 15
-      bindm = $mainMod, mouse:272, movewindow
-      bindm = $mainMod, mouse:273, resizewindow
+      general = {
+        layout = "dwindle";
+        resize_on_border = false;
+      };
 
-      #---------------#
-      # auto start    #
-      #---------------#
-      exec = hyprctl dispatch exec "sleep 5s && discord --enable-features=UseOzonePlatform --ozone-platform=wayland"
-      exec = bash -c ~/.local/bin/genmenupic
-      #exec = waybar &
-      exec = swaybg -i "${config.stylix.image}" &
-      exec = dunst &
-      exec = hyprctl dispatch exec "sleep 5s && copyq --start-server" &
-      exec = wl-paste -t text -w xclip -selection clipboard &
-      exec = xwaylandvideobridge &
+      misc = {
+        layers_hog_keyboard_focus = false;
+        disable_splash_rendering = true;
+        force_default_wallpaper = 0;
+      };
 
-      layerrule = blur,lockscreen
-      layerrule = blur,gtk-layer-shell
-      layerrule = blur,waybar
-      #---------------#
-      # windows rules #
-      #---------------#
-      #`hyprctl clients` get class、title...
-      windowrulev2 = opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$
-      windowrulev2 = noanim,class:^(xwaylandvideobridge)$
-      windowrulev2 = nofocus,class:^(xwaylandvideobridge)$
-      windowrulev2 = noinitialfocus,class:^(xwaylandvideobridge)$
-      windowrulev2 = stayfocused, title:^()$, class:^(steam)$
-      windowrulev2 = minsize 1 1, title:^()$, class:^(steam)$
-      windowrulev2 = opacity 0.9 override 0.9 override, class:^(ArmCord)$
-      windowrulev2 = workspace special:chat silent, class:^(ArmCord)$
-      windowrulev2 = opacity 0.9 override 0.9 override, class:^(discord)$
-      windowrulev2 = workspace special:chat silent, class:^(discord)$
-      windowrule=float,title:^(Picture-in-Picture)$
-      windowrule=size 960 540,title:^(Picture-in-Picture)$
-      windowrule=move 25%-,title:^(Picture-in-Picture)$
-      windowrule=float,imv
-      windowrule=move 25%-,imv
-      windowrule=size 960 540,imv
-      windowrule=float,mpv
-      windowrule=move 25%-,mpv
-      windowrule=size 960 540,mpv
-      windowrule=float,danmufloat
-      windowrule=move 25%-,danmufloat
-      windowrule=pin,danmufloat
-      windowrule=rounding 5,danmufloat
-      windowrule=size 960 540,danmufloat
-      windowrule=float,termfloat
-      windowrule=move 25%-,termfloat
-      windowrule=size 960 540,termfloat
-      windowrule=rounding 5,termfloat
-      windowrule=float,nemo
-      windowrule=move 25%-,nemo
-      windowrule=size 960 540,nemo
-      windowrule=animation slide right,st
-      windowrule=workspace name:Music, musicfox
-      windowrule=float,ncmpcpp
-      windowrule=move 25%-,ncmpcpp
-      windowrule=size 960 540,ncmpcpp
-      windowrule=noblur,^(firefox)$
-    '';
+      input = {
+        kb_layout = "latam";
+        kb_model = "";
+        follow_mouse = 1;
+        sensitivity = 0;
+        float_switch_override_focus = 2;
+      };
+
+      binds = {
+        allow_workspace_cycles = true;
+      };
+
+      dwindle = {
+        pseudotile = "yes";
+        preserve_split = "yes";
+        # no_gaps_when_only = "yes";
+      };
+
+      windowrule = let
+        f = regex: "float, ^(${regex})$";
+      in [
+        (f "org.gnome.Calculator")
+        (f "kitty")
+        (f "discord")
+        (f "Armcord")
+        (f "nemo")
+        (f "pavucontrol")
+        (f "nm-connection-editor")
+        (f "blueberry.py")
+        (f "Color Picker")
+        (f "xdg-desktop-portal")
+        (f "xdg-desktop-portal-gnome")
+        (f "transmission-gtk")
+        "workspace 9, title:Spotify"
+      ];
+
+      windowrulev2 = [
+        "workspace special:chat silent, class:^(discord)$"
+        "workspace special:chat silent, class:^(ArmCord)$"
+        "stayfocused, title:^()$, class:^(steam)$"
+        "minsize 1 1, title:^()$, class:^(steam)$"
+      ];
+
+      bind = [
+        "SUPER, Return, exec, kitty"
+        "SUPER SHIFT, Q, killactive"
+        "SUPER SHIFT, Space, togglefloating"
+        "SUPER, F, fullscreen"
+        "SUPER, Y, pin"
+        "SUPER, P, pseudo"
+        "SUPER, J, togglesplit"
+        "SUPER, C, togglespecialworkspace, chat"
+        "SUPER SHIFT, S, movetoworkspace, special"
+        "SUPER, S, togglespecialworkspace"
+
+        "SUPER, D, exec, rofi -show drun"
+        ", PRINT, exec, wayshot --stdout | wl-copy"
+        ''SUPER SHIFT, PRINT, exec, wayshot -s "$(slurp)" --stdout | wl-copy''
+
+        "SUPER SHIFT, left, movewindow, l"
+        "SUPER SHIFT, right, movewindow, r"
+        "SUPER SHIFT, up, movewindow, u"
+        "SUPER SHIFT, down, movewindow, d"
+
+        "SUPER, 1, workspace, 1"
+        "SUPER, 2, workspace, 2"
+        "SUPER, 3, workspace, 3"
+        "SUPER, 4, workspace, 4"
+        "SUPER, 5, workspace, 5"
+        "SUPER, 6, workspace, 6"
+        "SUPER, 7, workspace, 7"
+        "SUPER, 8, workspace, 8"
+        "SUPER, 9, workspace, 9"
+        "SUPER, 0, workspace, 0"
+
+        "SUPER SHIFT, 1, movetoworkspacesilent, 1"
+        "SUPER SHIFT, 2, movetoworkspacesilent, 2"
+        "SUPER SHIFT, 3, movetoworkspacesilent, 3"
+        "SUPER SHIFT, 4, movetoworkspacesilent, 4"
+        "SUPER SHIFT, 5, movetoworkspacesilent, 5"
+        "SUPER SHIFT, 6, movetoworkspacesilent, 6"
+        "SUPER SHIFT, 7, movetoworkspacesilent, 7"
+        "SUPER SHIFT, 8, movetoworkspacesilent, 8"
+        "SUPER SHIFT, 9, movetoworkspacesilent, 9"
+        "SUPER SHIFT, 0, movetoworkspacesilent, 0"
+      ];
+
+      bindle = let e = "exec, ags -b hypr -r"; in [
+        ",XF86AudioRaiseVolume, ${e} 'audio.speaker.volume += 0.05; indicator.speaker()'"
+        ",XF86AudioLowerVolume, ${e} 'audio.speaker.volume -= 0.05; indicator.speaker()'"
+      ];
+
+      bindl = let e = "exec, ags -b hypr -r"; in [
+        ",XF86AudioPlay, ${e} 'mpris?.playPause()'"
+        ",XF86AudioPrev, ${e} 'mpris?.previous()'"
+        ",XF86AudioNext, ${e} 'mpris?.next()'"
+        ",XF86AudioMicMute, ${e} 'audio.microphone.isMuted = !audio.microphone.isMuted'"
+      ];
+
+      bindm = [
+        "SUPER, mouse:273, resizewindow"
+        "SUPER, mouse:272, movewindow"
+      ];
+
+      decoration = {
+        drop_shadow = "yes";
+        shadow_range = 8;
+        shadow_render_power = 2;
+        "col.shadow" = "rgba(00000044)";
+
+        dim_inactive = false;
+
+        blur = {
+          enabled = true;
+          size = 8;
+          passes = 3;
+          new_optimizations = "on";
+          noise = 0.01;
+          contrast = 0.9;
+          brightness = 0.8;
+        };
+      };
+
+      animations = {
+        enabled = "yes";
+        bezier = "md3_decel, 0.05, 0.7, 0.1, 1";
+        animation = [
+          "windows, 1, 2, md3_decel, popin 80%"
+          "border, 1, 10, default"
+          "fade, 1, 2, default"
+          "workspaces, 1, 3, default"
+        ];
+      };
+    };
   };
 }

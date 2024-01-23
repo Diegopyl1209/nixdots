@@ -25,9 +25,9 @@ in {
     image = "/home/diegopyl/Documentos/nix-config/wallpapers/aaaaa.jpg";
     base16Scheme = "${config.scheme.outPath}";
     targets = {
-      dunst.enable = true;
       alacritty.enable = true;
       gtk.enable = true;
+      helix.enable = true;
     };
   };
 

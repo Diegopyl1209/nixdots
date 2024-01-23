@@ -7,21 +7,14 @@
     ./hyprland.nix
   ];
   home.packages = with pkgs; [
-    dunst
-    cliphist
     wl-clipboard
+    xclip
     wf-recorder
     wayshot
     slurp
     swaybg
+    swaynotificationcenter
     hyprpicker
-    swappy
-    imagemagick
-    pavucontrol
-    blueberry
-    xclip
-    copyq
-    xwaylandvideobridge
   ];
 
   systemd.user.targets.hyprland-session.Unit.Wants = ["xdg-desktop-autostart.target"];

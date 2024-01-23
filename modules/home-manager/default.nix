@@ -4,7 +4,6 @@
   # List your module files here
   # my-module = import ./my-module.nix;
   imports = [
-    ./dunst
     ./git
     ./gnome
     ./hyprland
@@ -14,7 +13,8 @@
     ./rofi
     ./shell
     ./stylix
-    ./waybar
     ./firefox
+    ./ags
+    ./swaync
   ];
 }

@@ -6,7 +6,6 @@
   my-python-packages = ps:
     with ps; [
       numpy
-      ds4drv
     ];
 in {
   imports = [
@@ -16,17 +15,21 @@ in {
   programs = {
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhsWithPackages (ps:
+      package = pkgs.stable.vscode.fhsWithPackages (ps:
         with ps; [
           libGL # Neccesary to debug FabricMC Mods
           flite # Mc Narrator
           usbmuxd
         ]);
     };
-
+    
     java = {
       enable = true;
       package = pkgs.openjdk17;
+    };
+
+    direnv = {
+      enable = true;
     };
   };
 
@@ -36,11 +39,9 @@ in {
     heroic
     protonup-qt
     cartridges
-    micro
     runelite
-    neovim
     prismlauncher
-    alacritty
+    
 
     # GUI Applications
     d-spy
@@ -54,6 +55,7 @@ in {
     # Tools
     bat
     bc
+    helix
     hsetroot
     catimg
     eza
@@ -75,15 +77,24 @@ in {
     moreutils
     cava
     mpdris2
-    pfetch
     xorg.xev
     procps
-    mpc-cli
     playerctl
     recode
     gcc
     zls
     mangohud
+    imagemagick
+    pavucontrol
+    blueberry
+    swappy
+    neovim
+    micro
+    alacritty
+    vcpkg
+    ferium
+    pkg-config
+    cmake
 
     # Frameworks
     love # lua

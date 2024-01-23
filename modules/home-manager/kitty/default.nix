@@ -25,7 +25,7 @@ in {
   programs.kitty = {
     enable = true;
     settings = {
-      font_family = "Iosevka Nerd Font Mono";
+      font_family = "FiraCode Nerd Font Mono";
       italic_font = "auto";
       bold_font = "auto";
       bold_italic_font = "auto";
@@ -51,13 +51,6 @@ in {
     };
     extraConfig = ''
       include ${schemeFile}
-
-      font_family FiraCode Nerd Font Mono
-      modify_font cell_height 120%
-      click_interval 0.5
-      cursor_blink_interval 0
-      modify_font cell_width 87%
-
     '';
   };
 }

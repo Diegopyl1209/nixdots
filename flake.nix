@@ -20,16 +20,15 @@
       url = "github:diegopyl1209/base16-kitty";
       flake = false;
     };
-    base16-biscuit = {
-      url = "github:Diegopyl1209/biscuit";
-      flake = false;
-    };
+
+    ags.url = "github:Aylur/ags";
 
     hyprland.url = "github:hyprwm/Hyprland";
     nur.url = "github:nix-community/NUR";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
+    nix-alien.url = "github:thiagokokada/nix-alien";
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -46,7 +45,7 @@
     system = "x86_64-linux";
 
     #scheme = "${inputs.base16-schemes}/default-dark.yaml";
-    scheme = "${inputs.base16-biscuit}/biscuit-dark-base16.yaml";
+    scheme = import ./colors/paradise.nix;
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.alejandra;
     # Your custom packages and modifications, exported as overlays

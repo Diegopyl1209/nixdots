@@ -43,7 +43,7 @@ in {
         "xpui.js_repl_8008" = ",$\{1}56,";
       };
       injectCss = true;
-      replaceColors = true;
+      replaceColors = false;
       overwriteAssets = true;
       sidebarConfig = true;
     };

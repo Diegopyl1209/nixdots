@@ -45,12 +45,12 @@
 }:
 stdenv.mkDerivation rec {
   name = "bolt-launcher";
-  version = "0.4.1";
+  version = "0.7.0";
 
   src = fetchgit {
     url = "https://github.com/Adamcake/Bolt.git";
-    rev = "baaaa072d25ec188eca255436809f1c553ef850b";
-    sha256 = "sha256-f7m9wkYVTUCajGtBsdbyHJ9WH0b/XjKnVa46onvRwms=";
+    rev = "fc7167ab1eb4be4221c6a5752452739d4ccce4d9";
+    sha256 = "sha256-ltjN+K2ShIkIe+M9uaVI+Rd0Zyuwf96QvJEVynP+pIA=";
   };
 
   cef-bin = fetchzip {

@@ -56,6 +56,10 @@
   # programs.neovim.enable = true;
   # home.packages = with pkgs; [ steam ];
 
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;

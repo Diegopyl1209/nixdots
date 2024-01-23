@@ -105,16 +105,13 @@ with lib.hm.gvariant; {
     "org/gnome/shell" = {
       favorite-apps = [
         "firefox.desktop"
-        "org.wezfurlong.wezterm.desktop"
-        "org.gnome.Nautilus.desktop"
+        "kitty"
+        "nemo"
         "org.gnome.Calendar.desktop"
         "obsidian.desktop"
         "transmission-gtk.desktop"
-        "caprine.desktop"
-        "teams-for-linux.desktop"
         "discord.desktop"
         "spotify.desktop"
-        "com.usebottles.bottles.desktop"
         "org.gnome.Software.desktop"
       ];
     };

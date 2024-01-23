@@ -6,6 +6,8 @@
   aliases = {
     "db" = "distrobox";
     "fl" = " ~/.local/flutter/bin/flutter";
+    "neofetch" = "nitch";
+    "fetch" = "nitch";
     "arch" = "distrobox-enter arch -- zsh";
     "fedora" = "distrobox-enter Fedora -- zsh";
     "eza" = "eza -l --sort type --no-permissions --no-user --no-time --header --icons --no-filesize --group-directories-first";
@@ -31,45 +33,18 @@
 in {
   programs = {
     thefuck.enable = true;
-
-    zsh = {
+    
+    fish = {
       enable = true;
-      enableCompletion = true;
-      enableAutosuggestions = true;
-      syntaxHighlighting.enable = true;
-      initExtra = ''
-           autoload -Uz compinit && compinit
-           zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-           zstyle ':completion:*' menu select
-           bindkey "^[[1;5C" forward-word
-           bindkey "^[[1;5D" backward-word
-           path+=('/home/diegopyl/.local/bin')
-
-
-           AUTO_NOTIFY_THRESHOLD=600
-           ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
-
-           # pnpm
-        	export PNPM_HOME="/home/diegopyl/.local/share/pnpm"
-        	case ":$PATH:" in
-            	*":$PNPM_HOME:"*) ;;
-            	*) export PATH="$PNPM_HOME:$PATH" ;;
-        	esac
-        # pnpm end
-
-           rxfetch
+      interactiveShellInit = ''
+        set fish_greeting # Disable greeting
+        set PATH ~/.local/share/flutter/bin $PATH # Add flutter to path
+        
       '';
-      shellAliases = aliases;
       plugins = [
-        {
-          name = "auto-notify";
-          src = pkgs.fetchFromGitHub {
-            owner = "MichaelAquilina";
-            repo = "zsh-auto-notify";
-            rev = "22b2c61ed18514b4002acc626d7f19aa7cb2e34c";
-            sha256 = "sha256-x+6UPghRB64nxuhJcBaPQ1kPhsDx3HJv0TLJT5rjZpA=";
-          };
-        }
+        { name = "done"; src = pkgs.fishPlugins.done.src; }
+        { name = "bass"; src = pkgs.fishPlugins.bass.src; }
+        { name = "autopair"; src = pkgs.fishPlugins.autopair.src; }
       ];
     };
 
@@ -77,15 +52,6 @@ in {
       enable = true;
       shellAliases = aliases;
     };
-
-    # nushell = {
-    #   enable = true;
-    #   shellAliases = aliases;
-    #   extraConfig = ''
-    #     $env.config = {
-    #       show_banner: false,
-    #     }
-    #   '';
-    # };
+    
   };
 }

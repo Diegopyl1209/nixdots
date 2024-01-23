@@ -9,6 +9,8 @@
     zsh = {enable = true;};
     adb = {enable = true;};
     dconf = {enable = true;};
+    nix-ld = {enable = true;};
+    virt-manager = {enable = true;};
   };
 
   environment.systemPackages = with pkgs; [
@@ -30,9 +32,8 @@
     nix-prefetch-git
     usb-reset
     procps
-    rxfetch
-    hdos
-    bolt-launcher
+    nitch
+    nix-alien
 
     # Discord with modifications
     (pkgs.discord.override {
@@ -46,9 +47,11 @@
     flatpak
 
     # Gaming
-    wineWowPackages.staging
+    wineWowPackages.stagingFull
     winetricks
     gamemode
+    hdos
+    bolt-launcher
   ];
 
   # Android

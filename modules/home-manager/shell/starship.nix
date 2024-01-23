@@ -1,4 +1,8 @@
-{lib, config, ...}: let
+{
+  lib,
+  config,
+  ...
+}: let
   lang = icon: color: {
     symbol = icon;
     format = "[$symbol ](${color})";

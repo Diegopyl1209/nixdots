@@ -24,6 +24,7 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
+      inputs.nix-alien.overlays.default
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -66,6 +67,9 @@
 
   networking.hostName = "diego-pc";
 
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   # Bootloader.
   boot.loader = {
     efi = {
@@ -77,16 +81,6 @@
       efiSupport = true;
       enable = true;
       gfxmodeEfi = "1280x800";
-      extraEntries = ''
-        menuentry "Windows" {
-          insmod part_gpt
-          insmod fat
-          insmod search_fs_uuid
-          insmod chain
-          search --fs-uuid --set=root 061F-8444
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      '';
     };
   };
 
@@ -94,14 +88,19 @@
     diegopyl = {
       isNormalUser = true;
       description = "Diego Peña y Lillo";
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       extraGroups = ["networkmanager" "wheel"];
     };
   };
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
 
   environment.variables = {
     NIXOS_CONFIG_DIR = "$HOME/Documentos/nix-config";
+  };
+
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
@@ -115,6 +114,13 @@
       PasswordAuthentication = false;
     };
   };
+
+  services.fstrim.enable = true;
+  hardware.sane = {
+	  enable = true;
+	  extraBackends = [ pkgs.epkowa ];
+   };
+
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

@@ -4,7 +4,7 @@
   ...
 }: {
   services.mpd = {
-    enable = true;
+    enable = false;
     musicDirectory = "${config.home.homeDirectory}/Música";
     dataDir = "${config.home.homeDirectory}/.config/mpd";
     extraConfig = ''

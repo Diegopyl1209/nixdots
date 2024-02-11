@@ -24,6 +24,17 @@ export default {
         },
         mixer: '',
     },
+    asusctl: {
+        profile: {
+            Balanced: 'power-profile-balanced-symbolic',
+            Quiet: 'power-profile-power-saver-symbolic',
+            Performance: 'power-profile-performance-symbolic',
+        },
+        mode: {
+            Integrated: '',
+            Hybrid: '󰢮',
+        },
+    },
     apps: {
         apps: 'view-app-grid-symbolic',
         search: 'folder-saved-search-symbolic',
@@ -35,6 +46,11 @@ export default {
     bluetooth: {
         enabled: 'bluetooth-active-symbolic',
         disabled: 'bluetooth-disabled-symbolic',
+    },
+    brightness: {
+        indicator: 'display-brightness-symbolic',
+        keyboard: 'keyboard-brightness-symbolic',
+        screen: 'display-brightness-symbolic',
     },
     powermenu: {
         sleep: 'weather-clear-night-symbolic',
@@ -71,6 +87,7 @@ export default {
         next: '󰒭',
     },
     ui: {
+        colorpicker: 'color-select-symbolic',
         close: 'window-close-symbolic',
         info: 'info-symbolic',
         menu: 'open-menu-symbolic',

@@ -1,5 +1,3 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   outputs,
@@ -8,7 +6,6 @@
   pkgs,
   ...
 }: {
-  # You can import other NixOS modules here
   imports = [
     outputs.nixosModules
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
@@ -18,27 +15,13 @@
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
       inputs.nix-alien.overlays.default
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
     ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
@@ -81,18 +64,30 @@
       efiSupport = true;
       enable = true;
       gfxmodeEfi = "1280x800";
+      extraEntries = ''
+        menuentry "Windows" {
+          insmod part_gpt
+          insmod fat
+          insmod search_fs_uuid
+          insmod chain
+          search --fs-uuid --set=root B2D87D68D87D2C2B
+          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+        }
+      '';
     };
   };
+
+  time.hardwareClockInLocalTime = true;
 
   users.users = {
     diegopyl = {
       isNormalUser = true;
       description = "Diego Peña y Lillo";
-      shell = pkgs.fish;
+      shell = pkgs.zsh;
       extraGroups = ["networkmanager" "wheel"];
     };
   };
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   environment.variables = {
     NIXOS_CONFIG_DIR = "$HOME/Documentos/nix-config";
@@ -117,10 +112,9 @@
 
   services.fstrim.enable = true;
   hardware.sane = {
-	  enable = true;
-	  extraBackends = [ pkgs.epkowa ];
-   };
-
+    enable = true;
+    extraBackends = [pkgs.epkowa];
+  };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

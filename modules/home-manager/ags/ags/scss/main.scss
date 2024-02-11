@@ -17,10 +17,14 @@
 @import './common/spacing';
 
 // widgets
+@import './widgets/about';
 @import './widgets/applauncher';
 @import './widgets/bar';
+@import './widgets/desktop';
+@import './widgets/notifications';
 @import './widgets/overview';
 @import './widgets/osd';
+@import './widgets/dashboard';
 @import './widgets/dock';
 @import './widgets/powermenu';
 @import './widgets/lockscreen';

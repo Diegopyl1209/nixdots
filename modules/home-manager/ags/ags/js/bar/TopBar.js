@@ -1,12 +1,12 @@
 import SystemTray from 'resource:///com/github/Aylur/ags/service/systemtray.js';
-import Widget from 'resource:///com/github/Aylur/ags/widget.js';
-import Variable from 'resource:///com/github/Aylur/ags/variable.js';
+import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 import OverviewButton from './buttons/OverviewButton.js';
 import Workspaces from './buttons/Workspaces.js';
 import FocusedClient from './buttons/FocusedClient.js';
 import MediaIndicator from './buttons/MediaIndicator.js';
 import DateButton from './buttons/DateButton.js';
+import NotificationIndicator from './buttons/NotificationIndicator.js';
 import SysTray from './buttons/SysTray.js';
 import ColorPicker from './buttons/ColorPicker.js';
 import SystemIndicators from './buttons/SystemIndicators.js';
@@ -14,9 +14,12 @@ import PowerMenu from './buttons/PowerMenu.js';
 import ScreenRecord from './buttons/ScreenRecord.js';
 import SubMenu from './buttons/SubMenu.js';
 import Recorder from '../services/screenrecord.js';
+import notificationService from './buttons/notifications.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 // import * as System from './buttons/System.js';
 // import Taskbar from './buttons/Taskbar.js';
 import options from '../options.js';
+import PanelButton from './PanelButton.js';
 
 const submenuItems = Variable(1);
 SystemTray.connect('changed', () => {
@@ -48,6 +51,20 @@ const SeparatorDot = (service, condition) => Widget.Separator({
     },
 });
 
+const Notification = () => PanelButton({
+    class_name: 'notification',
+    on_primary_click: () => Utils.exec("sh -c 'swaync-client -op' "),
+    child: Widget.Label('').hook(notificationService, (self, notificationValue) => {
+        const obj = JSON.parse(notificationValue);
+        if (obj.text == "0"){
+            self.label = '󰂚';
+            return;
+        }else{
+            self.label = '󱅫';
+        }
+    }, 'notification-changed'),
+});
+
 const Start = () => Widget.Box({
     class_name: 'start',
     children: [
@@ -57,12 +74,16 @@ const Start = () => Widget.Box({
         SeparatorDot(),
         FocusedClient(),
         Widget.Box({ hexpand: true }),
+        NotificationIndicator(),
+        SeparatorDot(Notifications, n => n.notifications.length > 0 || n.dnd),
     ],
 });
 
 const Center = () => Widget.Box({
     class_name: 'center',
     children: [
+        Notification(),
+        SeparatorDot(),
         DateButton(),
     ],
 });

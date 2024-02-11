@@ -1,10 +1,10 @@
+import App from 'resource:///com/github/Aylur/ags/app.js';
 import Clock from '../../misc/Clock.js';
 import PanelButton from '../PanelButton.js';
-import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 
-export default ({ format = '%I:%M %p - %A %e.' } = {}) => PanelButton({
+export default ({ format = '%H:%M - %A %e.' } = {}) => PanelButton({
     class_name: 'dashboard panel-button',
-    on_clicked: () => Utils.execAsync('swaync-client -t'),
+    on_clicked: () => App.toggleWindow('dashboard'),
     window: 'dashboard',
     content: Clock({ format }),
 });

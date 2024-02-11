@@ -1,6 +1,6 @@
 import Applauncher from './applauncher/Applauncher.js';
+import Dashboard from './dashboard/Dashboard.js';
 import FloatingDock from './dock/FloatingDock.js';
-import Lockscreen from './lockscreen/Lockscreen.js';
 import OSD from './osd/OSD.js';
 import Overview from './overview/Overview.js';
 import PowerMenu from './powermenu/PowerMenu.js';
@@ -14,7 +14,6 @@ import options from './options.js';
 
 const windows = () => [
     forMonitors(FloatingDock),
-    forMonitors(Lockscreen),
     forMonitors(OSD),
     forMonitors(ScreenCorners),
     forMonitors(TopBar),
@@ -28,9 +27,8 @@ const windows = () => [
 export default {
     onConfigParsed: init,
     windows: windows().flat(1),
-    maxStreamVolume: 1.05,
-    cacheNotificationActions: false,
     closeWindowDelay: {
         'quicksettings': options.transition.value,
+        'dashboard': options.transition.value,
     },
 };

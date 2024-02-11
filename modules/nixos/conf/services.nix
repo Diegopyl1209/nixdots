@@ -12,8 +12,10 @@
     };
   };
   services.xserver = {
-    layout = "latam";
-    xkbVariant = "";
+    xkb = {
+      layout = "latam";
+      variant = "";
+    };
     displayManager.defaultSession = "hyprland";
   };
   systemd.services.usbreset = {
@@ -23,12 +25,6 @@
     restartIfChanged = false;
     script = ''
       ${pkgs.usb-reset}/bin/usb-reset 33fa:0001
-    '';
-  };
-
-  security.pam.services.swaylock = {
-    text = ''
-      auth include login
     '';
   };
 

@@ -33,7 +33,6 @@ in {
 
     gnome.excludePackages =
       (with pkgs; [
-        #gnome-text-editor
         gnome-console
         gnome-photos
         gnome-tour
@@ -43,7 +42,6 @@ in {
         nautilus
         cheese # webcam tool
         gnome-music
-        #gedit # text editor
         epiphany # web browser
         geary # email reader
         evince # document viewer

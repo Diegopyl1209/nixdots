@@ -21,15 +21,11 @@
     unzip
     killall
     xdg-utils
-    gtk3
     home-manager
     inotify-tools
     udiskie
     libnotify
-    git
-    jq
     pamixer
-    nix-prefetch-git
     usb-reset
     procps
     nitch
@@ -50,8 +46,6 @@
     wineWowPackages.stagingFull
     winetricks
     gamemode
-    hdos
-    bolt-launcher
   ];
 
   # Android

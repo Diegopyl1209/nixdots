@@ -105,6 +105,7 @@ class Recorder extends Service {
         if (res === 'edit')
             Utils.execAsync(['swappy', '-f', file]);
 
+        App.closeWindow('dashboard');
     }
 }
 

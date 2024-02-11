@@ -50,8 +50,6 @@ in {
 
     enabledExtensions = with spicePkgs.extensions; [
       playlistIcons
-      lastfm
-      genre
       historyShortcut
       inputs.spicetify-nix.packages.${pkgs.system}.default.extensions.adblock
       hidePodcasts

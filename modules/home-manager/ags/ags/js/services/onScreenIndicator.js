@@ -3,6 +3,7 @@ import Service from 'resource:///com/github/Aylur/ags/service.js';
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import icons from '../icons.js';
 import { getAudioTypeIcon } from '../utils.js';
+import Brightness from './brightness.js';
 
 class Indicator extends Service {
     static {
@@ -36,6 +37,19 @@ class Indicator extends Service {
         );
     }
 
+    display() {
+        // brightness is async, so lets wait a bit
+        Utils.timeout(10, () => this.popup(
+            Brightness.screen,
+            icons.brightness.screen));
+    }
+
+    kbd() {
+        // brightness is async, so lets wait a bit
+        Utils.timeout(10, () => this.popup(
+            (Brightness.kbd * 33 + 1) / 100,
+            icons.brightness.keyboard));
+    }
 
     connect(event = 'popup', callback) {
         return super.connect(event, callback);

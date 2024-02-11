@@ -8,10 +8,6 @@
       numpy
     ];
 in {
-  imports = [
-    ./scripts
-  ];
-
   programs = {
     vscode = {
       enable = true;
@@ -22,7 +18,7 @@ in {
           usbmuxd
         ]);
     };
-    
+
     java = {
       enable = true;
       package = pkgs.openjdk17;
@@ -41,7 +37,6 @@ in {
     cartridges
     runelite
     prismlauncher
-    
 
     # GUI Applications
     d-spy
@@ -59,8 +54,6 @@ in {
     hsetroot
     catimg
     eza
-    dconf
-    ranger
     fd
     ripgrep
     fzf
@@ -69,7 +62,6 @@ in {
     jq
     acpi
     ffmpeg
-    stow
     glib
     nodePackages_latest.pnpm
     yarn
@@ -91,10 +83,6 @@ in {
     neovim
     micro
     alacritty
-    vcpkg
-    ferium
-    pkg-config
-    cmake
 
     # Frameworks
     love # lua

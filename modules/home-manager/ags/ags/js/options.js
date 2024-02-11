@@ -10,7 +10,7 @@
 
 import { Option, resetOptions, getValues, apply, getOptions } from './settings/option.js';
 import { USER } from 'resource:///com/github/Aylur/ags/utils.js';
-//import themes from './themes.js';
+import themes from './themes.js';
 
 export default {
     reset: resetOptions,
@@ -40,6 +40,15 @@ export default {
     },
 
     theme: {
+        name: Option(themes[0].name, {
+            'category': 'exclude',
+            'note': 'Name to show as active in quicktoggles',
+        }),
+
+        icon: Option(themes[0].icon, {
+            'category': 'exclude',
+            'note': 'Icon to show as active in quicktoggles',
+        }),
 
         scheme: Option('dark', {
             'enums': ['dark', 'light'],
@@ -148,6 +157,7 @@ export default {
     applauncher: {
         width: Option(500),
         height: Option(500),
+        anchor: Option(['top']),
         icon_size: Option(52),
     },
 
@@ -184,6 +194,13 @@ export default {
     },
 
     desktop: {
+        wallpaper: {
+            fg: Option('#fff', { 'scss': 'wallpaper-fg' }),
+            img: Option(themes[0].options['desktop.wallpaper.img'], {
+                'scssFormat': v => `"${v}"`,
+                'type': 'img',
+            }),
+        },
         avatar: Option(`/var/lib/AccountsService/icons/${USER}`, {
             'scssFormat': v => `"${v}"`,
             'type': 'img',
@@ -202,16 +219,32 @@ export default {
             icon_size: Option(56),
             pinned_apps: Option([
                 'firefox',
-                'kitty',
-                'nemo',
-                'code',
+                'org.wezfurlong.wezterm',
+                'org.gnome.Nautilus',
+                'org.gnome.Calendar',
                 'obsidian',
                 'transmission-gtk',
+                'caprine',
+                'teams-for-linux',
                 'discord',
                 'spotify',
+                'com.usebottles.bottles',
                 'org.gnome.Software',
             ], { 'scss': 'exclude' }),
         },
+    },
+
+    notifications: {
+        black_list: Option(['Spotify'], { 'note': 'app-name | entry' }),
+        position: Option(['top', 'right'], { 'note': 'anchor' }),
+        width: Option(450),
+    },
+
+    dashboard: {
+        sys_info_size: Option(70, {
+            'category': 'Desktop',
+            'scss': 'sys-info-size',
+        }),
     },
 
     mpris: {
@@ -234,6 +267,7 @@ export default {
 
     temperature: '/sys/class/thermal/thermal_zone0/temp',
     systemFetchInterval: 5000,
+    brightnessctlKBD: 'asus::kbd_backlight',
     substitutions: {
         icons: [
             ['transmission-gtk', 'transmission'],

@@ -32,25 +32,25 @@ in {
       enableAutosuggestions = true;
       syntaxHighlighting.enable = true;
       initExtra = ''
-         autoload -Uz compinit && compinit
-         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-         zstyle ':completion:*' menu select
-         zstyle ':notify:*' check-focus no
-         bindkey "^[[1;5C" forward-word
-         bindkey "^[[1;5D" backward-word
-         path+=('/home/diegopyl/.local/bin')
-         path+=('/home/diegopyl/.local/share/flutter/bin/')
+        autoload -Uz compinit && compinit
+        zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+        zstyle ':completion:*' menu select
+        zstyle ':notify:*' check-focus no
+        bindkey "^[[1;5C" forward-word
+        bindkey "^[[1;5D" backward-word
+        path+=('/home/diegopyl/.local/bin')
+        path+=('/home/diegopyl/.local/share/flutter/bin/')
 
-         AUTO_NOTIFY_THRESHOLD=600
-         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
+        AUTO_NOTIFY_THRESHOLD=600
+        ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'
 
-         # pnpm
-        	export PNPM_HOME="/home/diegopyl/.local/share/pnpm"
-        	case ":$PATH:" in
-            	*":$PNPM_HOME:"*) ;;
-            	*) export PATH="$PNPM_HOME:$PATH" ;;
-        	esac
-         # pnpm end
+        # pnpm
+        export PNPM_HOME="/home/diegopyl/.local/share/pnpm"
+        case ":$PATH:" in
+           	*":$PNPM_HOME:"*) ;;
+           	*) export PATH="$PNPM_HOME:$PATH" ;;
+        esac
+        # pnpm end
       '';
       shellAliases = aliases;
       plugins = [

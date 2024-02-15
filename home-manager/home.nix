@@ -27,9 +27,9 @@
     homeDirectory = "/home/diegopyl";
   };
 
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
+  #home.sessionVariables = {
+  #  NIXOS_OZONE_WL = "1";
+  #};
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

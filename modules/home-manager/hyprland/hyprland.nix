@@ -120,12 +120,16 @@
         "SUPER SHIFT, 0, movetoworkspacesilent, 0"
       ];
 
-      bindle = let e = "exec, ags -b hypr -r"; in [
+      bindle = let
+        e = "exec, ags -b hypr -r";
+      in [
         ",XF86AudioRaiseVolume, ${e} 'audio.speaker.volume += 0.05; indicator.speaker()'"
         ",XF86AudioLowerVolume, ${e} 'audio.speaker.volume -= 0.05; indicator.speaker()'"
       ];
 
-      bindl = let e = "exec, ags -b hypr -r"; in [
+      bindl = let
+        e = "exec, ags -b hypr -r";
+      in [
         ",XF86AudioPlay, ${e} 'mpris?.playPause()'"
         ",XF86AudioPrev, ${e} 'mpris?.previous()'"
         ",XF86AudioNext, ${e} 'mpris?.next()'"

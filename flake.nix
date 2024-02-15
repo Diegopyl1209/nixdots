@@ -44,8 +44,8 @@
     inherit (self) outputs;
     system = "x86_64-linux";
 
-    #scheme = "${inputs.base16-schemes}/default-dark.yaml";
-    scheme = import ./colors/paradise.nix;
+    scheme = "${inputs.base16-schemes}/gruvbox-dark-hard.yaml";
+    #scheme = import ./colors/paradise.nix;
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.alejandra;
     # Your custom packages and modifications, exported as overlays

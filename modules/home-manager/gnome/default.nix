@@ -12,6 +12,10 @@ with lib.hm.gvariant; {
     gnome.gnome-weather
     gnome.gnome-calculator
     gnome.gnome-software # for flatpak
+    gnomeExtensions.application-tabs
+    gnomeExtensions.awesome-tiles
+    gnomeExtensions.dash-to-dock
+    gnomeExtensions.bluetooth-battery-meter
   ];
 
   dconf.settings = {
@@ -38,6 +42,18 @@ with lib.hm.gvariant; {
       idle-delay = mkUint32 0;
     };
 
+    "org/gnome/shell/extensions/dash-to-dock" = {
+      intellihide = false;
+      hot-keys = false;
+    };
+
+    "org/gnome/shell/extensions/awesome-tiles" = {
+      shortcut-tile-window-to-left = ["<Super>Left"];
+      shortcut-tile-window-to-right = ["<Super>Right"];
+      shortcut-tile-window-to-center = ["<Super>Up"];
+      shortcut-align-window-to-center = ["<Super>Down"];
+    };
+
     "org/gnome/desktop/wm/keybindings" = {
       close = ["<Alt>q"];
       move-to-workspace-1 = ["<Shift><Super>1"];
@@ -51,6 +67,8 @@ with lib.hm.gvariant; {
       switch-to-workspace-4 = ["<Super>4"];
       switch-to-workspace-5 = ["<Super>5"];
       toggle-fullscreen = ["<Super>g"];
+      maximize = ["<Super>x"];
+      unmaximize = ["<Super>c"];
     };
 
     "org/gnome/shell/keybindings" = {
@@ -105,19 +123,18 @@ with lib.hm.gvariant; {
     "org/gnome/shell" = {
       favorite-apps = [
         "firefox.desktop"
-        "kitty"
-        "nemo"
-        "org.gnome.Calendar.desktop"
+        "alacritty.desktop"
+        "nemo.desktop"
         "obsidian.desktop"
-        "transmission-gtk.desktop"
-        "discord.desktop"
+        "armcord.desktop"
         "spotify.desktop"
+        "steam.desktop"
         "org.gnome.Software.desktop"
       ];
     };
 
     "org/gnome/shell/app-switcher" = {
-      current-workspace-only = false;
+      current-workspace-only = true;
     };
 
     "org/gnome/shell/keybindings" = {

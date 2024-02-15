@@ -38,6 +38,7 @@ in {
       box_drawing_scale = "0.01, 0.8, 1.5, 2";
       mouse_hide_wait = 0;
       focus_follows_mouse = "no";
+      hide_window_decorations = "yes";
 
       # Performance
       repaint_delay = 20;

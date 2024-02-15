@@ -17,6 +17,7 @@
 in {
   home.packages = [
     nerdfonts
+    pkgs.gruvbox-gtk-theme
   ];
 
   stylix = {
@@ -59,8 +60,10 @@ in {
   gtk = {
     enable = true;
     iconTheme = {
-      name = "papirus-biscuit-dark";
-      package = pkgs.mythemes.biscuit;
+      #name = "papirus-biscuit-dark";
+      #package = pkgs.mythemes.biscuit;
+      name = "Gruvbox-Plus-Dark";
+      package = pkgs.gruvbox-plus-icons;
     };
     gtk3.extraConfig = {
       Settings = ''

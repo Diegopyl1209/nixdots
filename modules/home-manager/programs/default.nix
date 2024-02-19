@@ -46,6 +46,7 @@ in {
     jetbrains-toolbox
     zoom-us
     jetbrains.idea-ultimate
+    chiaki
 
     # Tools
     bat

@@ -125,10 +125,12 @@ with lib.hm.gvariant; {
         "firefox.desktop"
         "alacritty.desktop"
         "nemo.desktop"
+        "code.desktop"
         "obsidian.desktop"
         "armcord.desktop"
         "spotify.desktop"
         "steam.desktop"
+        "heroic.desktop"
         "org.gnome.Software.desktop"
       ];
     };

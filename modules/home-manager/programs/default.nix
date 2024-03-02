@@ -37,6 +37,7 @@ in {
     cartridges
     runelite
     prismlauncher
+    yuzuPackages.early-access
 
     # GUI Applications
     d-spy
@@ -98,4 +99,24 @@ in {
     ninja
     (python3.withPackages my-python-packages)
   ];
+  
+  xdg.desktopEntries = {
+    "heroic" = {
+      exec = "heroic %u";
+      icon = "heroic";
+      name = "Heroic Games Launcher";
+      categories = [
+        "Game"
+      ];
+      settings = {
+        "StartupWMClass" = "Heroic";
+        "MimeType" = "x-scheme-handler/heroic";
+        "Type" = "Application";
+      };
+    };
+    "com.heroicgameslauncher.hgl" = {
+      name = "Heroic";
+      noDisplay = true;
+    };
+  };
 }

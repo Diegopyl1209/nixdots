@@ -76,6 +76,7 @@
       '';
     };
   };
+  boot.plymouth.enable = true;
 
   time.hardwareClockInLocalTime = true;
 
@@ -90,7 +91,7 @@
   programs.zsh.enable = true;
 
   environment.variables = {
-    NIXOS_CONFIG_DIR = "$HOME/Documentos/nix-config";
+    NIXOS_CONFIG_DIR = "$HOME/Configuration";
   };
 
   nix.settings = {

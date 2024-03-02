@@ -16,7 +16,7 @@
       layout = "latam";
       variant = "";
     };
-    displayManager.defaultSession = "hyprland";
+    displayManager.defaultSession = "gnome";
   };
   systemd.services.usbreset = {
     description = "fix my usb dongle";

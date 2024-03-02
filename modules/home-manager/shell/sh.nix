@@ -40,6 +40,7 @@ in {
         bindkey "^[[1;5D" backward-word
         path+=('/home/diegopyl/.local/bin')
         path+=('/home/diegopyl/.local/share/flutter/bin/')
+        path+=('/home/diegopyl/.pub-cache/bin')
 
         AUTO_NOTIFY_THRESHOLD=600
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'

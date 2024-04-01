@@ -22,6 +22,7 @@
       inputs.nix-alien.overlays.default
     ];
     config = {
+      android_sdk.accept_license = true;
       allowUnfree = true;
     };
   };

@@ -29,7 +29,7 @@ in {
     zsh = {
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       initExtra = ''
         autoload -Uz compinit && compinit
@@ -41,6 +41,7 @@ in {
         path+=('/home/diegopyl/.local/bin')
         path+=('/home/diegopyl/.local/share/flutter/bin/')
         path+=('/home/diegopyl/.pub-cache/bin')
+        path+=('/home/diegopyl/.cargo/bin')
 
         AUTO_NOTIFY_THRESHOLD=600
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'

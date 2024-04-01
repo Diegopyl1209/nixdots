@@ -12,8 +12,8 @@
     hardware.url = "github:nixos/nixos-hardware";
     stylix.url = "github:danth/stylix";
     base16.url = "github:SenchoPens/base16.nix";
-    base16-schemes = {
-      url = "github:base16-project/base16-schemes";
+    tt-schemes = {
+      url = "github:tinted-theming/schemes";
       flake = false;
     };
     base16-kitty = {
@@ -44,7 +44,7 @@
     inherit (self) outputs;
     system = "x86_64-linux";
 
-    scheme = "${inputs.base16-schemes}/gruvbox-dark-hard.yaml";
+    scheme = "${inputs.tt-schemes}/base16/gruvbox-dark-hard.yaml";
     #scheme = import ./colors/paradise.nix;
   in {
     formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.alejandra;

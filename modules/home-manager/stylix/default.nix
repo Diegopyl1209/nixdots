@@ -23,7 +23,7 @@ in {
   stylix = {
     autoEnable = false;
     polarity = "dark";
-    image = "/home/diegopyl/Documentos/nix-config/wallpapers/aaaaa.jpg";
+    image = ./wallpapers/samurai.jpg;
     base16Scheme = "${config.scheme.outPath}";
     targets = {
       alacritty.enable = true;
@@ -33,8 +33,8 @@ in {
   };
 
   stylix.cursor = {
-    name = "phinger-cursors";
-    package = pkgs.phinger-cursors;
+    name = "Bibata-Modern-Classic";
+    package = pkgs.bibata-cursors;
     size = 16;
   };
 

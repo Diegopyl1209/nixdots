@@ -6,6 +6,8 @@
   my-python-packages = ps:
     with ps; [
       numpy
+      psycopg2
+      matplotlib
     ];
 in {
   programs = {
@@ -16,6 +18,13 @@ in {
           libGL # Neccesary to debug FabricMC Mods
           flite # Mc Narrator
           usbmuxd
+          #openssl_1_1
+          fontconfig
+          freetype
+          xorg.libX11
+          xorg.libXcursor
+          xorg.libXrandr
+          xorg.libXi
         ]);
     };
 
@@ -35,9 +44,9 @@ in {
     heroic
     protonup-qt
     cartridges
-    runelite
     prismlauncher
-    yuzuPackages.early-access
+    ryujinx
+    airshipper # veloren
 
     # GUI Applications
     d-spy
@@ -99,7 +108,7 @@ in {
     ninja
     (python3.withPackages my-python-packages)
   ];
-  
+
   xdg.desktopEntries = {
     "heroic" = {
       exec = "heroic %u";
@@ -117,6 +126,14 @@ in {
     "com.heroicgameslauncher.hgl" = {
       name = "Heroic";
       noDisplay = true;
+    };
+    "Ryujinx" = {
+      exec = "ryujinx %u";
+      icon = "Ryujinx";
+      name = "Ryujinx";
+      categories = [
+        "Game"
+      ];
     };
   };
 }

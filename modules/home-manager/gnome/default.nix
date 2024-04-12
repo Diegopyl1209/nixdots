@@ -12,7 +12,8 @@ with lib.hm.gvariant; {
     gnome.gnome-weather
     gnome.gnome-calculator
     gnome.gnome-software # for flatpak
-    gnomeExtensions.application-tabs
+    #gnomeExtensions.application-tabs
+    gnomeExtensions.app-menu-is-back
     gnomeExtensions.awesome-tiles
     gnomeExtensions.dash-to-dock
     gnomeExtensions.bluetooth-battery-meter

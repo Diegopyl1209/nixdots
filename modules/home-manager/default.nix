@@ -6,15 +6,12 @@
   imports = [
     ./git
     ./gnome
-    ./hyprland
     ./kitty
     ./music
     ./programs
-    ./rofi
     ./shell
     ./stylix
     ./firefox
-    ./ags
-    ./swaync
+    ./nixvim
   ];
 }

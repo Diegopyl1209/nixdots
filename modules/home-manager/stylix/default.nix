@@ -29,12 +29,14 @@ in {
       alacritty.enable = true;
       gtk.enable = true;
       helix.enable = true;
+      bat.enable = true;
+      gnome.enable = true;
     };
   };
 
   stylix.cursor = {
-    name = "Bibata-Modern-Classic";
-    package = pkgs.bibata-cursors;
+    name = "phinger-cursors";
+    package = pkgs.phinger-cursors;
     size = 16;
   };
 

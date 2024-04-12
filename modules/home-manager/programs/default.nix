@@ -91,7 +91,6 @@ in {
     pavucontrol
     blueberry
     swappy
-    neovim
     micro
     alacritty
 

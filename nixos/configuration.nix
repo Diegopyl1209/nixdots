@@ -1,3 +1,5 @@
+# This is your system's configuration file.
+# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   outputs,
@@ -6,33 +8,29 @@
   pkgs,
   ...
 }: {
+  # You can import other NixOS modules here
   imports = [
     outputs.nixosModules
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
     inputs.hardware.nixosModules.common-gpu-amd
-
     ./hardware-configuration.nix
   ];
 
   nixpkgs = {
+    # You can add overlays here
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
-      inputs.nix-alien.overlays.default
+      inputs.nix-topology.overlays.default
     ];
     config = {
       android_sdk.accept_license = true;
       allowUnfree = true;
     };
   };
-
-  # This will add each flake input as a registry
-  # To make nix3 commands consistent with your flake
   nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
-  # This will additionally add your inputs to the system's legacy channels
-  # Making legacy nix commands consistent as well, awesome!
   nix.nixPath = ["/etc/nix/path"];
   environment.etc =
     lib.mapAttrs'
@@ -51,53 +49,34 @@
 
   networking.hostName = "diego-pc";
 
-  # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_zen;
-
-  # Bootloader.
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-      efiSysMountPoint = "/boot";
-    };
-    grub = {
-      devices = ["nodev"];
-      efiSupport = true;
-      enable = true;
-      gfxmodeEfi = "1280x800";
-      extraEntries = ''
-        menuentry "Windows" {
-          insmod part_gpt
-          insmod fat
-          insmod search_fs_uuid
-          insmod chain
-          search --fs-uuid --set=root B2D87D68D87D2C2B
-          chainloader /EFI/Microsoft/Boot/bootmgfw.efi
-        }
-      '';
-    };
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
+    extraEntries = ''
+      menuentry "MacOS" {
+        search --file --no-floppy --set=root /EFI/OC/OpenCore.efi
+        chainloader /EFI/OC/OpenCore.efi
+      }
+    '';
   };
-  boot.plymouth.enable = true;
-
-  time.hardwareClockInLocalTime = true;
 
   users.users = {
     diegopyl = {
-      isNormalUser = true;
       description = "Diego Peña y Lillo";
       shell = pkgs.zsh;
-      extraGroups = ["networkmanager" "wheel"];
+      isNormalUser = true;
+      openssh.authorizedKeys.keys = [
+        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
+      ];
+      extraGroups = ["wheel" "networkmanager"];
     };
   };
   programs.zsh.enable = true;
 
   environment.variables = {
-    NIXOS_CONFIG_DIR = "$HOME/Configuration";
-  };
-
-  nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    NIXOS_CONFIG_DIR = "$HOME/Documentos/nix-config";
   };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
@@ -110,12 +89,6 @@
       # Use keys only. Remove if you want to SSH using password (not recommended)
       PasswordAuthentication = false;
     };
-  };
-
-  services.fstrim.enable = true;
-  hardware.sane = {
-    enable = true;
-    extraBackends = [pkgs.epkowa];
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion

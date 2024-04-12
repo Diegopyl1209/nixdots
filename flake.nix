@@ -8,6 +8,9 @@
     # Home manager
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # Disko
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     hardware.url = "github:nixos/nixos-hardware";
     stylix.url = "github:danth/stylix";
@@ -20,17 +23,16 @@
       url = "github:diegopyl1209/base16-kitty";
       flake = false;
     };
-
-    ags.url = "github:Aylur/ags";
-
-    hyprland.url = "github:hyprwm/Hyprland";
     nur.url = "github:nix-community/NUR";
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nixpkgs-f2k.url = "github:fortuneteller2k/nixpkgs-f2k";
-    nix-alien.url = "github:thiagokokada/nix-alien";
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -42,39 +44,51 @@
     ...
   } @ inputs: let
     inherit (self) outputs;
-    system = "x86_64-linux";
-
     scheme = "${inputs.tt-schemes}/base16/gruvbox-dark-hard.yaml";
-    #scheme = import ./colors/paradise.nix;
-  in {
-    formatter.x86_64-linux = nixpkgs.legacyPackages.${system}.alejandra;
-    # Your custom packages and modifications, exported as overlays
-    overlays = import ./overlays {inherit inputs;};
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+    systems = [
+      "x86_64-linux"
+      "x86_64-darwin"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+    pkgs = import nixpkgs {
+      system = "x86_64-linux";
+      overlays = [inputs.nix-topology.overlays.default];
+    };
+  in
+    {
+      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-    nixosConfigurations = {
-      diegopyl = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          # > Our main nixos configuration file <
-          ./nixos/configuration.nix
-        ];
+      overlays = import ./overlays {inherit inputs;};
+      nixosModules = import ./modules/nixos;
+      homeManagerModules = import ./modules/home-manager;
+
+      nixosConfigurations = {
+        diegopyl = nixpkgs.lib.nixosSystem {
+          specialArgs = {inherit inputs outputs;};
+          modules = [
+            ./nixos/configuration.nix
+            (import ./nixos/disko-config.nix {device = "/dev/disk/by-id/ata-WALRAM_512GB_AA000000000000004204";})
+            inputs.disko.nixosModules.disko
+
+            inputs.nix-topology.nixosModules.default
+
+          ];
+        };
+      };
+
+      homeConfigurations = {
+        "diegopyl" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+          extraSpecialArgs = {inherit inputs outputs;};
+          modules = [
+            {inherit scheme;}
+            inputs.stylix.homeManagerModules.stylix
+            inputs.base16.nixosModule
+            inputs.nixvim.homeManagerModules.nixvim
+            ./home-manager/home.nix
+          ];
+        };
       };
     };
-
-    homeConfigurations = {
-      "diegopyl" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = [
-          inputs.stylix.homeManagerModules.stylix
-          inputs.base16.nixosModule
-          {inherit scheme;}
-          # > Our main home-manager configuration file <
-          ./home-manager/home.nix
-        ];
-      };
-    };
-  };
-}
+  }

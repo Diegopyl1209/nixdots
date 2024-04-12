@@ -15,11 +15,9 @@ in {
   # Enable the GNOME Desktop Environment.
   services.xserver = {
     enable = true;
-    videoDrivers = ["amdgpu"];
     desktopManager.gnome.enable = true;
     displayManager = {
       gdm.enable = true;
-      startx.enable = true;
     };
   };
 

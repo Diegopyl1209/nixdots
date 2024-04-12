@@ -47,7 +47,6 @@ in {
     usb-reset
     procps
     nitch
-    nix-alien
     pkgsi686Linux.gperftools # fix for tf2
 
     # Discord with modifications

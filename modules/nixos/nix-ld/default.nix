@@ -4,7 +4,7 @@
   ...
 }: {
   # Enable nix ld
-  programs.nix-ld.enable = true;
+  programs.nix-ld.enable = false;
 
   # Sets up all the libraries to load
   programs.nix-ld.libraries = with pkgs; [

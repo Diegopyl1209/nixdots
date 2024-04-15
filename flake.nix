@@ -71,8 +71,6 @@
             (import ./nixos/disko-config.nix {device = "/dev/disk/by-id/ata-WALRAM_512GB_AA000000000000004204";})
             inputs.disko.nixosModules.disko
 
-            inputs.nix-topology.nixosModules.default
-
           ];
         };
       };

@@ -35,7 +35,7 @@ in {
   };
 
   stylix.cursor = {
-    name = "phinger-cursors";
+    name = "phinger-cursors-dark";
     package = pkgs.phinger-cursors;
     size = 16;
   };

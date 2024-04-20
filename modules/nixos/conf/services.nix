@@ -19,6 +19,9 @@
   };
   services = {
     displayManager.defaultSession = "gnome";
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
     xserver = {
       xkb = {
         layout = "latam";
@@ -28,12 +31,14 @@
   };
   systemd.services.usbreset = {
     description = "fix my usb dongle";
-    after = ["multi-user.target"];
-    wantedBy = ["multi-user.target"];
     restartIfChanged = false;
-    script = ''
-      ${pkgs.usb-reset}/bin/usb-reset 33fa:0001
-    '';
+    serviceConfig = {
+      ExecStart = "${pkgs.usb-reset}/bin/usb-reset 33fa:0001";
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+
+    wantedBy = [ "multi-user.target" ];
   };
 
   services.blueman = {

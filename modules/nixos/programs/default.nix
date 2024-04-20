@@ -26,6 +26,12 @@ in {
     adb = {enable = true;};
     dconf = {enable = true;};
     virt-manager = {enable = true;};
+    nh = {
+      enable = true;
+      clean.enable = true;
+      clean.extraArgs = "--keep-since 4d --keep 3";
+      flake = "/home/diegopyl/nixdots";
+  };
   };
 
   environment.systemPackages = with pkgs; [
@@ -46,8 +52,6 @@ in {
     usb-reset
     procps
     nitch
-    snowfallorg.flake
-    pkgsi686Linux.gperftools # fix for tf2
 
     # Discord with modifications
     (pkgs.discord.override {

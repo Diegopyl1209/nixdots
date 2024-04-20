@@ -1,5 +1,3 @@
-# This is your system's configuration file.
-# Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
   outputs,
@@ -8,7 +6,6 @@
   pkgs,
   ...
 }: {
-  # You can import other NixOS modules here
   imports = [
     outputs.nixosModules
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
@@ -17,13 +14,10 @@
   ];
 
   nixpkgs = {
-    # You can add overlays here
     overlays = [
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
-      inputs.snowfall-flake.overlays.default
-      inputs.snowfall-flake.overlays."package/flake"
     ];
     config = {
       android_sdk.accept_license = true;
@@ -77,10 +71,8 @@
   programs.zsh.enable = true;
 
   environment.variables = {
-    NIXOS_CONFIG_DIR = "$HOME/Documentos/nix-config";
+    #FLAKE = "$HOME/nixdots";
   };
-
-  hardware.opengl.driSupport32Bit = true;
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.

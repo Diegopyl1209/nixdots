@@ -35,16 +35,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    snowfall-flake = {
-      url = "github:snowfallorg/flake";
-      # Flake requires some packages that aren't on 22.05, but are available on unstable.
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {

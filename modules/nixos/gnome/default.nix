@@ -4,11 +4,11 @@
   ...
 }: let
   configure-terminal-nemo = pkgs.writeTextFile {
-    name = "configure-gtk";
+    name = "configure-nemo-terminal";
     destination = "/bin/configure-terminal-nemo";
     executable = true;
     text = ''
-      nix-shell -I "nixpkgs=channel:nixos-unstable" -p glib cinnamon.cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH gsettings set org.cinnamon.desktop.default-applications.terminal exec $TERMINAL'
+      nix-shell -p glib cinnamon.cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH gsettings set org.cinnamon.desktop.default-applications.terminal exec $TERMINAL'
     '';
   };
 in {

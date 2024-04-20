@@ -35,6 +35,16 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    snowfall-lib = {
+      url = "github:snowfallorg/lib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    snowfall-flake = {
+      url = "github:snowfallorg/flake";
+      # Flake requires some packages that aren't on 22.05, but are available on unstable.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -54,39 +64,37 @@
       system = "x86_64-linux";
       overlays = [inputs.nix-topology.overlays.default];
     };
-  in
-    {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+  in {
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-      overlays = import ./overlays {inherit inputs;};
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
+    overlays = import ./overlays {inherit inputs;};
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
 
-      nixosConfigurations = {
-        diegopyl = nixpkgs.lib.nixosSystem {
-          specialArgs = {inherit inputs outputs;};
-          modules = [
-            ./nixos/configuration.nix
-            (import ./nixos/disko-config.nix {device = "/dev/disk/by-id/ata-WALRAM_512GB_AA000000000000004204";})
-            inputs.disko.nixosModules.disko
-
-          ];
-        };
-      };
-
-      homeConfigurations = {
-        "diegopyl" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-          extraSpecialArgs = {inherit inputs outputs;};
-          modules = [
-            {inherit scheme;}
-            inputs.stylix.homeManagerModules.stylix
-            inputs.base16.nixosModule
-            inputs.nixvim.homeManagerModules.nixvim
-            ./home-manager/home.nix
-          ];
-        };
+    nixosConfigurations = {
+      diegopyl = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs outputs;};
+        modules = with inputs; [
+          ./nixos/configuration.nix
+          (import ./nixos/disko-config.nix {device = "/dev/disk/by-id/ata-WALRAM_512GB_AA000000000000004204";})
+          inputs.disko.nixosModules.disko
+        ];
       };
     };
-  }
+
+    homeConfigurations = {
+      "diegopyl" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
+        extraSpecialArgs = {inherit inputs outputs;};
+        modules = with inputs; [
+          {inherit scheme;}
+          stylix.homeManagerModules.stylix
+          base16.nixosModule
+          nixvim.homeManagerModules.nixvim
+          ./home-manager/home.nix
+        ];
+      };
+    };
+  };
+}

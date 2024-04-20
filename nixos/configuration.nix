@@ -22,6 +22,8 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
+      inputs.snowfall-flake.overlays.default
+      inputs.snowfall-flake.overlays."package/flake"
     ];
     config = {
       android_sdk.accept_license = true;
@@ -77,7 +79,7 @@
   environment.variables = {
     NIXOS_CONFIG_DIR = "$HOME/Documentos/nix-config";
   };
-  
+
   hardware.opengl.driSupport32Bit = true;
 
   # This setups a SSH server. Very important if you're setting up a headless system.

@@ -93,6 +93,9 @@ in {
     swappy
     micro
     alacritty
+    bubblewrap
+    fuse-overlayfs
+    dwarfs
 
     # Frameworks
     love # lua

@@ -46,6 +46,7 @@ in {
     usb-reset
     procps
     nitch
+    snowfallorg.flake
     pkgsi686Linux.gperftools # fix for tf2
 
     # Discord with modifications

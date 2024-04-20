@@ -16,7 +16,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
-  
+
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
 

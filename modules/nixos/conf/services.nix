@@ -17,12 +17,14 @@
       };
     };
   };
-  services.xserver = {
-    xkb = {
-      layout = "latam";
-      variant = "";
-    };
+  services = {
     displayManager.defaultSession = "gnome";
+    xserver = {
+      xkb = {
+        layout = "latam";
+        variant = "";
+      };
+    };
   };
   systemd.services.usbreset = {
     description = "fix my usb dongle";

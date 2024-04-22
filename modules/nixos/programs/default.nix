@@ -16,9 +16,9 @@
   };
   androidSdk = androidComposition.androidsdk;
 in {
-  environment.variables = {
-    ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-  };
+  #environment.variables = {
+  #  ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
+  #};
 
   programs = {
     steam = {enable = true;};
@@ -35,7 +35,7 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    androidSdk
+    #androidSdk
 
     # Utils
     distrobox

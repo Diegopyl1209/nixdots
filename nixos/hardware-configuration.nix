@@ -16,6 +16,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
+  boot.supportedFilesystems = [ "btrfs" "apfs" "xfs" ];
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;

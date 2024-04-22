@@ -124,14 +124,13 @@ with lib.hm.gvariant; {
     "org/gnome/shell" = {
       favorite-apps = [
         "firefox.desktop"
-        "alacritty.desktop"
+        "kitty.desktop"
         "nemo.desktop"
         "code.desktop"
-        "obsidian.desktop"
         "armcord.desktop"
         "spotify.desktop"
         "steam.desktop"
-        "heroic.desktop"
+        "hu.kramo.Cartridges.desktop"
         "org.gnome.Software.desktop"
       ];
     };

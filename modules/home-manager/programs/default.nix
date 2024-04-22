@@ -96,6 +96,7 @@ in {
     bubblewrap
     fuse-overlayfs
     dwarfs
+    psmisc
 
     # Frameworks
     love # lua

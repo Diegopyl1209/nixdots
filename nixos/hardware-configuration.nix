@@ -16,12 +16,14 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
-  boot.supportedFilesystems = [ "btrfs" "apfs" "xfs" ];
+  boot.supportedFilesystems = ["btrfs" "apfs" "xfs"];
 
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
   boot.plymouth.enable = true;
+
+  fileSystems."/run/media/diegopyl/Disco1".device = "/dev/disk/by-uuid/60d52e98-0213-45cb-a59b-b528a3835ac6";
 
   networking.useDHCP = lib.mkDefault true;
 

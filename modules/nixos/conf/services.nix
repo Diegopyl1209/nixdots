@@ -18,7 +18,7 @@
     };
   };
   services = {
-    displayManager.defaultSession = "gnome";
+    #displayManager.defaultSession = "gnome";
     devmon.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
@@ -38,7 +38,7 @@
       RemainAfterExit = true;
     };
 
-    wantedBy = [ "multi-user.target" ];
+    wantedBy = ["multi-user.target"];
   };
 
   services.blueman = {

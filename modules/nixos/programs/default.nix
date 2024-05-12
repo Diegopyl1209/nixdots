@@ -31,7 +31,7 @@ in {
       clean.enable = true;
       clean.extraArgs = "--keep-since 4d --keep 3";
       flake = "/home/diegopyl/nixdots";
-  };
+    };
   };
 
   environment.systemPackages = with pkgs; [

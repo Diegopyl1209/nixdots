@@ -42,6 +42,7 @@ in {
     # Games
     lutris
     heroic
+    bottles
     protonup-qt
     cartridges
     prismlauncher
@@ -97,6 +98,7 @@ in {
     fuse-overlayfs
     dwarfs
     psmisc
+    toolbox
 
     # Frameworks
     love # lua

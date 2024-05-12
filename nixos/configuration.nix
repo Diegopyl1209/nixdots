@@ -42,7 +42,7 @@
     auto-optimise-store = true;
   };
 
-  networking.hostName = "diego-pc";
+  networking.hostName = "diegopyl";
 
   boot.loader.grub = {
     enable = true;

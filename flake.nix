@@ -2,7 +2,7 @@
   description = "Your new nix config";
 
   inputs = {
-    # Nixpkgs
+    # Nixpkgs 
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     # Home manager

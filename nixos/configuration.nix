@@ -24,38 +24,27 @@
       allowUnfree = true;
     };
   };
-  nix.registry = (lib.mapAttrs (_: flake: {inherit flake;})) ((lib.filterAttrs (_: lib.isType "flake")) inputs);
 
-  nix.nixPath = ["/etc/nix/path"];
-  environment.etc =
-    lib.mapAttrs'
-    (name: value: {
-      name = "nix/path/${name}";
-      value.source = value.flake;
-    })
-    config.nix.registry;
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      # Enable flakes and new 'nix' command
+      experimental-features = "nix-command flakes";
+      # Opinionated: disable global registry
+      flake-registry = "";
+      # Workaround for https://github.com/NixOS/nix/issues/9574
+      nix-path = config.nix.nixPath;
+    };
+    # Opinionated: disable channels
+    channel.enable = false;
 
-  nix.settings = {
-    # Enable flakes and new 'nix' command
-    experimental-features = "nix-command flakes";
-    # Deduplicate and optimize nix store
-    auto-optimise-store = true;
+    # Opinionated: make flake registry and nix path match flake inputs
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  networking.hostName = "diegopyl";
-
-  boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    device = "nodev";
-    extraEntries = ''
-      menuentry "MacOS" {
-        search --file --no-floppy --set=root /EFI/OC/OpenCore.efi
-        chainloader /EFI/OC/OpenCore.efi
-      }
-    '';
-  };
+  networking.hostName = "diego-pc";
 
   users.users = {
     diegopyl = {
@@ -70,18 +59,15 @@
   };
   programs.zsh.enable = true;
 
-  environment.variables = {
-    #FLAKE = "$HOME/nixdots";
-  };
-
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
   services.openssh = {
     enable = true;
     settings = {
-      # Forbid root login through SSH.
+      # Opinionated: forbid root login through SSH.
       PermitRootLogin = "no";
-      # Use keys only. Remove if you want to SSH using password (not recommended)
+      # Opinionated: use keys only.
+      # Remove if you want to SSH using passwords
       PasswordAuthentication = false;
     };
   };

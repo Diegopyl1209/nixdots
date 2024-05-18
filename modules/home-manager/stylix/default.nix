@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   config,
   ...
@@ -62,8 +61,6 @@ in {
   gtk = {
     enable = true;
     iconTheme = {
-      #name = "papirus-biscuit-dark";
-      #package = pkgs.mythemes.biscuit;
       name = "Gruvbox-Plus-Dark";
       package = pkgs.gruvbox-plus-icons;
     };

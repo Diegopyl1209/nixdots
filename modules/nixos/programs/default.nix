@@ -1,31 +1,11 @@
-{
-  pkgs,
-  inputs,
-  config,
-  outputs,
-  ...
-}: let
-  buildToolsVersion = "33.0.0";
-  androidComposition = pkgs.androidenv.composeAndroidPackages {
-    buildToolsVersions = [buildToolsVersion "30.0.3"];
-    platformVersions = ["30" "31" "33" "34"];
-    abiVersions = ["armeabi-v7a" "arm64-v8a"];
-    includeNDK = true;
-    cmakeVersions = ["3.18.1"];
-    ndkVersions = ["25.1.8937393"];
-  };
-  androidSdk = androidComposition.androidsdk;
-in {
-  #environment.variables = {
-  #  ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-  #};
-
+{pkgs, ...}: {
   programs = {
-    steam = {enable = true;};
-    zsh = {enable = true;};
-    adb = {enable = true;};
-    dconf = {enable = true;};
-    virt-manager = {enable = true;};
+    steam.enable = true;
+    gamemode.enable = true;
+    zsh.enable = true;
+    adb.enable = true;
+    dconf.enable = true;
+    virt-manager.enable = true;
     nh = {
       enable = true;
       clean.enable = true;
@@ -35,8 +15,6 @@ in {
   };
 
   environment.systemPackages = with pkgs; [
-    #androidSdk
-
     # Utils
     distrobox
     appimage-run
@@ -48,7 +26,6 @@ in {
     inotify-tools
     udiskie
     libnotify
-    pamixer
     usb-reset
     procps
     nitch

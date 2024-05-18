@@ -1,4 +1,4 @@
-{...}: {
+{
   time = {
     hardwareClockInLocalTime = true;
     timeZone = "America/Santiago";

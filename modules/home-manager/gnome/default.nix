@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   lib,
   ...
@@ -12,8 +11,6 @@ with lib.hm.gvariant; {
     gnome.gnome-weather
     gnome.gnome-calculator
     gnome.gnome-software # for flatpak
-    #gnomeExtensions.application-tabs
-    #gnomeExtensions.app-menu-is-back
     gnomeExtensions.awesome-tiles
     gnomeExtensions.dash-to-dock
     gnomeExtensions.bluetooth-battery-meter
@@ -130,7 +127,7 @@ with lib.hm.gvariant; {
         "armcord.desktop"
         "spotify.desktop"
         "steam.desktop"
-        "hu.kramo.Cartridges.desktop"
+        "page.kramo.Cartridges.desktop"
         "org.gnome.Software.desktop"
       ];
     };

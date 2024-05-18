@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  config,
-  ...
-}: {
+{inputs, ...}: {
   programs.firefox = {
     enable = true;
     profiles.diego = {

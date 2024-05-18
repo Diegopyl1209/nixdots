@@ -1,13 +1,21 @@
 {pkgs, ...}: {
-  services.dbus.enable = true;
-  services.flatpak.enable = true;
-  services.printing.enable = true;
+  services = {
+    dbus.enable = true;
+    flatpak.enable = true;
+    printing.enable = true;
+    blueman.enable = true;
+    devmon.enable = true;
+    gvfs.enable = true;
+    udisks2.enable = true;
+  };
+
   services.postgresql = {
     enable = true;
     ensureDatabases = ["mydb"];
     enableTCPIP = true;
     # port = 5432;
   };
+
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = false;
@@ -17,18 +25,7 @@
       };
     };
   };
-  services = {
-    #displayManager.defaultSession = "gnome";
-    devmon.enable = true;
-    gvfs.enable = true;
-    udisks2.enable = true;
-    xserver = {
-      xkb = {
-        layout = "latam";
-        variant = "";
-      };
-    };
-  };
+
   systemd.services.usbreset = {
     description = "fix my usb dongle";
     restartIfChanged = false;
@@ -39,9 +36,5 @@
     };
 
     wantedBy = ["multi-user.target"];
-  };
-
-  services.blueman = {
-    enable = true;
   };
 }

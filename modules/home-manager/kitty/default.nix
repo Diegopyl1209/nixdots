@@ -1,6 +1,5 @@
 {
   pkgs,
-  lib,
   config,
   inputs,
   ...
@@ -10,14 +9,13 @@
       ${pkgs.kitty}/bin/kitty "$@"
     '';
 
-  mkTuple = lib.hm.gvariant.mkTuple;
   schemeFile = config.scheme {
     templateRepo = inputs.base16-kitty;
     target = "default-256";
   };
 in {
   home = {
-    packages = with pkgs; [kitty (substitute "xterm")]; #kgx = gnome-console
+    packages = with pkgs; [kitty (substitute "xterm")];
     sessionVariables.TERMINAL = "xterm";
     sessionVariables.TERM = "xterm";
   };
@@ -25,11 +23,10 @@ in {
   programs.kitty = {
     enable = true;
     settings = {
-      font_family = "FiraCode Nerd Font Mono";
-      italic_font = "auto";
-      bold_font = "auto";
-      bold_italic_font = "auto";
-      #font_size = 12;
+      font_family = config.stylix.fonts.monospace.name; #"FiraCode Nerd Font Mono";
+      copy_on_select = "clipboard";
+      scrollback_lines = 10000;
+      update_check_interval = 0;
       disable_ligatures = "never";
       confirm_os_window_close = 0;
       window_padding_width = 24;
@@ -39,19 +36,19 @@ in {
       mouse_hide_wait = 0;
       focus_follows_mouse = "no";
       hide_window_decorations = "yes";
-
-      # Performance
       repaint_delay = 20;
       input_delay = 2;
       sync_to_monitor = "no";
-
-      # Bell
       visual_bell_duration = 0;
-      enable_audio_bell = "no";
+      enable_audio_bell = false;
       bell_on_tab = "yes";
     };
     extraConfig = ''
       include ${schemeFile}
     '';
+  };
+
+  home.shellAliases = {
+    ssh = "kitten ssh";
   };
 }

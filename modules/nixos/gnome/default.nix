@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   configure-terminal-nemo = pkgs.writeTextFile {
     name = "configure-nemo-terminal";
     destination = "/bin/configure-terminal-nemo";
@@ -15,9 +11,14 @@ in {
   # Enable the GNOME Desktop Environment.
   services.xserver = {
     enable = true;
+    displayManager.defaultSession = "gnome";
     desktopManager.gnome.enable = true;
     displayManager = {
       gdm.enable = true;
+    };
+    xkb = {
+      layout = "latam";
+      variant = "";
     };
   };
 

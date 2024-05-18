@@ -1,11 +1,6 @@
-{
-  pkgs,
-  config,
-  ...
-}: let
+{pkgs, ...}: let
   aliases = {
     "db" = "distrobox";
-    "fl" = " ~/.local/flutter/bin/flutter";
     "arch" = "distrobox-enter arch -- zsh";
     "fedora" = "distrobox-enter Fedora -- zsh";
     "eza" = "eza -l --sort type --no-permissions --no-user --no-time --header --icons --no-filesize --group-directories-first";
@@ -32,16 +27,15 @@ in {
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       initExtra = ''
+        path+=('/home/diegopyl/.pub-cache/bin')
+        path+=('/home/diegopyl/.cargo/bin')
+
         autoload -Uz compinit && compinit
         zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
         zstyle ':completion:*' menu select
         zstyle ':notify:*' check-focus no
         bindkey "^[[1;5C" forward-word
         bindkey "^[[1;5D" backward-word
-        path+=('/home/diegopyl/.local/bin')
-        path+=('/home/diegopyl/.local/share/flutter/bin/')
-        path+=('/home/diegopyl/.pub-cache/bin')
-        path+=('/home/diegopyl/.cargo/bin')
 
         AUTO_NOTIFY_THRESHOLD=600
         ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=5'

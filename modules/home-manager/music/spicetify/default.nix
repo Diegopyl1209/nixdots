@@ -14,12 +14,6 @@ in {
       rev = "7e9e898124c96f115dc61fb91d0499ae81f56892";
       sha256 = "06xp6vlbd4kj6vafkc3z2a81xpcwmz62cxilahjsj28110s0hxby";
     };
-    # pin a certain version of the localFiles custom app
-    localFilesSrc = pkgs.fetchgit {
-      url = "https://github.com/hroland/spicetify-show-local-files/";
-      rev = "1bfd2fc80385b21ed6dd207b00a371065e53042e";
-      sha256 = "01gy16b69glqcalz1wm8kr5wsh94i419qx4nfmsavm4rcvcr3qlx";
-    };
   in {
     spotifyPackage = pkgs.spotify;
     enable = true;

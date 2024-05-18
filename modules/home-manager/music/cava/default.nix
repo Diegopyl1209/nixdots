@@ -18,7 +18,5 @@
     # You can define as many as 8 different colors. They range from bottom to top of screen
     gradient = 1
     gradient_count = 3
-
-
   '';
 }

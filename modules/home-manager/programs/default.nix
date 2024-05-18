@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: let
+{pkgs, ...}: let
   my-python-packages = ps:
     with ps; [
       numpy
@@ -18,7 +14,6 @@ in {
           libGL # Neccesary to debug FabricMC Mods
           flite # Mc Narrator
           usbmuxd
-          #openssl_1_1
           fontconfig
           freetype
           xorg.libX11
@@ -42,7 +37,6 @@ in {
     # Games
     lutris
     heroic
-    bottles
     protonup-qt
     cartridges
     prismlauncher
@@ -57,18 +51,13 @@ in {
     jetbrains-toolbox
     zoom-us
     jetbrains.idea-ultimate
-    chiaki
 
     # Tools
     bat
-    bc
-    helix
-    hsetroot
     catimg
     eza
     fd
     ripgrep
-    fzf
     socat
     htop
     jq
@@ -76,13 +65,10 @@ in {
     ffmpeg
     glib
     nodePackages_latest.pnpm
-    yarn
     git-lfs
     moreutils
-    cava
     mpdris2
     xorg.xev
-    procps
     playerctl
     recode
     gcc
@@ -90,7 +76,6 @@ in {
     mangohud
     imagemagick
     pavucontrol
-    blueberry
     swappy
     micro
     alacritty
@@ -100,17 +85,11 @@ in {
     psmisc
     toolbox
 
-    # Frameworks
-    love # lua
-
     # Languages
-    bun
     rustup
     nodejs_20
-    luajit
     typescript
     meson
-    ninja
     (python3.withPackages my-python-packages)
   ];
 

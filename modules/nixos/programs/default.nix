@@ -12,6 +12,8 @@
       clean.extraArgs = "--keep-since 4d --keep 3";
       flake = "/home/diegopyl/nixdots";
     };
+    labwc.enable = true;
+    waybar.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

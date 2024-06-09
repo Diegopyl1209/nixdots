@@ -7,10 +7,12 @@
     devmon.enable = true;
     gvfs.enable = true;
     udisks2.enable = true;
+    earlyoom.enable = true;
+    tailscale.enable = true;
   };
 
   services.postgresql = {
-    enable = true;
+    enable = false;
     ensureDatabases = ["mydb"];
     enableTCPIP = true;
     # port = 5432;

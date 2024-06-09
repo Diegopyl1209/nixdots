@@ -8,11 +8,6 @@
     pkgs.writeShellScriptBin name ''
       ${pkgs.kitty}/bin/kitty "$@"
     '';
-
-  schemeFile = config.scheme {
-    templateRepo = inputs.base16-kitty;
-    target = "default-256";
-  };
 in {
   home = {
     packages = with pkgs; [kitty (substitute "xterm")];
@@ -23,7 +18,7 @@ in {
   programs.kitty = {
     enable = true;
     settings = {
-      font_family = config.stylix.fonts.monospace.name; #"FiraCode Nerd Font Mono";
+      font_family = "FiraCode Nerd Font Mono";
       copy_on_select = "clipboard";
       scrollback_lines = 10000;
       update_check_interval = 0;
@@ -43,9 +38,6 @@ in {
       enable_audio_bell = false;
       bell_on_tab = "yes";
     };
-    extraConfig = ''
-      include ${schemeFile}
-    '';
   };
 
   home.shellAliases = {

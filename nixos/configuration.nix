@@ -10,6 +10,7 @@
     outputs.nixosModules
     inputs.hardware.nixosModules.common-cpu-intel-cpu-only
     inputs.hardware.nixosModules.common-gpu-amd
+    inputs.hardware.nixosModules.common-pc-ssd
     ./hardware-configuration.nix
   ];
 
@@ -35,6 +36,7 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
+      auto-optimise-store = true;
     };
     # Opinionated: disable channels
     channel.enable = false;

@@ -51,14 +51,14 @@ in {
         format = "[](fg:white)[](bg:white fg:black)[](fg:white) ";
       };
       container = {
-        symbol = " 󰏖";
+        symbol = "󰏖";
         format = "[$symbol ](yellow dimmed)";
       };
       directory = {
-        home_symbol = "⌂ ";
+        home_symbol = " ⌂ ";
         truncation_length = 2;
         #truncation_symbol = "□ ";
-        read_only = " △";
+        read_only = " △ ";
         use_os_path_sep = true;
         style = "bright-blue";
       };

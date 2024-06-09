@@ -5,12 +5,10 @@
 }: let
   nerdfonts = pkgs.nerdfonts.override {
     fonts = [
+      "JetBrainsMono"
       "Ubuntu"
       "UbuntuMono"
-      "CascadiaCode"
-      "FantasqueSansMono"
       "FiraCode"
-      "Mononoki"
     ];
   };
 in {
@@ -26,6 +24,7 @@ in {
     base16Scheme = "${config.scheme.outPath}";
     targets = {
       alacritty.enable = true;
+      kitty.enable = true;
       gtk.enable = true;
       helix.enable = true;
       bat.enable = true;
@@ -41,16 +40,16 @@ in {
 
   stylix.fonts = {
     serif = {
-      package = nerdfonts;
-      name = "Ubuntu Nerd Font";
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Serif";
     };
     sansSerif = {
-      package = nerdfonts;
-      name = "Ubuntu Nerd Font";
+      package = pkgs.dejavu_fonts;
+      name = "DejaVu Sans Condensed";
     };
     monospace = {
       package = nerdfonts;
-      name = "UbuntuMono Nerd Font";
+      name = "JetBrainsMono Nerd Font Mono";
     };
     emoji = {
       package = pkgs.noto-fonts-emoji;

@@ -2,8 +2,12 @@
   my-python-packages = ps:
     with ps; [
       numpy
+      pandas
       psycopg2
       matplotlib
+      # TODO: Eliminar
+      elasticsearch
+      elastic-transport
     ];
 in {
   programs = {
@@ -84,6 +88,7 @@ in {
     dwarfs
     psmisc
     toolbox
+    logstash
 
     # Languages
     rustup

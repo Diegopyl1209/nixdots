@@ -46,7 +46,7 @@
     {device = "/dev/disk/by-uuid/e3f41777-8a33-4c9f-94b6-62a4fe1d7eec";}
   ];
   
- # fileSystems."/run/media/diegopyl/Disco1".device = "/dev/disk/by-uuid/60d52e98-0213-45cb-a59b-b528a3835ac6";
+  fileSystems."/run/media/diegopyl/Disco1".device = "/dev/disk/by-uuid/6f2c13e9-d688-47c8-9edb-ef3b1bef39e0";
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

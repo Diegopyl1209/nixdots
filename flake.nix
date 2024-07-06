@@ -1,77 +1,80 @@
 {
-  description = "nix config";
+  description = "NixOS configuration";
 
   inputs = {
-    # Nixpkgs
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-23.11";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # Home manager
-    home-manager.url = "github:nix-community/home-manager/master";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    # Disko
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    hardware.url = "github:nixos/nixos-hardware";
-    spicetify-nix.url = "github:the-argus/spicetify-nix";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    spicetify-nix.url = "github:MichaelPachec0/spicetify-nix";
+
+    nix-gaming.url = "github:fufexan/nix-gaming";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+
+    Lumi.url = "github:bananad3v/Lumi"; #nixvim conf
+    waybar.url = "github:Alexays/Waybar";
+
+    auto-cpufreq = {
+      url = "github:adnanhodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nur.url = "github:nix-community/NUR";
+
     stylix.url = "github:danth/stylix";
     base16.url = "github:SenchoPens/base16.nix";
-    tt-schemes = {
-      url = "github:tinted-theming/schemes";
-      flake = false;
-    };
+
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    getchoo = {
+      url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    schizofox = {
+      url = "github:schizofox/schizofox";
+    };
+    tt-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
+    game-rs.url = "github:amanse/game-rs";
+    nix-alien.url = "github:thiagokokada/nix-alien";
+    wayfreeze.url = "github:jappie3/wayfreeze";
   };
 
   outputs = {
-    self,
     nixpkgs,
-    home-manager,
+    self,
     ...
   } @ inputs: let
-    inherit (self) outputs;
-    systems = [
-      "x86_64-linux"
-      "x86_64-darwin"
-    ];
-    forAllSystems = nixpkgs.lib.genAttrs systems;
+    username = "diegopyl";
+    userfullname = "Diego Peña y Lillo";
+    useremail = "diegopyl1209@gmail.com";
+
+    system = "x86_64-linux";
+
+    commonInherits = {
+      inherit (nixpkgs) lib;
+      inherit self inputs;
+      inherit username userfullname useremail;
+      inherit system;
+    };
   in {
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-    overlays = import ./overlays {inherit inputs;};
-    nixosModules = import ./modules/nixos;
-    homeManagerModules = import ./modules/home-manager;
+    nixosConfigurations = import ./hosts (
+      commonInherits // {isNixOS = true;}
+    );
 
-    nixosConfigurations = {
-      diego-pc = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [
-          ./nixos/configuration.nix
-          #(import ./nixos/disko-config.nix {device = "/dev/disk/by-id/ata-WALRAM_512GB_AA000000000000004204";})
-          #inputs.disko.nixosModules.disko
-        ];
-      };
-    };
-
-    homeConfigurations = {
-      "diegopyl@diego-pc" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs outputs;};
-        modules = with inputs; [
-          {scheme = "${inputs.tt-schemes}/base16/gruvbox-dark-hard.yaml";}
-          ./home-manager/home.nix
-          stylix.homeManagerModules.stylix
-          base16.nixosModule
-          nixvim.homeManagerModules.nixvim
-        ];
-      };
-    };
+    homeConfigurations = import ./hosts (
+      commonInherits // {isNixOS = false;}
+    );
   };
 }

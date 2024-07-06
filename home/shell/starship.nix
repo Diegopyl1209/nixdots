@@ -1,58 +1,92 @@
+{ ... }:
 {
-  config,
-  lib,
-  ...
-}: {
   programs.starship = {
     enable = true;
     settings = {
-      palette = "base16";
+      format = "$directory$all$cmd_duration$jobs$status$shell$line_break$env_var$username$sudo$character";
+      right_format = "$battery$time";
       add_newline = true;
-      format = ''
-        $hostname$directory$git_branch
-        $character
-
-      '';
-
-      username = {
-        show_always = true;
-        style_user = "green bold";
-        style_root = "red bold";
-        format = "[$user]($style) in";
-        disabled = true;
+      character = {
+        format = "$symbol ";
+        success_symbol = "[●](bright-green)";
+        error_symbol = "[●](red)";
+        vicmd_symbol = "[◆](blue)";
       };
-
-      hostname = {
-        ssh_only = true;
-        format = "[$hostname](bold yellow) in ";
-        trim_at = ".";
+      sudo = {
+        format = "[$symbol]($style)";
+        style = "bright-purple";
+        symbol = ":";
         disabled = false;
       };
-
+      username = {
+        style_user = "yellow bold";
+        style_root = "purple bold";
+        format = "[$user]($style) ▻ ";
+        disabled = false;
+        show_always = false;
+      };
       directory = {
-        read_only = " ";
-        truncation_length = 10;
-        truncate_to_repo = true; # truncates directory to root folder if in github repo
-        style = "bold italic cyan";
+        home_symbol = "⌂";
+        truncation_length = 2;
+        truncation_symbol = "□ ";
+        read_only = " △";
+        use_os_path_sep = true;
+        style = "bright-blue";
       };
-
       git_branch = {
-        symbol = " ";
-        style = "bold blue";
+        format = "[$symbol $branch(:$remote_branch)]($style) ";
+        symbol = "[△](green)";
+        style = "green";
       };
-
-      character = {
-        success_symbol = "[﬌](bold green)";
-        error_symbol = "[✗](bold red)";
+      git_status = {
+        format = "($ahead_behind$staged$renamed$modified$untracked$deleted$conflicted$stashed)";
+        conflicted = "[◪ ]( bright-magenta)";
+        ahead = "[▲ [$count](bold white) ](green)";
+        behind = "[▼ [$count](bold white) ](red)";
+        diverged = "[◇ [$ahead_count](bold green)/[$behind_count](bold red) ](bright-magenta)";
+        untracked = "[○ ](bright-yellow)";
+        stashed = "[$count ](bold white)";
+        renamed = "[● ](bright-blue)";
+        modified = "[● ](yellow)";
+        staged = "[● ](bright-cyan)";
+        deleted = "[✕ ](red)";
       };
-
-      palettes.base16 = with config.lib.stylix.colors.withHashtag; {
-        blue = "${base07}";
-        red = "${base08}";
-        orange = "${base09}";
-        green = "${base0B}";
-        yellow = "${base0A}";
-        cyan = "${base07}";
+      deno = {
+        format = "deno [∫ $version](blue ) ";
+        version_format = "$major.$minor";
+      };
+      nodejs = {
+        format = "node [◫ ($version)]( bright-green) ";
+        detect_files = [ "package.json" ];
+        version_format = "$major.$minor";
+      };
+      rust = {
+        format = "rs [$symbol$version]($style) ";
+        symbol = "⊃ ";
+        version_format = "$major.$minor";
+        style = "red";
+      };
+      gradle = {
+        symbol = " ";
+      };
+      golang = {
+        symbol = " ";
+      };
+      kotlin = {
+        symbol = "󱈙 ";
+      };
+      java = {
+        symbol = " ";
+      };
+      package = {
+        format = "pkg [$symbol$version]($style) ";
+        version_format = "$major.$minor";
+        symbol = "◫ ";
+        style = "bright-yellow ";
+      };
+      nix_shell = {
+        symbol = "⊛ ";
+        format = "nix [$symbol$state $name]($style) ";
       };
     };
   };

@@ -6,7 +6,6 @@
 }: {
   imports = [
     ./config.nix
-    ./scripts
     ./hyprlock.nix
     ./hyprpaper.nix
   ];
@@ -17,6 +16,8 @@
       wl-gammarelay-rs
       wayfreeze
       grimblast
+      hyprpaper
+      hyprpicker
     ];
 
     # Import wallpaper

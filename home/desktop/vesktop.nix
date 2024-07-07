@@ -6,7 +6,7 @@
   home.packages = with pkgs; [
     vesktop
   ];
-  xdg.configFile."vesktop/themes/nix-colors-theme.css" = {
+  xdg.configFile."vesktop/themes/base16-nix-theme.css" = {
     text = with config.lib.stylix.colors; ''
 
       .theme-dark {

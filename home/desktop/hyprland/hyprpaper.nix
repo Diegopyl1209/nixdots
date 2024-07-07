@@ -4,14 +4,19 @@
   username,
   ...
 }: let
-  wallpaper = "/home/${username}/.config/wallpapers/${config.home-manager.wallpaper}";
+  wallpaper = "${config.stylix.image}";
 in {
   config = lib.mkIf config.home-manager.graphical.enable {
-    xdg.configFile."hypr/hyprpaper.conf".text = ''
-      preload = ${wallpaper}
-
-      )}
-      splash = false
-    '';
+    services.hyprpaper = {
+      enable = true;
+      settings = {
+        preload = [
+          "${wallpaper}"
+        ];
+        wallpaper = [
+          "${wallpaper}"
+        ];
+      };
+    };
   };
 }

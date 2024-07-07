@@ -6,7 +6,7 @@
   username,
   ...
 }: let
-  wallpaper = "/home/${username}/.config/wallpapers/ship-2.png";
+  wallpaper = "${config.stylix.image}";
 in {
   config = lib.mkIf config.home-manager.graphical.enable {
     xdg.configFile."hypr/hyprlock.conf".text = with config.lib.stylix.colors; ''

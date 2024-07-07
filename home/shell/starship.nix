@@ -1,11 +1,11 @@
-{ ... }:
-{
+{...}: {
   programs.starship = {
     enable = true;
     settings = {
       format = "$directory$all$cmd_duration$jobs$status$shell$line_break$env_var$username$sudo$character";
       right_format = "$battery$time";
       add_newline = true;
+      command_timeout = 1000;
       character = {
         format = "$symbol ";
         success_symbol = "[●](bright-green)";
@@ -57,7 +57,7 @@
       };
       nodejs = {
         format = "node [◫ ($version)]( bright-green) ";
-        detect_files = [ "package.json" ];
+        detect_files = ["package.json"];
         version_format = "$major.$minor";
       };
       rust = {

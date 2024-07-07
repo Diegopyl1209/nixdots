@@ -9,7 +9,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
-  
+
   services.displayManager.autoLogin = {
     user = username;
     enable = true;

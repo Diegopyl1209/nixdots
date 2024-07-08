@@ -96,7 +96,7 @@ in {
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
-          "SUPER, L, hyprlock"
+          "SUPER, L, exec, hyprlock"
 
           (mvfocus "left" "l")
           (mvfocus "right" "r")

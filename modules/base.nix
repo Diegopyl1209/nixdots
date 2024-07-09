@@ -177,7 +177,7 @@
   };
   nix.optimise = {
     automatic = true;
-    optimise.dates = ["10:00"];
+    dates = ["10:00"];
   };
 
   # Enable needed programs

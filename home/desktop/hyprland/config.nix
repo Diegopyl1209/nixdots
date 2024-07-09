@@ -82,7 +82,7 @@ in {
         ws = binding "SUPER" "workspace";
         resizeactive = binding "SUPER CTRL" "resizeactive";
         mvactive = binding "SUPER ALT" "moveactive";
-        mvwindow = binding "SUPER ALT" "movewindow";
+        mvwindow = binding "SUPER SHIFT" "movewindow";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
         arr = [1 2 3 4 5 6 7];
       in
@@ -97,7 +97,7 @@ in {
           "SUPER, G, fullscreen"
           "SUPER, O, fakefullscreen"
           "SUPER, P, togglesplit"
-          "SUPER, L, hyprlock"
+          "SUPER, L, exec, hyprlock"
 
           (mvfocus "left" "l")
           (mvfocus "right" "r")

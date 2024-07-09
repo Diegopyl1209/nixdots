@@ -19,6 +19,11 @@
       };
     };
 
+    xdg.portal = {
+      enable = true;
+      extraPortals = [pkgs.xdg-desktop-portal-gnome];
+    };
+
     # this is a life saver.
     # literally no documentation about this anywhere.
     # might be good to write about this...

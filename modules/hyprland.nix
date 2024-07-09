@@ -7,7 +7,7 @@
   config = lib.mkIf config.hm.home-manager.hyprland.enable {
     programs.hyprland.enable = true;
     
-    services.gnome3.gnome-keyring.enable = true;
+    services.gnome.gnome-keyring.enable = true;
     ssh.startAgent = true;
 
     services.greetd = {

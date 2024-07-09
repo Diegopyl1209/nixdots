@@ -18,17 +18,18 @@
   boot.supportedFilesystems = ["btrfs" "apfs" "xfs"];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/5120c1e5-4da4-4a13-8e4f-8e6e4bfebfa8";
+    device = "/dev/disk/by-uuid/7fed59fe-fabf-4779-b8f4-8e41294e0bf1";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/04D3-B94E";
+    device = "/dev/disk/by-uuid/C75A-0788";
     fsType = "vfat";
+    options = ["fmask=0022" "dmask=0022"];
   };
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/e3f41777-8a33-4c9f-94b6-62a4fe1d7eec";}
+    {device = "/dev/disk/by-uuid/7e9f8a36-127c-42b0-b320-e982bd44633b";}
   ];
 
   fileSystems."/run/media/diegopyl/Disco1".device = "/dev/disk/by-uuid/6f2c13e9-d688-47c8-9edb-ef3b1bef39e0";

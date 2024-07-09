@@ -103,7 +103,7 @@ in {
           (mvfocus "right" "r")
           (mvfocus "up" "u")
           (mvfocus "down" "d")
- 	  (mvwindow "left" "l")
+          (mvwindow "left" "l")
           (mvwindow "right" "r")
           (mvwindow "up" "u")
           (mvwindow "down" "d")

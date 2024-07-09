@@ -16,6 +16,7 @@ with lib.hm.gvariant; {
       gnomeExtensions.awesome-tiles
       gnomeExtensions.dash-to-dock
       gnomeExtensions.bluetooth-battery-meter
+      gnomeExtensions.app-menu-is-back
     ];
 
     dconf.settings = {

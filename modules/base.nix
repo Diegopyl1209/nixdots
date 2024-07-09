@@ -175,6 +175,10 @@
     dates = "daily";
     options = "--delete-older-than 3d";
   };
+  nix.optimise = {
+    automatic = true;
+    optimise.dates = ["10:00"];
+  };
 
   # Enable needed programs
   programs = {

@@ -8,4 +8,5 @@
     inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490
   ];
+  services.fprintd.enable = true;
 }

@@ -16,6 +16,8 @@ in {
     desktopManager.gnome.enable = config.hm.home-manager.gnome.enable;
     displayManager.gdm.enable = config.hm.home-manager.gnome.enable;
   };
+  
+  services.gnome.gnome-keyring.enable
 
   environment = {
     systemPackages = with pkgs; [

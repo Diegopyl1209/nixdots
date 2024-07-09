@@ -8,7 +8,7 @@
     destination = "/bin/configure-terminal-nemo";
     executable = true;
     text = ''
-      nix-shell -p glib cinnamon.cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH gsettings set org.cinnamon.desktop.default-applications.terminal exec $TERMINAL'
+      nix-shell -p glib cinnamon.cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH & gsettings set org.cinnamon.desktop.default-applications.terminal exec $TERMINAL'
     '';
   };
 in {
@@ -18,6 +18,24 @@ in {
   };
 
   services.gnome.gnome-keyring.enable = true;
+
+  nixpkgs.overlays = [
+    # GNOME 46: triple-buffering-v4-46
+    (final: prev: {
+      gnome = prev.gnome.overrideScope (gnomeFinal: gnomePrev: {
+        mutter = gnomePrev.mutter.overrideAttrs (old: {
+          src = pkgs.fetchFromGitLab {
+            domain = "gitlab.gnome.org";
+            owner = "vanvugt";
+            repo = "mutter";
+            rev = "triple-buffering-v4-46";
+            hash = "sha256-fkPjB/5DPBX06t7yj0Rb3UEuu5b9mu3aS+jhH18+lpI=";
+          };
+        });
+      });
+    })
+  ];
+  nixpkgs.config.allowAliases = false; # needed for overlay works
 
   environment = {
     systemPackages = with pkgs; [

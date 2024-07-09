@@ -9,7 +9,8 @@
     colorscheme = "gruvbox";
     #wallpaper = "samurai.jpg";
     graphical.enable = true;
-    hyprland.enable = true;
+    hyprland.enable = false;
+    gnome.enable = true;
     lid.enable = true;
     touchpad.enable = true;
     battery.enable = true;

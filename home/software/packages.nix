@@ -37,7 +37,7 @@
     #kdenlive
     #krita
     gimp
-    gnome.nautilus
+    #gnome.nautilus
     #gnome.gnome-boxes
     kvmtool
     inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
@@ -96,7 +96,6 @@
     # glibc
     # figma-linux
     direnv
-    vscode
     jetbrains.idea-community
     # (pkgs.vscode.overrideAttrs (o: let
     #   version = "1.81.1";
@@ -143,6 +142,11 @@
     qt6.qtwayland
     qt6.qmake
   ];
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
 
   xdg.desktopEntries = {
     "heroic" = {

@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }: let
   playerctl = "${pkgs.playerctl}/bin/playerctl";

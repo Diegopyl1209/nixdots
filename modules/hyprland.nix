@@ -8,7 +8,6 @@
     programs.hyprland.enable = true;
     
     services.gnome.gnome-keyring.enable = true;
-    ssh.startAgent = true;
 
     services.greetd = {
       enable = true;

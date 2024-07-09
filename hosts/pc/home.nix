@@ -2,6 +2,7 @@
   home-manager = {
     graphical.enable = true;
     gnome.enable = true;
+    gdm.enable = true;
     colorscheme = "gruvbox";
     lid.enable = false;
     touchpad.enable = false;
@@ -13,7 +14,4 @@
       steam.enable = true;
     };
   };
-  # xresources.properties = {
-  #   "Xft.dpi" = 120;
-  # };
 }

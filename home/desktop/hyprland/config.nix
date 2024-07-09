@@ -15,7 +15,7 @@ in {
     settings = {
       exec-once = [
         "waybar &"
-        #"hyprctl setcursor Qogir 24"
+        "hyprpaper"
       ];
 
       monitor = [

@@ -5,7 +5,7 @@
   ...
 }:
 with lib.hm.gvariant; {
-  config = lib.mkIf config.home-manager.graphical.enable {
+  config = lib.mkIf config.home-manager.gnome.enable {
     home.packages = with pkgs; [
       gnome.adwaita-icon-theme
       gnome.gnome-calendar

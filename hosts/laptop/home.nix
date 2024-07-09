@@ -11,6 +11,7 @@
     graphical.enable = true;
     hyprland.enable = false;
     gnome.enable = true;
+    tuigreet.enable = true;
     lid.enable = true;
     touchpad.enable = true;
     battery.enable = true;

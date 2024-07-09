@@ -165,6 +165,7 @@
 
   # Virtualization
   virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
   virtualisation.waydroid.enable = true;
   programs.dconf.enable = true; # virt-manager requires dconf to remember settings
 

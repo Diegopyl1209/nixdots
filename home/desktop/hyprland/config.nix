@@ -82,6 +82,7 @@ in {
         ws = binding "SUPER" "workspace";
         resizeactive = binding "SUPER CTRL" "resizeactive";
         mvactive = binding "SUPER ALT" "moveactive";
+        mvwindow = binding "SUPER ALT" "movewindow";
         mvtows = binding "SUPER SHIFT" "movetoworkspace";
         arr = [1 2 3 4 5 6 7];
       in
@@ -102,6 +103,10 @@ in {
           (mvfocus "right" "r")
           (mvfocus "up" "u")
           (mvfocus "down" "d")
+ 	  (mvwindow "left" "l")
+          (mvwindow "right" "r")
+          (mvwindow "up" "u")
+          (mvwindow "down" "d")
           (resizeactive "up" "0 -20")
           (resizeactive "down" "0 20")
           (resizeactive "right" "20 0")

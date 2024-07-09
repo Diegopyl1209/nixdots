@@ -8,7 +8,7 @@
   pactl = "${pkgs.pulseaudio}/bin/pactl";
 in {
   wayland.windowManager.hyprland = {
-    enable = true;
+    enable = config.home-manager.hyprland.enable;
     systemd.enable = true;
     xwayland.enable = true;
 

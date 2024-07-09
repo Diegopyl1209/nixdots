@@ -4,7 +4,7 @@
   config,
   ...
 }: {
-  imports = lib.mkIf config.home-manager.hyprland.enable [
+  imports = [
     ./config.nix
     ./hyprlock.nix
     ./hyprpaper.nix

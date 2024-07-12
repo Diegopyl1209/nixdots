@@ -27,6 +27,7 @@
       inputs.schizofox.homeManagerModule
       inputs.stylix.homeManagerModules.stylix
       inputs.base16.nixosModule
+      inputs.nixvim.homeManagerModules.nixvim
     ];
   in
     if isNixOS

@@ -4,7 +4,8 @@
   ...
 }: {
   home.packages = with pkgs; [
-    inputs.Lumi.packages.${system}.default
+    #inputs.Lumi.packages.${system}.default
+
     commitizen
   ];
   programs.lazygit = {
@@ -20,6 +21,14 @@
           subprocess = true;
         }
       ];
+    };
+  };
+
+  programs.nixvim = {
+    enable = true;
+    colorschemes.gruvbox.enable = true;
+    plugins = {
+      lightline.enable = true;
     };
   };
 }

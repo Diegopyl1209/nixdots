@@ -5,7 +5,7 @@
     graphical.enable = true;
     hyprland.enable = false;
     gnome.enable = true;
-    #tuigreet.enable = true;
+    tuigreet.enable = false;
     gdm.enable = true;
     lid.enable = true;
     touchpad.enable = true;

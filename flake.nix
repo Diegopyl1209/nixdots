@@ -18,7 +18,11 @@
 
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
-    Lumi.url = "github:bananad3v/Lumi"; #nixvim conf
+    #Lumi.url = "github:bananad3v/Lumi"; #nixvim conf
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     waybar.url = "github:Alexays/Waybar";
 
     auto-cpufreq = {

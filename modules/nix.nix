@@ -66,7 +66,7 @@ in {
   programs.nix-ld = {
     enable = true;
     # deps from steam-run
-    nix-ld.libraries = with pkgs; [
+    libraries = with pkgs; [
       alsa-lib
       at-spi2-atk
       at-spi2-core

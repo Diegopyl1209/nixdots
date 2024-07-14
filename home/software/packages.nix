@@ -33,7 +33,7 @@
     mpc-cli
     flatpak
     calcure
-    qbittorrent
+    transmission-gtk
     #kdenlive
     #krita
     gimp

@@ -18,10 +18,6 @@
   boot.plymouth.enable = true;
 
   # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  # boot.kernelModules = ["v4l2loopback"];
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
-  # boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
   boot.loader.grub = {
     enable = lib.mkForce true;
     device = "nodev";
@@ -53,6 +49,9 @@
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
+  };
+  zramSwap = {
+    enable = true;
   };
 
   # Adb

@@ -1,5 +1,6 @@
 {...}: {
   home-manager = {
+    wallpaper = "samurai.jpg";
     graphical.enable = true;
     gnome.enable = true;
     gdm.enable = true;

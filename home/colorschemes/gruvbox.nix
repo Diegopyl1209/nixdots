@@ -9,7 +9,7 @@
     == "gruvbox") {
     scheme = "${inputs.tt-schemes}/base16/gruvbox-material-dark-hard.yaml";
     home-manager = {
-      wallpaper = "samurai.jpg";
+      #wallpaper = "samurai.jpg";
     };
     home.packages = [
       pkgs.gruvbox-gtk-theme

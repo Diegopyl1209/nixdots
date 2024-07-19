@@ -89,7 +89,6 @@
 
   # Sound
   security.rtkit.enable = true;
-  sound.enable = true;
   hardware.pulseaudio.enable = lib.mkForce false;
   services.pipewire = {
     enable = true;
@@ -136,7 +135,7 @@
   environment.systemPackages = with pkgs; [
     nh
     virt-manager
-    gnome.gnome-disk-utility
+    gnome-disk-utility
     gutenprint
     git
     curl

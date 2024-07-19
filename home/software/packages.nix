@@ -32,8 +32,8 @@
     ncmpcpp
     mpc-cli
     flatpak
-    calcure
-    transmission-gtk
+    #calcure
+    transmission_4-gtk
     #kdenlive
     #krita
     gimp

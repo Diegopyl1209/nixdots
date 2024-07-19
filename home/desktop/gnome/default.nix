@@ -7,11 +7,11 @@
 with lib.hm.gvariant; {
   config = lib.mkIf config.home-manager.gnome.enable {
     home.packages = with pkgs; [
-      gnome.adwaita-icon-theme
-      gnome.gnome-calendar
-      gnome.gnome-system-monitor
+      adwaita-icon-theme
+      gnome-calendar
+      gnome-system-monitor
       gnome.gnome-weather
-      gnome.gnome-calculator
+      gnome-calculator
       gnome.gnome-software # for flatpak
       gnomeExtensions.awesome-tiles
       gnomeExtensions.dash-to-dock

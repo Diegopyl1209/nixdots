@@ -71,6 +71,11 @@
     # Development
     # dotnetCorePackages.sdk_8_0_2xx
     # dotnet-sdk_8
+    zig
+    zls # zig-language-server
+    SDL2
+    jetbrains.clion
+    gcc
     texliveFull
     commitizen
     python3
@@ -121,6 +126,7 @@
     mangohud
     gamescope
     prismlauncher
+    pcsx2
     # inputs.getchoo.packages.${pkgs.system}.modrinth-app
     wine-staging
     winetricks
@@ -145,7 +151,14 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.fhs;
+    package = pkgs.vscode.fhsWithPackages (ps:
+      with ps; [
+        pkg-config
+        gcc
+        raylib
+        SDL2
+        SDL2.dev
+      ]);
   };
 
   xdg.desktopEntries = {

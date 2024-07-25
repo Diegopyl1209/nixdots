@@ -56,7 +56,7 @@
 
     # Gui apps
     # authy
-    firefox
+    #firefox
     gnumake
     chromium
     element-desktop
@@ -101,7 +101,7 @@
     # glibc
     # figma-linux
     direnv
-    jetbrains.idea-community
+    jetbrains.idea-ultimate
     # (pkgs.vscode.overrideAttrs (o: let
     #   version = "1.81.1";
     #   plat = "linux-x64";

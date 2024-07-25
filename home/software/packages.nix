@@ -91,7 +91,7 @@
     # gnumake
     gh
     icu74
-    jdk17
+    jdk21
     filezilla
     docker
     docker-compose
@@ -127,6 +127,7 @@
     gamescope
     prismlauncher
     pcsx2
+    rpcs3
     # inputs.getchoo.packages.${pkgs.system}.modrinth-app
     wine-staging
     winetricks
@@ -153,6 +154,7 @@
     enable = true;
     package = pkgs.vscode.fhsWithPackages (ps:
       with ps; [
+        jdk21
         pkg-config
         gcc
         raylib

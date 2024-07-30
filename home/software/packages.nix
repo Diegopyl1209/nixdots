@@ -121,6 +121,7 @@
     # Gaming
     steamcmd
     heroic
+    cartridges
     gamemode
     lutris
     mangohud

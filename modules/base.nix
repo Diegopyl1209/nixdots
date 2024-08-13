@@ -60,7 +60,13 @@
   # Networking
   networking = {
     hostName = "${host}";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      settings.connectivity = {
+       uri = "http://network-test.debian.org/nm";
+       interval = 300;
+     };
+    };
     firewall.enable = false;
   };
   services.blueman.enable = config.hm.home-manager.bluetooth.enable;

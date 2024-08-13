@@ -40,16 +40,16 @@
     #gnome.nautilus
     #gnome.gnome-boxes
     kvmtool
-    inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
-    wl-clipboard
-    cliphist
+    #inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
+    #wl-clipboard
+    #cliphist
     #keepass
     #keepassxc
     #keepass-diff
     wl-clip-persist
     imagemagick
     grim
-    inputs.nixpkgs-wayland.packages.${system}.slurp
+    #inputs.nixpkgs-wayland.packages.${system}.slurp
     libreoffice
     ydotool
     lutgen

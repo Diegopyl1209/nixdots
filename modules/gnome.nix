@@ -39,8 +39,8 @@ in {
   environment = {
     systemPackages = with pkgs; [
       configure-terminal-nemo
-      cinnamon.nemo-with-extensions
-      cinnamon.nemo-fileroller
+      nemo-with-extensions
+      nemo-fileroller
       gnome-extension-manager
     ];
 

@@ -14,6 +14,12 @@
     extraGroups = ["wheel" "video" "networkmanager" "adbusers"];
     shell = pkgs.zsh;
   };
+  users.groups.media = {
+    gid = 1800;
+    members = [
+      username
+    ];
+  };
 
   boot.plymouth.enable = true;
 
@@ -36,8 +42,6 @@
   # boot.kernel.sysctl = {
   #   "vm.max_map_count" = 1048576;
   # };
-
-  hardware.opengl.enable = true;
 
   # Fix USB sticks not mounting or being listed:
   services.devmon.enable = true;
@@ -67,9 +71,9 @@
     networkmanager = {
       enable = true;
       settings.connectivity = {
-       uri = "http://network-test.debian.org/nm";
-       interval = 300;
-     };
+        uri = "http://network-test.debian.org/nm";
+        interval = 300;
+      };
     };
     firewall.enable = false;
   };

@@ -13,5 +13,6 @@
       enable = lib.mkEnableOption "Gaming" // {default = host != "server";};
       steam.enable = lib.mkEnableOption "Steam" // {default = config.home-manager.gaming.enable;};
     };
+    jellyfin.enable = lib.mkEnableOption "Jellyfin" // {default = host == "pc";};
   };
 }

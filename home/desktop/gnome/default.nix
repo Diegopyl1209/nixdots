@@ -10,9 +10,9 @@ with lib.hm.gvariant; {
       adwaita-icon-theme
       gnome-calendar
       gnome-system-monitor
-      gnome.gnome-weather
+      gnome-weather
       gnome-calculator
-      gnome.gnome-software # for flatpak
+      gnome-software # for flatpak
       gnomeExtensions.awesome-tiles
       gnomeExtensions.dash-to-dock
       gnomeExtensions.bluetooth-battery-meter

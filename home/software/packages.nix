@@ -34,6 +34,7 @@
     flatpak
     #calcure
     transmission_4-gtk
+    chiaki
     #kdenlive
     #krita
     gimp
@@ -67,6 +68,10 @@
     zathura
     todoist-electron
     obsidian
+    (pkgs.discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
 
     # Development
     # dotnetCorePackages.sdk_8_0_2xx

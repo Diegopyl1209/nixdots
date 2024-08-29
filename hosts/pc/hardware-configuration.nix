@@ -8,18 +8,18 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-intel" "nfs" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/9941dac4-933f-4a7e-a690-2cddcd96ef04";
+    { device = "/dev/disk/by-uuid/a9d54aac-b6fc-465f-867f-288e9ca9d3d4";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F392-A740";
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/46B3-C7C7";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
@@ -28,6 +28,16 @@
   
   fileSystems."/run/media/diegopyl/Disco2" = {
     device = "/dev/nvme0n1p1";
+    options = [ "nofail" ];
+  };
+  
+  fileSystems."/run/media/diegopyl/Disco1" = {
+    device = "/dev/disk/by-uuid/f26d86de-11c8-4081-ab02-17c0bab7deed";
+    options = [ "nofail" ];
+  };
+  
+  fileSystems."/run/media/diegopyl/Disco3" = {
+    device = "/dev/disk/by-uuid/a8df9c84-fa4d-4629-93b8-93e4a051dc69";
     options = [ "nofail" ];
   };
 

@@ -23,17 +23,21 @@
     device = "nodev";
     efiSupport = true;
     useOSProber = true;
+    efiInstallAsRemovable = true;
+    gfxmodeEfi = "1920x1080";
     # theme = inputs.catppuccin-grub + "/src/catppuccin-mocha-grub-theme";
   };
 
   boot.loader.efi = {
-    canTouchEfiVariables = true;
-    efiSysMountPoint = "/boot";
+    #canTouchEfiVariables = true;
+    efiSysMountPoint = "/boot/efi";
   };
 
   # boot.kernel.sysctl = {
   #   "vm.max_map_count" = 1048576;
   # };
+
+  hardware.opengl.enable = true;
 
   # Fix USB sticks not mounting or being listed:
   services.devmon.enable = true;

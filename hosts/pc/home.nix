@@ -10,7 +10,7 @@
     hyprland.enable = false;
     battery.enable = false;
     backlight.enable = false;
-    jellyfin.enable = false;
+    jellyfin.enable = true;
     gaming = {
       enable = true;
       steam.enable = true;

@@ -33,7 +33,7 @@
     mpc-cli
     flatpak
     #calcure
-    transmission_4-gtk
+    transmission_3-gtk
     chiaki
     #kdenlive
     #krita

@@ -37,22 +37,16 @@ in {
           incomplete-dir = "${media_folder}/download/.incomplete";
         };
       };
+
+      autobrr = {
+        enable = true;
+	user = username;
+        group = "media";
+        configDir = "/home/${username}/.local/share/autobrr";
+        package = (pkgs.callPackage ./../pkgs/autobrr/package.nix {});
+      };
     };
-    
-     # TODO: Write a proper service module
-    systemd.services.autobrr = {
-       enable = true;
-       description = "runs autobrr as a service";
-       unitConfig = {
-         Type = "simple";
-       };
-       serviceConfig = {
-         WorkingDirectory = "/home/${username}/.local/share/autobrr/";
-         ExecStart = "/home/${username}/.local/share/autobrr/autobrr";
-       };
-       wantedBy = ["multi-user.target"];
-    };
-    
+
     environment.systemPackages = with pkgs; [
       jellyfin
       jellyfin-web

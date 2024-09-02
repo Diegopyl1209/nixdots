@@ -1,7 +1,7 @@
 {...}: {
   home-manager = {
     colorscheme = "gruvbox";
-    wallpaper = "elixir-murakami-shiina.jpg";
+    wallpaper = "coffe-paint.jpeg";
     graphical.enable = true;
     hyprland.enable = false;
     gnome.enable = true;

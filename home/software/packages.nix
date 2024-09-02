@@ -25,6 +25,7 @@
     appimage-run
 
     # Desktop stuff
+    projectlibre # TODO: Remove
     mpd
     mpdevil
     github-desktop

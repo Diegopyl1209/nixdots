@@ -66,17 +66,18 @@
     mpv
     libreoffice
     zathura
-    todoist-electron
     obsidian
     (pkgs.discord.override {
       withOpenASAR = true;
       withVencord = true;
     })
-
+    
+    gnuradio # todo: remove
+    
     # Development
     # dotnetCorePackages.sdk_8_0_2xx
     # dotnet-sdk_8
-    zig
+    go
     zls # zig-language-server
     SDL2
     jetbrains.clion
@@ -107,6 +108,7 @@
     # figma-linux
     direnv
     jetbrains.idea-ultimate
+    jetbrains.goland
     # (pkgs.vscode.overrideAttrs (o: let
     #   version = "1.81.1";
     #   plat = "linux-x64";

@@ -1,14 +1,12 @@
 {
   pkgs,
-  makeWrapper,
-  lib,
   ...
 }: let
   pname = "autobrr";
   version = "1.45.0";
   name = "${pname}-${version}";
 in
-  pkgs.stdenv.mkDerivation rec {
+  pkgs.stdenv.mkDerivation {
     inherit pname name;
 
     src = pkgs.fetchzip {
@@ -26,7 +24,7 @@ in
       cp autobrrctl $out/bin
     '';
 
-    meta = with lib; {
+    meta = {
       homepage = "https://autobrr.com/";
       mainProgram = "autobrr";
       description = "The modern autodl-irssi replacement";

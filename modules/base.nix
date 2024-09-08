@@ -157,6 +157,7 @@
     jq
     polkit
     polkit_gnome
+    nil
   ];
 
   environment.sessionVariables = {

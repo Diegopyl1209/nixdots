@@ -13,7 +13,7 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ehci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel" "nfs"];
+  boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
@@ -28,22 +28,6 @@
   };
 
   swapDevices = [];
-
-  fileSystems."/run/media/diegopyl/Disco2" = {
-    device = "/dev/nvme0n1p1";
-    options = ["nofail"];
-  };
-
-  fileSystems."/run/media/diegopyl/Disco1" = {
-    device = "/dev/disk/by-uuid/a8df9c84-fa4d-4629-93b8-93e4a051dc69";
-    options = ["nofail"];
-  };
-
-  # create a tmpfs directory for jellyfin transcoding
-  fileSystems."/mnt/transcodes" = {
-    fsType = "tmpfs";
-    options = ["rw" "nosuid" "inode64" "nodev" "noexec" "size=12G"];
-  };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

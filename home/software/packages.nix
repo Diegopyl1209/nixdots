@@ -1,8 +1,4 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = with pkgs; [
     # Archives
     zip
@@ -20,12 +16,11 @@
     feh
     thefuck
     unrar
-    openvpn
     ffmpeg-full
     appimage-run
+    typst
 
     # Desktop stuff
-    projectlibre # TODO: Remove
     mpd
     mpdevil
     github-desktop
@@ -33,22 +28,10 @@
     ncmpcpp
     mpc-cli
     flatpak
-    #calcure
     transmission_3-gtk
     chiaki
-    #kdenlive
-    #krita
     gimp
-    #gnome.nautilus
-    #gnome.gnome-boxes
     kvmtool
-    #inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
-    #wl-clipboard
-    #cliphist
-    #keepass
-    #keepassxc
-    #keepass-diff
-    wl-clip-persist
     imagemagick
     grim
     #inputs.nixpkgs-wayland.packages.${system}.slurp
@@ -57,45 +40,32 @@
     lutgen
 
     # Gui apps
-    # authy
-    #firefox
     gnumake
     chromium
-    element-desktop
     zoom-us
     qdirstat
     mpv
     libreoffice
-    zathura
+    #zathura
     obsidian
-    (pkgs.discord.override {
+    /*
+      (pkgs.discord.override {
       withOpenASAR = true;
       withVencord = true;
     })
-    
-    gnuradio # todo: remove
-    
+    */
+
+    projectlibre # TODO: Remove
+    gnuradio # TODO: remove
+
     # Development
-    # dotnetCorePackages.sdk_8_0_2xx
-    # dotnet-sdk_8
     go
-    zls # zig-language-server
-    SDL2
-    jetbrains.clion
     gcc
     texliveFull
     commitizen
     python3
     insomnia
-    godot_4
-    nodejs_20
-    bun
-    yarn
     android-studio
-    # gcc
-    # libstdcxx5
-    # zlib
-    # gnumake
     gh
     icu74
     jdk21
@@ -103,10 +73,6 @@
     docker
     docker-compose
     distrobox
-    # libglibutil
-    # glib
-    # glibc
-    # figma-linux
     direnv
     jetbrains.idea-ultimate
     jetbrains.goland
@@ -137,6 +103,7 @@
     prismlauncher
     pcsx2
     rpcs3
+    shipwright
     # inputs.getchoo.packages.${pkgs.system}.modrinth-app
     wine-staging
     winetricks
@@ -144,13 +111,10 @@
 
     # Sound
     pipewire
-    # soundux
-    lyrebird
     wireplumber
     alsaLib
     pamixer
     playerctl
-    wev
     pavucontrol
 
     # QT
@@ -163,12 +127,7 @@
     enable = true;
     package = pkgs.vscode.fhsWithPackages (ps:
       with ps; [
-        jdk21
         pkg-config
-        gcc
-        raylib
-        SDL2
-        SDL2.dev
       ]);
   };
 

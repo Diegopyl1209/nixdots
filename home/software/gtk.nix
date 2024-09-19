@@ -2,7 +2,6 @@
   home = {
     packages = with pkgs; [
       dconf
-      catppuccin-gtk
       tree
       # gnome.dconf-editor
     ];

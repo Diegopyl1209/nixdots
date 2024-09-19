@@ -1,8 +1,4 @@
 {
-  config,
-  username,
-  ...
-}: {
   imports = [
     ./base.nix
     ./docker-compose.nix

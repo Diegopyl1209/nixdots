@@ -8,7 +8,7 @@
     destination = "/bin/configure-terminal-nemo";
     executable = true;
     text = ''
-      nix-shell -p glib cinnamon.cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH & gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty'
+      nix-shell -p glib cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH & gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty'
     '';
   };
 in {
@@ -17,8 +17,6 @@ in {
   };
 
   services.gnome.gnome-keyring.enable = true;
-
-  nixpkgs.config.allowAliases = false; # needed for overlay works
 
   environment = {
     systemPackages = with pkgs; [

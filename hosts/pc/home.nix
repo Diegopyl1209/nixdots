@@ -1,4 +1,4 @@
-{username, ...}: {
+{
   home-manager = {
     wallpaper = "samurai.jpg";
     graphical.enable = true;

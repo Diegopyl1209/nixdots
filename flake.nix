@@ -55,7 +55,6 @@
     };
     game-rs.url = "github:amanse/game-rs";
     nix-alien.url = "github:thiagokokada/nix-alien";
-    wayfreeze.url = "github:jappie3/wayfreeze";
   };
 
   outputs = {

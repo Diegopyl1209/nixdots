@@ -5,14 +5,16 @@
 }: {
   config = lib.mkIf config.home-manager.graphical.enable {
     xdg.mimeApps = {
-      enable = true; #config.home-manager.graphical.enable;
+      enable = true;
       defaultApplications = {
-        "inode/directory" = "org.gnome.nautilus.desktop";
+        "inode/directory" = "nemo.desktop";
 
-        "application/zip" = "org.gnome.nautilus.desktop";
-        "application/vnd.rar" = "org.gnome.nautilus.desktop";
-        "application/x-7z-compressed" = "org.gnome.nautilus.desktop";
+        "application/zip" = "org.gnome.FileRoller.desktop";
+        "application/vnd.rar" = "org.gnome.FileRoller.desktop";
+        "application/x-7z-compressed" = "org.gnome.FileRoller.desktop";
+        "application/pdf" = "firefox.desktop";
         "text/html" = "firefox.desktop";
+        "text/plain" = "org.gnome.TextEditor.desktop";
         "x-scheme-handler/http" = "firefox.desktop";
         "x-scheme-handler/https" = "firefox.desktop";
         "x-scheme-handler/about" = "firefox.desktop";

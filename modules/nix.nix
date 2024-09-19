@@ -1,30 +1,11 @@
-{
-  host,
-  inputs,
-  lib,
-  pkgs,
-  username,
-  ...
-}: let
-  update_script = pkgs.writeShellScriptBin "update" ''
-    pushd /home/${username}/nixos-config/ >/dev/null
-
-    untracked_files=$(git ls-files --exclude-standard --others .>/dev/null)
-    if [ -n \"$untracked_files\" ]; then
-      git add \"$untracked_files\" >/dev/null
-    fi
-
-    nh os switch
-    echo -e "Switched to Generation \033[1m$(sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | grep current | awk '{print $1}')\033[0m"
-    popd >/dev/null
-  '';
-in {
+{pkgs, ...}: {
   # Nix
   nix = {
     # package = lib.mkIf (host != "server") pkgs.nixVersions.latest;
     settings = {
       experimental-features = ["nix-command" "flakes"];
       substituters = [
+        "https://cache.nixos.org/"
         "https://nix-gaming.cachix.org"
         "https://isabelroses.cachix.org"
         "https://nixpkgs-wayland.cachix.org"
@@ -41,7 +22,7 @@ in {
   # Nixpkgs
   nixpkgs = {
     overlays = [
-      inputs.sddm-sugar-candy-nix.overlays.default
+      #inputs.sddm-sugar-candy-nix.overlays.default
     ];
     config = {
       allowUnfree = true;
@@ -51,10 +32,6 @@ in {
     };
   };
 
-  # Scripts
-  environment.systemPackages = [
-    update_script
-  ];
   environment.profiles = [
     "$HOME/.local/share/flatpak/exports/share"
     "/var/lib/flatpak/exports/share"

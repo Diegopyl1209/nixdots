@@ -21,27 +21,17 @@
     ];
   };
 
-  boot.plymouth.enable = true;
+  boot = {
+    loader.grub = {
+      enable = lib.mkForce true;
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+      device = "/dev/sda2";
+      useOSProber = true;
+    };
 
-  # Bootloader.
-  boot.loader.grub = {
-    enable = lib.mkForce true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-    efiInstallAsRemovable = true;
-    gfxmodeEfi = "1920x1080";
-    # theme = inputs.catppuccin-grub + "/src/catppuccin-mocha-grub-theme";
+    plymouth.enable = config.hm.home-manager.graphical.enable;
   };
-
-  boot.loader.efi = {
-    #canTouchEfiVariables = true;
-    efiSysMountPoint = "/boot/efi";
-  };
-
-  # boot.kernel.sysctl = {
-  #   "vm.max_map_count" = 1048576;
-  # };
 
   # Fix USB sticks not mounting or being listed:
   services.devmon.enable = true;
@@ -52,6 +42,7 @@
   services.envfs.enable = true;
 
   services.tailscale.enable = true;
+
   # Hardware
   hardware.graphics.enable = true;
   hardware.bluetooth = {
@@ -152,6 +143,8 @@
     gnome-disk-utility
     gutenprint
     git
+    btrfs-progs
+    btrfs-snap
     curl
     wget
     jq

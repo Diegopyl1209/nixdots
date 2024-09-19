@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   pname = "autobrr";
   version = "1.45.0";
   name = "${pname}-${version}";

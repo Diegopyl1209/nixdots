@@ -8,7 +8,7 @@
   ];
 
   users.users.${username}.packages = with pkgs; [
-    (pkgs.callPackage ./autobrr/package.nix {})
+    #(pkgs.callPackage ./autobrr/package.nix {})
   ];
   environment.systemPackages = [
   ];

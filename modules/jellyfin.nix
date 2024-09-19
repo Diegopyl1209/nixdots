@@ -40,10 +40,10 @@ in {
 
       autobrr = {
         enable = true;
-	user = username;
+        user = username;
         group = "media";
         configDir = "/home/${username}/.local/share/autobrr";
-        package = (pkgs.callPackage ./../pkgs/autobrr/package.nix {});
+        package = pkgs.callPackage ./../pkgs/autobrr/package.nix {};
       };
     };
 

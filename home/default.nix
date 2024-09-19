@@ -1,8 +1,4 @@
-{
-  inputs,
-  username,
-  ...
-}: {
+{username, ...}: {
   home = {
     username = username;
     homeDirectory = "/home/${username}";
@@ -13,7 +9,6 @@
     ./desktop
     ./shell
     ./software
-    ./theming
     ./colorschemes
   ];
 

@@ -9,13 +9,14 @@
     == "gruvbox") {
     scheme = "${inputs.tt-schemes}/base16/gruvbox-material-dark-hard.yaml";
     home.packages = [
-      pkgs.gruvbox-gtk-theme
+      (pkgs.callPackage ../../pkgs/gruvbox-plus-icons/package.nix {})
+      #pkgs.gruvbox-gtk-theme
     ];
 
     gtk = {
       iconTheme = {
         name = "Gruvbox-Plus-Dark";
-        package = pkgs.gruvbox-plus-icons;
+        package = (pkgs.callPackage ../../pkgs/gruvbox-plus-icons/package.nix {}); #pkgs.gruvbox-plus-icons;
       };
     };
   };

@@ -5,7 +5,7 @@
   lib,
   ...
 }: let
-  media_folder = "/run/media/diegopyl/Disco1/Media";
+  media_folder = "/run/media/hdd1/Media";
 in {
   config = lib.mkIf config.hm.home-manager.jellyfin.enable {
     services = {

@@ -26,7 +26,7 @@
       enable = lib.mkForce true;
       efiSupport = true;
       efiInstallAsRemovable = true;
-      device = "/dev/sda2";
+      device = "nodev";
       useOSProber = true;
     };
 

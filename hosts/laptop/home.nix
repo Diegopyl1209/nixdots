@@ -12,5 +12,6 @@
     battery.enable = true;
     backlight.enable = true;
     gaming.enable = true;
+    jellyfin.enable = false;
   };
 }

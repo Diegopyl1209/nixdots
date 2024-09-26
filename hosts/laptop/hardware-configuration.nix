@@ -17,19 +17,36 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/19a5a17c-1a0a-4936-be47-599b19b838de";
-    fsType = "ext4";
+    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
+    fsType = "btrfs";
+    options = ["subvol=root" "compress=zstd"];
+  };
+
+  fileSystems."/home" = {
+    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
+    fsType = "btrfs";
+    options = ["subvol=home" "compress=zstd"];
+  };
+
+  fileSystems."/nix" = {
+    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
+    fsType = "btrfs";
+    options = ["subvol=nix" "compress=zstd" "noatime"];
+  };
+
+  fileSystems."/swap" = {
+    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
+    fsType = "btrfs";
+    options = ["subvol=swap" "noatime"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/A168-E98A";
+    device = "/dev/disk/by-uuid/12CE-A600";
     fsType = "vfat";
     options = ["fmask=0022" "dmask=0022"];
   };
 
-  swapDevices = [
-    {device = "/dev/disk/by-uuid/fb5940b5-4eb9-41b0-bb31-63c8c4503f88";}
-  ];
+  swapDevices = [{device = "/swap/swapfile";}];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -16,7 +16,7 @@
     gtk = {
       iconTheme = {
         name = "Gruvbox-Plus-Dark";
-        package = (pkgs.callPackage ../../pkgs/gruvbox-plus-icons/package.nix {}); #pkgs.gruvbox-plus-icons;
+        package = pkgs.callPackage ../../pkgs/gruvbox-plus-icons/package.nix {}; #pkgs.gruvbox-plus-icons;
       };
     };
   };

@@ -24,7 +24,6 @@
       ./${host}/home.nix # host specific home-manager configuration
       ../home
       ../options/home
-      inputs.schizofox.homeManagerModule
       inputs.stylix.homeManagerModules.stylix
       inputs.base16.nixosModule
       inputs.nixvim.homeManagerModules.nixvim

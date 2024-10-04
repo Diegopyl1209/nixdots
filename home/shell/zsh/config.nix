@@ -45,9 +45,6 @@
     };
 
     initExtra = ''
-      # Exports
-
-      export PATH="$PATH:~/.config/scripts"
 
       # Bind keys & opt
 

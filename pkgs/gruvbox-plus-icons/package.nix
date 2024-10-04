@@ -1,3 +1,4 @@
+# This package dont change anything from the original but from some fucking reason some icons dont work properly if the folder "status" is present so i just deleted bruh
 {
   lib,
   stdenvNoCC,

@@ -13,6 +13,8 @@ in {
         enable = true;
         user = username;
         group = "media";
+        dataDir = "${media_folder}/dataDir/jellyfin/dataDir";
+        configDir = "${media_folder}/dataDir/jellyfin/configDir";
       };
       prowlarr.enable = true;
 
@@ -20,6 +22,7 @@ in {
         enable = true;
         user = username;
         group = "media";
+        dataDir = "${media_folder}/dataDir/sonnar";
       };
 
       radarr = {
@@ -42,7 +45,7 @@ in {
         enable = true;
         user = username;
         group = "media";
-        configDir = "/home/${username}/.local/share/autobrr";
+        configDir = "${media_folder}/dataDir/autobrr";
         package = pkgs.callPackage ./../pkgs/autobrr/package.nix {};
       };
     };

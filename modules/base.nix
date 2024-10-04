@@ -11,7 +11,7 @@
   # User
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video" "networkmanager" "adbusers"];
+    extraGroups = ["wheel" "video" "networkmanager" "adbusers" "docker"];
     shell = pkgs.zsh;
   };
   users.groups.media = {
@@ -139,7 +139,6 @@
   # Env packages
   environment.systemPackages = with pkgs; [
     nh
-    virt-manager
     gnome-disk-utility
     gutenprint
     git
@@ -148,9 +147,9 @@
     curl
     wget
     jq
-    polkit
-    polkit_gnome
     nil
+    podman-tui
+    docker-compose
   ];
 
   environment.sessionVariables = {
@@ -171,7 +170,13 @@
 
   # Virtualization
   virtualisation.libvirtd.enable = true;
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
+  virtualisation.containers.enable = true;
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
   virtualisation.waydroid.enable = true;
   programs.dconf.enable = true; # virt-manager requires dconf to remember settings
 

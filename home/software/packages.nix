@@ -46,7 +46,6 @@
     qdirstat
     mpv
     libreoffice
-    #zathura
     obsidian
     /*
       (pkgs.discord.override {
@@ -60,6 +59,7 @@
 
     # Development
     go
+    rustup
     gcc
     texliveFull
     commitizen
@@ -70,12 +70,10 @@
     icu74
     jdk21
     filezilla
-    docker
-    docker-compose
     distrobox
     direnv
     jetbrains.idea-ultimate
-    jetbrains.goland
+    pkg-config
     # (pkgs.vscode.overrideAttrs (o: let
     #   version = "1.81.1";
     #   plat = "linux-x64";
@@ -90,7 +88,6 @@
     vlc
     alejandra
     pciutils
-    # ngrok
 
     # Gaming
     steamcmd
@@ -110,17 +107,9 @@
     # inputs.game-rs.packages.x86_64-linux.default
 
     # Sound
-    pipewire
-    wireplumber
-    alsaLib
     pamixer
     playerctl
     pavucontrol
-
-    # QT
-    qt5.qtwayland
-    qt6.qtwayland
-    qt6.qmake
   ];
 
   programs.vscode = {
@@ -128,6 +117,8 @@
     package = pkgs.vscode.fhsWithPackages (ps:
       with ps; [
         pkg-config
+        openssl
+        openssl.dev
       ]);
   };
 

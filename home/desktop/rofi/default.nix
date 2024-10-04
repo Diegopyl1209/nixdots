@@ -13,11 +13,11 @@ with lib; {
     };
 
     xdg.configFile."rofi/themes/colors.rasi".text = with config.lib.stylix.colors; ''
-      *{
-        accent: #${base07};
-       foreground: #${base07};
-       background: #${base00};
-       background-alt: #${base00};
+      * {
+          accent: #${base07};
+          foreground: #${base07};
+          background: #${base00};
+          background-alt: #${base00};
       }
     '';
 

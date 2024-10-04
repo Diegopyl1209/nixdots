@@ -34,9 +34,9 @@
          --interactive-active: #${base07};
          --ping: #${base03};
          --background-modifier-selected: #${base03};
-         --scrollbar-thin-thumb: #${base01};
+         --scrollbar-thin-thumb: #${base02};
          --scrollbar-thin-track: transparent;
-         --scrollbar-auto-thumb: #${base01};
+         --scrollbar-auto-thumb: #${base03};
          --scrollbar-auto-track: transparent;
       }
 

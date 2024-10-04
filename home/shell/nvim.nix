@@ -5,7 +5,6 @@
 }: {
   home.packages = with pkgs; [
     #inputs.Lumi.packages.${system}.default
-
     commitizen
   ];
   programs.lazygit = {

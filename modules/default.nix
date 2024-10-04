@@ -1,7 +1,6 @@
 {
   imports = [
     ./base.nix
-    ./docker-compose.nix
     ./nix.nix
     ./hyprland.nix
     ./gnome.nix

@@ -16,6 +16,7 @@ in {
         dataDir = "${media_folder}/dataDir/jellyfin/dataDir";
         configDir = "${media_folder}/dataDir/jellyfin/configDir";
       };
+
       prowlarr.enable = true;
 
       sonarr = {

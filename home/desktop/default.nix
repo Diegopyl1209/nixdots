@@ -5,7 +5,6 @@
     ./vesktop.nix
     ./swaync
     ./xdg.nix
-    ./waybar
     ./gnome
   ];
 }

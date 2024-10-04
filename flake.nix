@@ -16,9 +16,7 @@
     };
 
     nix-gaming.url = "github:fufexan/nix-gaming";
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-
     nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
 
     #Lumi.url = "github:bananad3v/Lumi"; #nixvim conf
@@ -26,7 +24,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    waybar.url = "github:Alexays/Waybar";
 
     auto-cpufreq = {
       url = "github:adnanhodzic/auto-cpufreq";
@@ -35,6 +32,10 @@
 
     nur.url = "github:nix-community/NUR";
 
+    tt-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
     stylix.url = "github:danth/stylix";
     base16.url = "github:SenchoPens/base16.nix";
 
@@ -42,18 +43,6 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    getchoo = {
-      url = "github:getchoo/nix-exprs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    schizofox = {
-      url = "github:schizofox/schizofox";
-    };
-    tt-schemes = {
-      url = "github:tinted-theming/schemes";
-      flake = false;
-    };
-    game-rs.url = "github:amanse/game-rs";
     nix-alien.url = "github:thiagokokada/nix-alien";
   };
 

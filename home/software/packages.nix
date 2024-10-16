@@ -73,6 +73,7 @@
     distrobox
     direnv
     jetbrains.idea-ultimate
+    jetbrains.clion
     pkg-config
     # (pkgs.vscode.overrideAttrs (o: let
     #   version = "1.81.1";

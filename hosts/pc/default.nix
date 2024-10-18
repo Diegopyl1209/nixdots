@@ -8,7 +8,11 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
-
+   
+  services.undervolt = {
+    enable = true;
+    turbo = 1; # disabled
+  };
   services.displayManager.autoLogin = {
     user = username;
     enable = true;

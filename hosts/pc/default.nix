@@ -1,14 +1,18 @@
 {
+  config,
   username,
   inputs,
   ...
 }: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel-cpu-only
-    inputs.nixos-hardware.nixosModules.common-gpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
-   
+  
+  #nvidia shit
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  services.xserver.videoDrivers = ["nvidia"];
+  
   services.undervolt = {
     enable = true;
     turbo = 1; # disabled
@@ -34,6 +38,10 @@
       */
     ];
   };
+
+  virtualisation.libvirtd.enable = true;
+
+  programs.virt-manager.enable = true;
 
   # create a tmpfs directory for jellyfin transcoding
   fileSystems."/mnt/transcodes" = {

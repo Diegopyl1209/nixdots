@@ -11,7 +11,7 @@
   # User
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video" "networkmanager" "adbusers" "docker"];
+    extraGroups = ["wheel" "video" "networkmanager" "adbusers" "docker" "libvirtd"];
     shell = pkgs.zsh;
   };
   users.groups.media = {

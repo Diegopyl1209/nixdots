@@ -4,6 +4,19 @@
   ...
 }: {
   options.nixos = {
+    amdgpu = {
+      enable = lib.mkEnableOption "AMD gpu";
+    };
+    nvidia = {
+      drivers = {
+        enable = lib.mkEnableOption "Nvidia drivers";
+        version = lib.mkOption {
+          type = lib.types.enum ["latest" "stable" "production" "beta"];
+          default = "latest";
+        };
+      };
+    };
+
     drives = lib.mkOption {
       type = with lib.types;
         listOf (

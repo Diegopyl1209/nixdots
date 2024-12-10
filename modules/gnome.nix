@@ -3,16 +3,7 @@
   pkgs,
   lib,
   ...
-}: let
-  configure-terminal-nemo = pkgs.writeTextFile {
-    name = "configure-nemo-terminal";
-    destination = "/bin/configure-terminal-nemo";
-    executable = true;
-    text = ''
-      nix-shell -p glib cinnamon-gsettings-overrides --run 'XDG_DATA_DIRS=$GSETTINGS_SCHEMAS_PATH & gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty'
-    '';
-  };
-in {
+}: {
   config = lib.mkIf config.hm.home-manager.gnome.enable {
     services.xserver = {
       desktopManager.gnome.enable = config.hm.home-manager.gnome.enable;
@@ -20,20 +11,27 @@ in {
 
     services.gnome.gnome-keyring.enable = true;
 
+    programs.nautilus-open-any-terminal = {
+      enable = true;
+      terminal = "kitty";
+    };
+
     environment = {
       systemPackages = with pkgs; [
-        configure-terminal-nemo
-        nemo-with-extensions
-        nemo-fileroller
+        #configure-terminal-nemo
+        #nemo-with-extensions
+        #nemo-fileroller
         gnome-extension-manager
+        nautilus
+        nautilus-python
       ];
 
       gnome.excludePackages = with pkgs; [
-        gnome-console
+        #gnome-console
         gnome-photos
         gnome-tour
         gnome-connections
-        nautilus
+        #nautilus
         cheese # webcam tool
         epiphany # web browser
         geary # email reader

@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   pkgs,
   ...
@@ -9,6 +10,7 @@
   hardware.xpadneo.enable = true;
   programs.steam = {
     enable = config.hm.home-manager.gaming.steam.enable;
+    # platformOptimizations.enable = true;
     extraCompatPackages = with pkgs; [
       proton-ge-bin
     ];

@@ -11,42 +11,14 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-intel"];
+  boot.kernelModules = ["kvm-amd"];
   boot.extraModulePackages = [];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
-    fsType = "btrfs";
-    options = ["subvol=root" "compress=zstd"];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
-    fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd"];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
-    fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime"];
-  };
-
-  fileSystems."/swap" = {
-    device = "/dev/disk/by-uuid/9be341c4-0919-4123-b653-7aabeaf891b2";
-    fsType = "btrfs";
-    options = ["subvol=swap" "noatime"];
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/12CE-A600";
-    fsType = "vfat";
-    options = ["fmask=0022" "dmask=0022"];
-  };
-
-  swapDevices = [{device = "/swap/swapfile";}];
+  swapDevices = [
+    {device = "/dev/disk/by-uuid/a1b617fc-74e5-42d9-a081-0198d2f4a60e";}
+  ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

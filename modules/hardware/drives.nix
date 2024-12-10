@@ -5,13 +5,22 @@
 }: {
   # Main driv
   config = lib.mkMerge [
-    /*
-      {
+    {
       fileSystems = {
         "/" = {
           device = "/dev/disk/by-label/NIXOS";
           fsType = "btrfs";
-          options = ["subvol=@"];
+          options = ["subvol=root" "compress=zstd"];
+        };
+        "/home" = {
+          device = "/dev/disk/by-label/NIXOS";
+          fsType = "btrfs";
+          options = ["subvol=home" "compress=zstd"];
+        };
+        "/nix" = {
+          device = "/dev/disk/by-label/NIXOS";
+          fsType = "btrfs";
+          options = ["subvol=nix" "compress=zstd" "noatime"];
         };
 
         "/boot" = {
@@ -20,7 +29,6 @@
         };
       };
     }
-    */
     {
       fileSystems = lib.mkMerge (
         map (

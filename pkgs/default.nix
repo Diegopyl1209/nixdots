@@ -8,8 +8,10 @@
   ];
 
   users.users.${username}.packages = with pkgs; [
-    #(pkgs.callPackage ./autobrr/package.nix {})
+    # (pkgs.callPackage ./soundux.nix {})
   ];
+
   environment.systemPackages = [
+    
   ];
 }

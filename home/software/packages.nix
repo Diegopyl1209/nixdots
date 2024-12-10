@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   home.packages = with pkgs; [
     # Archives
     zip
@@ -10,107 +14,105 @@
     ripgrep
     jq
     eza
+    zoxide
     fzf
     bat
     cava
     feh
-    thefuck
+    # thefuck
     unrar
+    openvpn
     ffmpeg-full
     appimage-run
-    typst
 
     # Desktop stuff
     mpd
-    mpdevil
-    github-desktop
-
     ncmpcpp
     mpc-cli
-    flatpak
-    transmission_3-gtk
-    chiaki
+    github-desktop
+    #freetube
+    #kdenlive
+    #krita
     gimp
+    nautilus
+    gnome-boxes
     kvmtool
+    hyprpaper
+    inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
+    wl-clipboard
+    cliphist
+    keepassxc
+    keepass-diff
+    wl-clip-persist
+    hyprpicker
     imagemagick
     grim
-    #inputs.nixpkgs-wayland.packages.${system}.slurp
+    inputs.nixpkgs-wayland.packages.${system}.slurp
     libreoffice
     ydotool
     lutgen
 
     # Gui apps
-    gnumake
     chromium
     zoom-us
     qdirstat
     mpv
     libreoffice
+    zathura
     obsidian
-    /*
-      (pkgs.discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
-    */
-
-    projectlibre # TODO: Remove
-    gnuradio # TODO: remove
+    #nicotine-plus
 
     # Development
-    go
-    rustup
-    gcc
+    cargo
+    rustfmt
+    rustc
     texliveFull
     commitizen
     python3
     insomnia
-    android-studio
+    godot_4
+    nodejs
+    nodePackages.pnpm
     gh
-    icu74
-    jdk21
+    jdk
     filezilla
+    docker
+    docker-compose
     distrobox
     direnv
-    jetbrains.idea-ultimate
-    jetbrains.clion
-    pkg-config
-    # (pkgs.vscode.overrideAttrs (o: let
-    #   version = "1.81.1";
-    #   plat = "linux-x64";
-    # in {
-    #   src = pkgs.fetchurl {
-    #     name = "VSCode_${version}_${plat}.tar.gz";
-    #     url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-    #     sha256 = "sha256-Tqawqu0iR0An3CZ4x3RGG0vD3x/PvQyRhVThc6SvdEg=";
-    #   };
-    # }))
+    jetbrains.idea-community
+    android-studio
     yt-dlp
     vlc
     alejandra
     pciutils
 
     # Gaming
-    steamcmd
+    r2modman
     heroic
-    cartridges
-    gamemode
     lutris
     mangohud
-    gamescope
     prismlauncher
-    pcsx2
-    rpcs3
-    shipwright
-    # inputs.getchoo.packages.${pkgs.system}.modrinth-app
-    wine-staging
+    # (prismlauncher.override {withWaylandGLFW = true;})
+    blockbench
+    wineWowPackages.staging
     winetricks
-    # inputs.game-rs.packages.x86_64-linux.default
 
     # Sound
+    pipewire
+    # soundux
+    lyrebird
+    wireplumber
+    alsa-lib
     pamixer
     playerctl
+    wev
     pavucontrol
+
+    # QT
+    qt5.qtwayland
+    qt6.qtwayland
+    qt6.qmake
   ];
 
   programs.vscode = {
@@ -123,23 +125,27 @@
       ]);
   };
 
-  xdg.desktopEntries = {
-    "heroic" = {
-      exec = "heroic %u";
-      icon = "heroic";
-      name = "Heroic Games Launcher";
-      categories = [
-        "Game"
-      ];
-      settings = {
-        "StartupWMClass" = "Heroic";
-        "MimeType" = "x-scheme-handler/heroic";
-        "Type" = "Application";
+  /*
+
+    xdg.desktopEntries = {
+      "heroic" = {
+        exec = "heroic %u";
+        icon = "heroic";
+        name = "Heroic Games Launcher";
+        categories = [
+          "Game"
+        ];
+        settings = {
+          "StartupWMClass" = "Heroic";
+          "MimeType" = "x-scheme-handler/heroic";
+          "Type" = "Application";
+        };
+      };
+      "com.heroicgameslauncher.hgl" = {
+        name = "Heroic";
+        noDisplay = true;
       };
     };
-    "com.heroicgameslauncher.hgl" = {
-      name = "Heroic";
-      noDisplay = true;
-    };
-  };
+  }
+  */
 }

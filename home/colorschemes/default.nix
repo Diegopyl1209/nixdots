@@ -1,23 +1,11 @@
 {
+  inputs,
   pkgs,
   config,
   ...
-}: let
-  nerdfonts = pkgs.nerdfonts.override {
-    fonts = [
-      "JetBrainsMono"
-      "Ubuntu"
-      "UbuntuMono"
-      "FiraCode"
-    ];
-  };
-in {
+}: {
   imports = [
     ./gruvbox.nix
-  ];
-
-  home.packages = [
-    nerdfonts
   ];
 
   stylix = {
@@ -52,7 +40,7 @@ in {
       name = "DejaVu Sans Condensed";
     };
     monospace = {
-      package = nerdfonts;
+      package = pkgs.nerd-fonts.jetbrains-mono;
       name = "JetBrainsMono Nerd Font Mono";
     };
     emoji = {

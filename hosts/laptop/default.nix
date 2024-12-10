@@ -1,8 +1,14 @@
 {inputs, ...}: {
-  imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-intel-cpu-only
-    inputs.nixos-hardware.nixosModules.common-pc-laptop-ssd
-    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490
-  ];
-  services.fprintd.enable = true;
+  imports = [inputs.nixos-hardware.nixosModules.common-gpu-nvidia-disable];
+  services.logind.powerKey = "ignore";
+  server.enable = false;
+  nixos = {
+    nvidia = {
+      drivers = {
+        enable = true;
+        version = "beta";
+      };
+      hyprland.enable = false;
+    };
+  };
 }

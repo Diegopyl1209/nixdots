@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -15,35 +15,30 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-
-    #Lumi.url = "github:bananad3v/Lumi"; #nixvim conf
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    nix-gaming = {
+      url = "github:fufexan/nix-gaming";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    auto-cpufreq = {
-      url = "github:adnanhodzic/auto-cpufreq";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nur.url = "github:nix-community/NUR";
-
-    tt-schemes = {
-      url = "github:tinted-theming/schemes";
-      flake = false;
-    };
-    stylix.url = "github:danth/stylix";
-    base16.url = "github:SenchoPens/base16.nix";
 
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-alien.url = "github:thiagokokada/nix-alien";
+    base16.url = "github:SenchoPens/base16.nix";
+    stylix.url = "github:danth/stylix/release-24.11";
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

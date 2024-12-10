@@ -6,12 +6,14 @@
   inputs,
   system,
   username,
+  userfullname,
   ...
 }: {
   # User
   users.users.${username} = {
     isNormalUser = true;
-    extraGroups = ["wheel" "video" "networkmanager" "adbusers" "docker" "libvirtd"];
+    extraGroups = ["wheel" "video" "networkmanager" "adbusers"];
+    description = userfullname;
     shell = pkgs.zsh;
   };
   users.groups.media = {
@@ -20,14 +22,23 @@
       username
     ];
   };
-
   boot = {
+    kernelPackages = pkgs.linuxPackages_zen;
+    # Bootloader.
     loader.grub = {
       enable = lib.mkForce true;
-      efiSupport = true;
-      efiInstallAsRemovable = true;
       device = "nodev";
+      efiSupport = true;
       useOSProber = true;
+      extraConfig = "
+        terminal_input console
+        terminal_output console
+      ";
+    };
+
+    loader.efi = {
+      canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot";
     };
 
     plymouth.enable = config.hm.home-manager.graphical.enable;
@@ -40,6 +51,13 @@
 
   # Bash shebang
   services.envfs.enable = true;
+
+  xdg.terminal-exec = {
+    enable = true;
+    settings = {
+      default = ["kitty.desktop"];
+    };
+  };
 
   services.tailscale.enable = true;
 
@@ -55,25 +73,23 @@
 
   # Adb
   programs.adb.enable = true;
-
+  # Podman
+  virtualisation.podman.enable = true;
   # Networking
   networking = {
     hostName = "${host}";
-    networkmanager = {
-      enable = true;
-      settings.connectivity = {
-        uri = "http://network-test.debian.org/nm";
-        interval = 300;
-      };
-    };
-    firewall.enable = false;
+    networkmanager.enable = true;
+    firewall.enable = lib.mkForce true;
   };
   services.blueman.enable = config.hm.home-manager.bluetooth.enable;
   systemd.services.NetworkManager-wait-online.enable = false;
   # XDG Desktop Portal stuff
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-hyprland];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
     config.common.default = "*";
   };
 
@@ -83,12 +99,38 @@
     excludePackages = with pkgs; [xterm];
   };
 
+  /*
+  services.displayManager.sddm = {
+    enable = lib.mkForce config.hm.home-manager.graphical.enable;
+    wayland.enable = true;
+    sugarCandyNix = {
+      enable = true; # This enables SDDM automatically and set its theme to
+      # "sddm-sugar-candy-nix"
+      settings = with config.hm.colorScheme.palette; {
+        # Set your configuration options here.
+        # Here is a simple example:
+        Background = lib.cleanSource ../home/desktop/hyprland/wallpapers/${config.hm.home-manager.wallpaper};
+        FormPosition = "right";
+        HaveFormBackground = true;
+        PartialBlur = true;
+        OverrideLoginButtonTextColor = "#${base05}";
+        MainColor = "#${base05}";
+        AccentColor = "#${base07}";
+        BackgroundColor = "#${base00}";
+        # ...
+      };
+    };
+  };
+  */
+
   # Printing support
   services.printing = {
     enable = true;
-    drivers = [pkgs.epson-escpr];
+    browsed.enable = false;
+    openFirewall = true;
+    drivers = [pkgs.epson-escpr2 pkgs.epson-escpr];
   };
-
+  security.polkit.enable = true;
   # Flatpak
   services.flatpak.enable = true;
 
@@ -139,6 +181,7 @@
   # Env packages
   environment.systemPackages = with pkgs; [
     nh
+    virt-manager
     gnome-disk-utility
     gutenprint
     git
@@ -147,9 +190,8 @@
     curl
     wget
     jq
-    nil
-    podman-tui
-    docker-compose
+    polkit
+    polkit_gnome
   ];
 
   environment.sessionVariables = {
@@ -158,7 +200,10 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    (nerdfonts.override {fonts = ["FiraCode" "JetBrainsMono" "DroidSansMono"];})
+    nerd-fonts.fira-code
+    nerd-fonts.ubuntu-mono
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.droid-sans-mono
     font-awesome
     manrope
     inter
@@ -170,14 +215,7 @@
 
   # Virtualization
   virtualisation.libvirtd.enable = true;
-  #virtualisation.docker.enable = true;
-  virtualisation.containers.enable = true;
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings.dns_enabled = true;
-  };
-  virtualisation.waydroid.enable = true;
+  #virtualisation.waydroid.enable = true;
   programs.dconf.enable = true; # virt-manager requires dconf to remember settings
 
   # Garbage collection
@@ -185,10 +223,6 @@
     automatic = true;
     dates = "daily";
     options = "--delete-older-than 3d";
-  };
-  nix.optimise = {
-    automatic = true;
-    dates = ["10:00"];
   };
 
   # Enable needed programs

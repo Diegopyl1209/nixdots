@@ -4,6 +4,7 @@
   lib,
   system,
   username,
+  userfullname,
   useremail,
   ...
 }: let
@@ -12,12 +13,8 @@
       inherit system;
       config.allowUnfree = true;
     };
-    pkgs = import inputs.nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
     extraSpecialArgs = {
-      inherit inputs host isNixOS username useremail pkgsStable pkgs;
+      inherit inputs host isNixOS username userfullname useremail pkgsStable;
     };
 
     homeManagerImports = [
@@ -40,7 +37,6 @@
           ../modules
           ../pkgs
           ../options/nixos
-          inputs.nur.nixosModules.nur
           inputs.home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -63,7 +59,6 @@
     else
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit extraSpecialArgs;
-        inherit pkgs;
 
         modules = homeManagerImports;
       };
@@ -71,4 +66,4 @@ in
   builtins.listToAttrs (map (host: {
     name = "${host}";
     value = mkHost host;
-  }) ["pc" "laptop"])
+  }) ["pc" "laptop" "server"])

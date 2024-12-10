@@ -1,12 +1,17 @@
 {
+  config,
+  username,
+  ...
+}: {
   imports = [
     ./base.nix
+    ./display-manager.nix
     ./nix.nix
     ./hyprland.nix
-    ./gnome.nix
     ./steam.nix
-    ./jellyfin.nix
-    ./display-manager.nix
+    ./syncthing.nix
     ./hardware
+    ./server
+    ./gnome.nix
   ];
 }

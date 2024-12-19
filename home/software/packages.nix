@@ -35,19 +35,19 @@
     #krita
     gimp
     nautilus
-    gnome-boxes
+    #gnome-boxes
     kvmtool
-    hyprpaper
-    inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
-    wl-clipboard
-    cliphist
-    keepassxc
-    keepass-diff
-    wl-clip-persist
-    hyprpicker
+    #hyprpaper
+    #inputs.nixpkgs-wayland.packages.${pkgs.system}.swww
+    #wl-clipboard
+    #cliphist
+    #keepassxc
+    #keepass-diff
+    #wl-clip-persist
+    #hyprpicker
     imagemagick
-    grim
-    inputs.nixpkgs-wayland.packages.${system}.slurp
+    #grim
+    #inputs.nixpkgs-wayland.packages.${system}.slurp
     libreoffice
     ydotool
     lutgen
@@ -66,6 +66,8 @@
     cargo
     rustfmt
     rustc
+    gcc
+    raylib
     texliveFull
     commitizen
     python3
@@ -80,7 +82,7 @@
     docker-compose
     distrobox
     direnv
-    jetbrains.idea-community
+    jetbrains.idea-ultimate
     android-studio
     yt-dlp
     vlc
@@ -119,33 +121,30 @@
     enable = true;
     package = pkgs.vscode.fhsWithPackages (ps:
       with ps; [
+        raylib
         pkg-config
         openssl
         openssl.dev
       ]);
   };
 
-  /*
-
-    xdg.desktopEntries = {
-      "heroic" = {
-        exec = "heroic %u";
-        icon = "heroic";
-        name = "Heroic Games Launcher";
-        categories = [
-          "Game"
-        ];
-        settings = {
-          "StartupWMClass" = "Heroic";
-          "MimeType" = "x-scheme-handler/heroic";
-          "Type" = "Application";
-        };
-      };
-      "com.heroicgameslauncher.hgl" = {
-        name = "Heroic";
-        noDisplay = true;
+  xdg.desktopEntries = {
+    "heroic" = {
+      exec = "heroic %u";
+      icon = "heroic";
+      name = "Heroic Games Launcher";
+      categories = [
+        "Game"
+      ];
+      settings = {
+        "StartupWMClass" = "Heroic";
+        "MimeType" = "x-scheme-handler/heroic";
+        "Type" = "Application";
       };
     };
-  }
-  */
+    "com.heroicgameslauncher.hgl" = {
+      name = "Heroic";
+      noDisplay = true;
+    };
+  };
 }

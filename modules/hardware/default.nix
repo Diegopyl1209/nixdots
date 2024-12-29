@@ -5,5 +5,6 @@
     ./nvidia.nix
     ./amdgpu.nix
     ./drives.nix
+    ./vfio.nix
   ];
 }

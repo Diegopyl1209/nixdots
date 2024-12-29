@@ -214,7 +214,13 @@
   ];
 
   # Virtualization
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu.vhostUserPackages = [pkgs.virtiofsd];
+      qemuOvmf = true;
+    };
+  };
   #virtualisation.waydroid.enable = true;
   programs.dconf.enable = true; # virt-manager requires dconf to remember settings
 

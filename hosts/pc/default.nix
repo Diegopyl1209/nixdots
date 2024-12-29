@@ -2,6 +2,7 @@
   config,
   username,
   inputs,
+  pkgs,
   ...
 }: {
   imports = [
@@ -15,18 +16,30 @@
   };
   services.getty.autologinUser = username;
 
-  services.undervolt = {
-    enable = true;
-    turbo = 1; # disabled
-  };
+  systemd.tmpfiles.rules = [
+    "f /dev/shm/looking-glass 0660 ${username} qemu-libvirtd -"
+  ];
 
   server.enable = true;
   nixos = {
-    amdgpu.enable = false;
+    vfio = {
+      enable = false;
+      acs = true;
+      gpuIDs = [
+        "10de:2584"
+        "10de:2291"
+      ];
+    };
+    amdgpu.enable = true;
     nvidia = {
       drivers = {
-        version = "beta";
         enable = true;
+        version = "beta";
+        prime = {
+          enable = true;
+          amdgpuBusId = "PCI:7:0:0";
+          nvidiaBusId = "PCI:6:0:0";
+        };
       };
     };
     drives = [

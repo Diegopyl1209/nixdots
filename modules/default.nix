@@ -9,7 +9,7 @@
     ./nix.nix
     ./hyprland.nix
     ./steam.nix
-    ./syncthing.nix
+    #./syncthing.nix
     ./hardware
     ./server
     ./gnome.nix

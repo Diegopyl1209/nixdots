@@ -1,5 +1,6 @@
 {
   config,
+  username,
   lib,
   ...
 }: {
@@ -7,6 +8,9 @@
   config = lib.mkIf config.syncthing.enable {
     services.syncthing = {
       enable = true;
+      user = username;
+      configDir = lib.mkIf config.server.enable "/run/media/hdd1/Data/Syncthing";
+      dataDir = lib.mkIf config.nixos.server.enable "/run/media/hdd1/Sync";
       guiAddress = "0.0.0.0:8384";
     };
   };

@@ -5,7 +5,7 @@
   username,
   ...
 }: let
-  media_folder = "/run/media/hdd1/Media";
+  media_folder = "/run/media/hdd1/Server/Data";
 in {
   options.server.jellyfin.enable = lib.mkEnableOption "Enable jellyfin" // {default = config.server.enable;};
   config = lib.mkIf config.server.jellyfin.enable {
@@ -14,8 +14,8 @@ in {
         enable = true;
         user = username;
         group = "media";
-        dataDir = "${media_folder}/dataDir/jellyfin/dataDir";
-        configDir = "${media_folder}/dataDir/jellyfin/configDir";
+        dataDir = "${media_folder}/jellyfin/dataDir";
+        configDir = "${media_folder}/jellyfin/configDir";
       };
 
       prowlarr.enable = true;
@@ -24,7 +24,7 @@ in {
         enable = true;
         user = username;
         group = "media";
-        dataDir = "${media_folder}/dataDir/sonnar";
+        dataDir = "${media_folder}/sonnar";
       };
 
       radarr = {
@@ -48,7 +48,7 @@ in {
         enable = true;
         user = username;
         group = "media";
-        configDir = "${media_folder}/dataDir/autobrr";
+        configDir = "${media_folder}/autobrr";
         package = pkgs.callPackage ./../../pkgs/autobrr/package.nix {};
       };
     };

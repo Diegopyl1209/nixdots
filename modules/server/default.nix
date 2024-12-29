@@ -8,6 +8,7 @@
   imports = [
     ./transmission.nix
     ./jellyfin.nix
+    #./pihole.nix
   ];
   config = lib.mkIf config.server.enable {
     virtualisation.docker = {

@@ -13,11 +13,11 @@
 
   boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
+  boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
   swapDevices = [
-    {device = "/dev/disk/by-uuid/a1b617fc-74e5-42d9-a081-0198d2f4a60e";}
+    {device = "/dev/disk/by-label/NIXOS-SWAP";}
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

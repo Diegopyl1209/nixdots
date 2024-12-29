@@ -6,7 +6,6 @@
   services.logind.powerKey = "ignore";
   server.enable = false;
   nixos = {
-      hyprland.enable = false;
-    };
+    hyprland.enable = false;
   };
 }

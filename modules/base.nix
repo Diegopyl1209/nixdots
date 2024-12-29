@@ -217,8 +217,10 @@
   virtualisation = {
     libvirtd = {
       enable = true;
-      qemu.vhostUserPackages = [pkgs.virtiofsd];
-      qemuOvmf = true;
+      qemu = {
+        vhostUserPackages = [pkgs.virtiofsd];
+        ovmf.enable = true;
+      };
     };
   };
   #virtualisation.waydroid.enable = true;

@@ -8,11 +8,9 @@
   imports = [
     ./transmission.nix
     ./jellyfin.nix
-    #./pihole.nix
     ./pufferpanel.nix
     ./glance.nix
     ./headscale.nix
-    ./flatnotes.nix
   ];
   config = lib.mkIf config.server.enable {
     virtualisation.docker = {

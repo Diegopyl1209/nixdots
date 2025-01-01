@@ -6,6 +6,7 @@
   imports = [
     ./base.nix
     ./display-manager.nix
+    ./sops.nix
     ./nix.nix
     ./hyprland.nix
     ./steam.nix

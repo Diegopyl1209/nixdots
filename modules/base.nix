@@ -128,7 +128,7 @@
     enable = true;
     browsed.enable = false;
     openFirewall = true;
-    drivers = [pkgs.epson-escpr2 pkgs.epson-escpr];
+    #drivers = [pkgs.epson-escpr2 pkgs.epson-escpr];
   };
   security.polkit.enable = true;
   # Flatpak

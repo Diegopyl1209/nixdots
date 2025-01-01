@@ -20,7 +20,11 @@
     "f /dev/shm/looking-glass 0660 ${username} qemu-libvirtd -"
   ];
 
-  server.enable = true;
+  server = {
+    enable = true;
+    headscale.enable = false;
+  };
+
   nixos = {
     vfio = {
       enable = false;

@@ -14,35 +14,20 @@ in {
         enable = true;
         user = username;
         group = "media";
+        openFirewall = true;
         dataDir = "${media_folder}/jellyfin/dataDir";
         configDir = "${media_folder}/jellyfin/configDir";
       };
 
-      prowlarr.enable = true;
+      #prowlarr.enable = true;
 
       sonarr = {
         enable = true;
         user = username;
         group = "media";
+        openFirewall = true;
         dataDir = "${media_folder}/sonnar";
       };
-
-      radarr = {
-        enable = true;
-        user = username;
-        group = "media";
-      };
-      /*
-      transmission = {
-        enable = true;
-        user = username;
-        group = "media";
-        settings = {
-          download-dir = "${media_folder}/download";
-          incomplete-dir = "${media_folder}/download/.incomplete";
-        };
-      };
-      */
 
       autobrr = {
         enable = true;

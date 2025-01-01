@@ -118,7 +118,7 @@ in {
         [
           "SUPER, Return, exec, uwsm app -- kitty"
           "SUPER, W, exec, uwsm app -- firefox"
-          "SUPER, D, exec, uwsm app -- ${pkgs.hyprlauncher}/bin/hyprlauncher"
+          # "SUPER, D, exec, uwsm app -- ${pkgs.hyprlauncher}/bin/hyprlauncher"
 
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, Delete, exit"

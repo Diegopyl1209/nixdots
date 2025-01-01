@@ -13,9 +13,7 @@
       extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
         bitwarden
         ublock-origin
-        darkreader
         sponsorblock
-        firefox-color
         return-youtube-dislikes
         translate-web-pages
         fastforwardteam

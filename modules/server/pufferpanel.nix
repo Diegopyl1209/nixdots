@@ -7,11 +7,11 @@
   config = lib.mkIf config.server.pufferpanel.enable {
     virtualisation.oci-containers.containers.pufferpanel = {
       image = "pufferpanel/pufferpanel:latest";
-      # ports = [
-      #   "8090:8080"
-      #   "5657:5657"
-      #   "25545:25545"
-      # ];
+      ports = [
+        "8090:8080"
+        "5657:5657"
+        "25545:25545"
+      ];
       environment = {
         PUFFER_DAEMON_CONSOLE_BUFFER = "1000";
         PUFFER_PANEL_REGISTRATIONENABLED = "false";
@@ -23,7 +23,7 @@
       ];
       extraOptions = [
         "--pull=always"
-        "--network=host"
+        #"--network=host"
       ];
     };
   };

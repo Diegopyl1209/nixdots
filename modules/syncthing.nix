@@ -11,7 +11,7 @@
       user = username;
       configDir = lib.mkIf config.server.enable "/run/media/hdd1/Server/Data/Syncthing";
       dataDir = lib.mkIf config.nixos.server.enable "/run/media/hdd1/Server/Sync";
-      guiAddress = "0.0.0.0:8384";
+      guiAddress = "0.0.0.0:9020";
     };
   };
 }

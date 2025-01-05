@@ -26,8 +26,12 @@
   programs.nixvim = {
     enable = true;
     colorschemes.gruvbox.enable = true;
+    clipboard.providers.wl-copy.enable = true;
     plugins = {
       lightline.enable = true;
+      nix.enable = true;
+      yazi.enable = true;
+      vimtex.enable = true;
     };
   };
 }

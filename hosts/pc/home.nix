@@ -7,8 +7,8 @@
     touchpad.enable = false;
     #hyprland.enable = true;
     hyprland = {
-      enable = true;
-      nvidia = true;
+      enable = false;
+      nvidia = false;
     };
     gnome.enable = true;
     battery.enable = false;

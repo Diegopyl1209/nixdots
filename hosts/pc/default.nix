@@ -22,7 +22,7 @@
 
   server = {
     enable = true;
-    headscale.enable = false;
+    immich.enable = false;
   };
 
   nixos = {

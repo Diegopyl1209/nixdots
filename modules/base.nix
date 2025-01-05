@@ -59,13 +59,14 @@
     };
   };
 
-  services.tailscale.enable = true;
+  #services.tailscale.enable = true;
+  services.netbird.enable = true;
 
   # Hardware
   hardware.graphics.enable = true;
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true;
+    powerOnBoot = false;
   };
   zramSwap = {
     enable = true;
@@ -73,8 +74,8 @@
 
   # Adb
   programs.adb.enable = true;
-  # Podman
-  virtualisation.podman.enable = true;
+  # docker
+  virtualisation.docker.enable = true;
   # Networking
   networking = {
     hostName = "${host}";

@@ -10,7 +10,10 @@
     ./jellyfin.nix
     ./pufferpanel.nix
     ./glance.nix
-    ./headscale.nix
+    ./immich.nix
+    ./scrutiny.nix
+    ./vaultwarden.nix
+    ./freshrss.nix
   ];
   config = lib.mkIf config.server.enable {
     virtualisation.docker = {

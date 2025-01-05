@@ -47,6 +47,16 @@
                         url = "http://localhost:8989";
                         icon = "si:sonarr";
                       }
+                      {
+                        title = "Vaultwarden";
+                        url = "http://100.94.117.213:8222";
+                        icon = "si:vaultwarden";
+                      }
+                      {
+                        title = "Miniflux";
+                        url = "http://100.94.117.213:8200";
+                        icon = "si:rss";
+                      }
                     ];
                   }
                   {

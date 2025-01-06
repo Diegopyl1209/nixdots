@@ -49,12 +49,12 @@
                       }
                       {
                         title = "Vaultwarden";
-                        url = "http://100.94.117.213:8222";
+                        url = "http://100.64.0.3:8222";
                         icon = "si:vaultwarden";
                       }
                       {
-                        title = "Miniflux";
-                        url = "http://100.94.117.213:8200";
+                        title = "Freshrss";
+                        url = "http://100.64.0.3:8220";
                         icon = "si:rss";
                       }
                     ];

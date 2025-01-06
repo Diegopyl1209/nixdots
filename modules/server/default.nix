@@ -14,6 +14,7 @@
     ./scrutiny.nix
     ./vaultwarden.nix
     ./freshrss.nix
+    ./suwayomi.nix
   ];
   config = lib.mkIf config.server.enable {
     virtualisation.docker = {

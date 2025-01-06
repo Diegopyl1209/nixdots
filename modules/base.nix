@@ -59,8 +59,8 @@
     };
   };
 
-  #services.tailscale.enable = true;
-  services.netbird.enable = true;
+  services.tailscale.enable = true;
+  #services.netbird.enable = true;
 
   # Hardware
   hardware.graphics.enable = true;

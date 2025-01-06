@@ -15,7 +15,7 @@ in {
       environment = {
         TZ = "Santiago/Chile";
         CRON_MIN = "3,33";
-        TRUSTED_PROXY = "100.94.117.213/16";
+        TRUSTED_PROXY = "100.64.0.3/16";
       };
       volumes = [
         "${data_folder}/config:/config"

@@ -60,6 +60,7 @@
     libreoffice
     zathura
     obsidian
+    cartridges
     #nicotine-plus
 
     # Development

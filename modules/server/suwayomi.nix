@@ -8,11 +8,11 @@
 in {
   options.server.suwayomi.enable = lib.mkEnableOption "Enable Suwayomi" // {default = config.server.enable;};
   config = lib.mkIf config.server.suwayomi.enable {
-   systemd.services.docker-suwayomi.serviceConfig = {
+    systemd.services.docker-suwayomi.serviceConfig = {
       StartLimitBurst = 0;
       RestartSec = 30;
     };
-  
+
     virtualisation.oci-containers.containers.suwayomi = {
       image = "ghcr.io/suwayomi/tachidesk:stable";
       ports = [

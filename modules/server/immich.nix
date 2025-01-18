@@ -12,7 +12,7 @@
         # host = "/dev/null";
         enable = true;
       };
-      mediaLocation = "/run/media/hdd/immich";
+      mediaLocation = "${config.server.dataDir}/immich";
     };
   };
 }

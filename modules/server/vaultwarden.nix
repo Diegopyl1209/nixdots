@@ -4,7 +4,7 @@
   useremail,
   ...
 }: let
-  backup_dir = "/run/media/hdd1/Server/Data/Vaultwarden/backup";
+  backup_dir = "${config.server.dataDir}/Vaultwarden/backup";
   domain = "diegopyl.duckdns.org";
 in {
   options.server.vaultwarden.enable = lib.mkEnableOption "Enable Vaultwarden" // {default = config.server.enable;};
@@ -13,14 +13,11 @@ in {
       allowedTCPPorts = [8222];
     };
 
-    /*
-    # sometimes vpn take a little longer in start and vaultwarden crash if is dont present
     systemd.services.vaultwarden.serviceConfig = {
       StartLimitBurst = 0;
       RestartSec = 30;
       After = "graphical.target";
     };
-    */
 
     services.vaultwarden = {
       enable = true;

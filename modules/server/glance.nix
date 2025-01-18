@@ -11,7 +11,7 @@
       settings = {
         server = {
           port = 8070;
-          assets-path = "/run/media/hdd1/Server/Data/Glance/Assets";
+          assets-path = "${config.server.dataDir}/Glance/Assets";
         };
         pages = [
           {

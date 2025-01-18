@@ -129,7 +129,6 @@
     enable = true;
     browsed.enable = false;
     openFirewall = true;
-    #drivers = [pkgs.epson-escpr2 pkgs.epson-escpr];
   };
   security.polkit.enable = true;
   # Flatpak
@@ -137,7 +136,6 @@
 
   # Sound
   security.rtkit.enable = true;
-  hardware.pulseaudio.enable = lib.mkForce false;
   services.pipewire = {
     enable = true;
     alsa = {

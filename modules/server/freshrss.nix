@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  data_folder = "/run/media/hdd1/Server/Data/Freshrss";
+  data_folder = "${config.server.dataDir}/Freshrss";
 in {
   options.server.freshrss.enable = lib.mkEnableOption "Enable Freshrss" // {default = config.server.enable;};
   config = lib.mkIf config.server.freshrss.enable {

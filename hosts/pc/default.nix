@@ -6,7 +6,9 @@
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-intel-cpu-only
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
+    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
 
@@ -22,7 +24,10 @@
 
   server = {
     enable = true;
+    dataDir = "/run/media/hdd1/Server/Data";
+    mediaDir = "/run/media/hdd1/Server/Media";
     immich.enable = false;
+    transmission.enable = false;
   };
 
   nixos = {

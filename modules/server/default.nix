@@ -4,7 +4,17 @@
   host,
   ...
 }: {
-  options.server.enable = lib.mkEnableOption "Enable server suite" // {default = host == "server";};
+  options.server = {
+    enable = lib.mkEnableOption "Enable server suite" // {default = host == "server";};
+    dataDir = lib.mkOption {
+      type = lib.types.str;
+      description = "Data dir for services";
+    };
+    mediaDir = lib.mkOption {
+      type = lib.types.str;
+      description = "Media dir for services";
+    };
+  };
   imports = [
     ./transmission.nix
     ./jellyfin.nix
@@ -15,6 +25,8 @@
     ./vaultwarden.nix
     ./freshrss.nix
     ./suwayomi.nix
+    ./shoko.nix
+    ./qbittorrent.nix
   ];
   config = lib.mkIf config.server.enable {
     virtualisation.docker = {

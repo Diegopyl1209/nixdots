@@ -1,6 +1,6 @@
 {pkgs, ...}: let
   pname = "autobrr";
-  version = "1.56.1";
+  version = "1.57.0";
   name = "${pname}-${version}";
 in
   pkgs.stdenv.mkDerivation {
@@ -8,7 +8,7 @@ in
 
     src = pkgs.fetchzip {
       url = "https://github.com/autobrr/autobrr/releases/download/v${version}/autobrr_${version}_linux_x86_64.tar.gz";
-      sha256 = "sha256-hMR58B+eje35T3ySXfw4fDX8Bv52nE42V7jpl8+CyJo=";
+      sha256 = "sha256-LVzPM+GSDrqUO72YC6RPgmPZRBTu30ZAYLvus4nWkis=";
       stripRoot = false;
     };
 

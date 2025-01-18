@@ -4,7 +4,7 @@
   config,
   ...
 }: let
-  data_folder = "/run/media/hdd1/Server/Data/Suwayomi";
+  data_folder = "${config.server.dataDir}/Suwayomi";
 in {
   options.server.suwayomi.enable = lib.mkEnableOption "Enable Suwayomi" // {default = config.server.enable;};
   config = lib.mkIf config.server.suwayomi.enable {

@@ -92,6 +92,7 @@
 
     # Gaming
     r2modman
+    bottles
     heroic
     lutris
     mangohud

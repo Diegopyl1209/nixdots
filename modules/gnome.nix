@@ -21,7 +21,7 @@
         #configure-terminal-nemo
         #nemo-with-extensions
         #nemo-fileroller
-        gnome-extension-manager
+        #gnome-extension-manager
         nautilus
         nautilus-python
       ];

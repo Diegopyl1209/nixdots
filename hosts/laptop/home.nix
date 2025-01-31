@@ -11,7 +11,7 @@
     backlight.enable = true;
     gaming = {
       enable = true;
-      steam.enable = false;
+      steam.enable = true;
     };
   };
 }

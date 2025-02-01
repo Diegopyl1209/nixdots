@@ -8,9 +8,10 @@
     defaultSopsFile = ../hosts/secrets.yaml;
     defaultSopsFormat = "yaml";
     age = {
-      sshKeyPaths = ["/home/${username}/.ssh/id_ed25519"];
+      #sshKeyPaths = ["/home/${username}/.ssh/id_ed25519"];
       keyFile = "/home/${username}/.config/sops/age/keys.txt";
-      generateKey = true;
+      #generateKey = true;
     };
+    secrets.hello = {};
   };
 }

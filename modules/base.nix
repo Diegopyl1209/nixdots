@@ -158,6 +158,12 @@
     enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
+    hostKeys = [
+      {
+        path = "/home/${username}/.ssh/id_ed25519";
+        type = "ed25519";
+      }
+    ];
   };
   # Locale
   time.timeZone = "America/Santiago";

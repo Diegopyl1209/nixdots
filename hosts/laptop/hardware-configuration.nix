@@ -16,6 +16,29 @@
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-label/NIXOS";
+      fsType = "btrfs";
+      options = ["subvol=root" "compress=zstd"];
+    };
+    "/home" = {
+      device = "/dev/disk/by-label/NIXOS";
+      fsType = "btrfs";
+      options = ["subvol=home" "compress=zstd"];
+    };
+    "/nix" = {
+      device = "/dev/disk/by-label/NIXOS";
+      fsType = "btrfs";
+      options = ["subvol=nix" "compress=zstd" "noatime"];
+    };
+
+    "/boot" = {
+      device = "/dev/disk/by-label/NIXOS-BOOT";
+      fsType = "vfat";
+    };
+  };
+
   swapDevices = [
     {device = "/dev/disk/by-label/NIXOS-SWAP";}
   ];

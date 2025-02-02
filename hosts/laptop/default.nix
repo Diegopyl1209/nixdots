@@ -1,4 +1,8 @@
-{inputs, pkgs, ...}: {
+{
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t490
     inputs.nixos-hardware.nixosModules.common-pc-ssd
@@ -14,8 +18,8 @@
     enable = true;
     extraPackages = with pkgs; [
       vpl-gpu-rt # for newer GPUs on NixOS >24.05 or unstable
-      onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
-      intel-media-sdk   # for older GPUs
+      onevpl-intel-gpu # for newer GPUs on NixOS <= 24.05
+      intel-media-sdk # for older GPUs
     ];
   };
 }

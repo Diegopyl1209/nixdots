@@ -10,7 +10,7 @@ in {
   config = lib.mkIf config.server.kavita.enable {
     sops.secrets.kavitaToken = {};
     sops.secrets.komf = {};
-    
+
     services.kavita = {
       enable = true;
       dataDir = "${data_dir}/Kavita";

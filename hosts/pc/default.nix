@@ -36,7 +36,8 @@
     fileSystems = {
       "/run/media/hdd1" = {
         device = "/dev/disk/by-uuid/fbd276d0-7686-4989-81c0-b72656584aad";
-        fsType = "exfat";
+        fsType = "btrfs";
+        options = ["nofail"];
       };
     };
   };

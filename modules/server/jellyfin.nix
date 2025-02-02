@@ -18,14 +18,14 @@
       };
 
       #prowlarr.enable = true;
-
+     /*
       sonarr = {
         enable = true;
         user = username;
         group = "media";
         openFirewall = true;
         dataDir = "${config.server.dataDir}/sonnar";
-      };
+      }; */
 
       autobrr = {
         enable = true;

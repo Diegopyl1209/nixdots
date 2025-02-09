@@ -97,6 +97,7 @@
     lutris
     mangohud
     prismlauncher
+    tetrio-desktop
     # (prismlauncher.override {withWaylandGLFW = true;})
     blockbench
     wineWowPackages.staging

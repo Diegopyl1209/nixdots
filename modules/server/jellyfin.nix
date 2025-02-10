@@ -18,22 +18,15 @@
       };
 
       #prowlarr.enable = true;
-     /*
+      /*
       sonarr = {
         enable = true;
         user = username;
         group = "media";
         openFirewall = true;
         dataDir = "${config.server.dataDir}/sonnar";
-      }; */
-
-      autobrr = {
-        enable = true;
-        user = username;
-        group = "media";
-        configDir = "${config.server.dataDir}/autobrr";
-        package = pkgs.callPackage ./../../pkgs/autobrr/package.nix {};
       };
+      */
     };
 
     environment.systemPackages = with pkgs; [

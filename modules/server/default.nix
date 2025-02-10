@@ -27,6 +27,7 @@
     ./suwayomi.nix
     ./shoko.nix
     ./qbittorrent.nix
+    ./autobrr.nix
   ];
   config = lib.mkIf config.server.enable {
     virtualisation.docker = {

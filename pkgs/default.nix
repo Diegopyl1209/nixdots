@@ -4,7 +4,7 @@
   ...
 }: {
   imports = [
-    ./autobrr/service.nix
+    #./autobrr/service.nix
     ./qbittorrent/service.nix
   ];
 

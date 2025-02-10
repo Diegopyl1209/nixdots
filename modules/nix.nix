@@ -31,7 +31,11 @@
   # Nixpkgs
   nixpkgs = {
     overlays = [
-      #inputs.sddm-sugar-candy-nix.overlays.default
+      (final: prev: {
+        lldb = prev.lldb.overrideAttrs {
+          dontCheckForBrokenSymlinks = true; # https://github.com/NixOS/nixpkgs/issues/380196
+        };
+      })
     ];
     config = {
       allowUnfree = true;

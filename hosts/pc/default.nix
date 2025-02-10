@@ -25,22 +25,22 @@
     immich.enable = false;
     transmission.enable = false;
   };
-  
-      fileSystems = {
-      "/run/media/hdd1" = {
-        device = "/dev/disk/by-uuid/11265333-7f55-4922-b9df-f9e92f6f388d";
-        fsType = "btrfs";
-        options = ["nofail"];
-      };
-            "/run/media/hdd2" = {
-        device = "/dev/disk/by-uuid/6aafb983-9b7b-4df7-b612-9d0eba95e46b";
-        fsType = "btrfs";
-        options = ["nofail"];
-      };
+
+  fileSystems = {
+    "/run/media/hdd1" = {
+      device = "/dev/disk/by-uuid/11265333-7f55-4922-b9df-f9e92f6f388d";
+      fsType = "btrfs";
+      options = ["nofail"];
     };
+    "/run/media/hdd2" = {
+      device = "/dev/disk/by-uuid/6aafb983-9b7b-4df7-b612-9d0eba95e46b";
+      fsType = "btrfs";
+      options = ["nofail"];
+    };
+  };
 
   nixos = {
-      vfio = {
+    vfio = {
       enable = false;
       acs = true;
       gpuIDs = [
@@ -53,8 +53,8 @@
       drivers = {
         enable = true;
         version = "beta";
-                prime = {
-          enable = true;
+        prime = {
+          enable = false;
           amdgpuBusId = "PCI:7:0:0";
           nvidiaBusId = "PCI:6:0:0";
         };

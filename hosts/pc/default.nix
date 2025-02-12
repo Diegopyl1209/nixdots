@@ -48,7 +48,7 @@
         "10de:2291"
       ];
     };
-    amdgpu.enable = true;
+    amdgpu.enable = false;
     nvidia = {
       drivers = {
         enable = true;

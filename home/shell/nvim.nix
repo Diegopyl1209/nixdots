@@ -51,7 +51,7 @@
           };
           mapping = {
             "<C-Space>" = "cmp.mapping.complete()";
-            "<C-d>" = "cmp.mapping.scroll_docs(-4)";
+            "<C-b>" = "cmp.mapping.scroll_docs(-4)";
             "<C-e>" = "cmp.mapping.close()";
             "<C-f>" = "cmp.mapping.scroll_docs(4)";
             "<CR>" = "cmp.mapping.confirm({ select = true })";
@@ -81,6 +81,14 @@
           bashls.enable = true;
           java_language_server.enable = true;
           kotlin_language_server.enable = true;
+        };
+      };
+      typescript-tools = {
+        enable = true;
+        settings = {
+          tsserver_plugins = [
+            "@styled/typescript-styled-plugin"
+          ];
         };
       };
     };

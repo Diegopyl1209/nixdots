@@ -43,6 +43,11 @@
   };
 
   hardware.graphics.enable = true;
+  
+  nixos.nvidia = {
+    enable = true;
+    version = "beta";
+  };
 
   system.stateVersion = "22.05";
 }

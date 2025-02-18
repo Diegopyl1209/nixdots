@@ -8,7 +8,6 @@
   data_folder = "${config.server.dataDir}/autobrr";
   package = pkgs.autobrr;
   username = "diegopyl";
-  group = "media";
 in {
   networking.firewall = {
     allowedTCPPorts = [7474];
@@ -26,7 +25,6 @@ in {
     serviceConfig = {
       Type = "simple";
       User = username;
-      Group = group;
       ExecStart = utils.escapeSystemdExecArgs [
         (lib.getExe package)
         "--config=${data_folder}"

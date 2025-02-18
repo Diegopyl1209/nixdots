@@ -2,7 +2,8 @@
   pkgs,
   inputs,
   ...
-}: {
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.common-gpu-amd
 
@@ -36,11 +37,12 @@
     hostName = "server";
   };
 
+  programs.ssh.startAgent = true;
+
   fileSystems."/run/media/hdd1" = {
     device = "/dev/disk/by-uuid/1d8863bd-af61-4214-993d-bec7b5f0c0bf";
     fsType = "ext4";
   };
-
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;

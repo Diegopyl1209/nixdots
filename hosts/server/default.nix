@@ -13,6 +13,7 @@
 
     ../common/optional/quietboot.nix
 
+    ../common/optional/caddy.nix
     ../common/optional/services/jellyfin.nix
     ../common/optional/services/vaultwarden.nix
     ../common/optional/services/glance.nix

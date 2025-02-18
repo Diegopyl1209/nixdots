@@ -8,7 +8,6 @@
     jellyfin = {
       enable = true;
       user = "diegopyl";
-      group = "media";
       openFirewall = true;
       dataDir = "${config.server.dataDir}/jellyfin/dataDir";
       configDir = "${config.server.dataDir}/jellyfin/configDir";

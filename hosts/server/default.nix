@@ -4,21 +4,22 @@
   ...
 }: {
   imports = [
-    inputs.nixos-hardware.nixosModules.common-cpu-amd
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-    inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
 
     ./hardware-configuration.nix
 
     ../common/global
     ../common/users/diegopyl
 
-    ../common/optional/gnome.nix
-    ../common/optional/pipewire.nix
     ../common/optional/quietboot.nix
-    ../common/optional/nginx.nix
-    ../common/optional/steam.nix
+
+    ../common/optional/services/jellyfin.nix
+    ../common/optional/services/vaultwarden.nix
+    ../common/optional/services/glance.nix
+    ../common/optional/services/freshrss.nix
+    ../common/optional/services/suwayomi.nix
+    ../common/optional/services/autobrr.nix
+    ../common/optional/services/shoko.nix
   ];
 
   server = {
@@ -30,16 +31,17 @@
     hello
   ];
   networking = {
-    hostName = "desktop";
+    hostName = "server";
   };
+
+  fileSystems."/run/media/hdd1" = {
+    device = "/dev/disk/by-uuid/1d8863bd-af61-4214-993d-bec7b5f0c0bf";
+    fsType = "ext4";
+  };
+
 
   boot = {
     kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-  };
-
-  programs = {
-    adb.enable = true;
-    dconf.enable = true;
   };
 
   hardware.graphics.enable = true;

@@ -17,4 +17,9 @@ in {
       ROCKET_PORT = 8222;
     };
   };
+
+  services.caddy.virtualHosts."server.local.com".extraConfig = ''
+    reverse_proxy http://100.64.0.5:8222
+    tls internal
+  '';
 }

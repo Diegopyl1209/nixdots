@@ -18,7 +18,7 @@ in {
     };
   };
 
-  services.caddy.virtualHosts."server.local.com:8222".extraConfig = ''
+  services.caddy.virtualHosts."server.local.com:8223".extraConfig = ''
     reverse_proxy http://100.64.0.5:8222
     tls internal
   '';

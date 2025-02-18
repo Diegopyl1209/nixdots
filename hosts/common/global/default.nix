@@ -18,6 +18,7 @@
       ./upower.nix
       ./grub.nix
       ./nix-index.nix
+      ./openssh.nix
     ]
     ++ (builtins.attrValues outputs.nixosModules);
 

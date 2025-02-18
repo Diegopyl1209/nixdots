@@ -14,7 +14,7 @@ in {
   virtualisation.oci-containers.containers.suwayomi = {
     image = "ghcr.io/suwayomi/tachidesk:stable";
     ports = [
-      "100.64.0.3:9900:4567"
+      "100.64.0.5:9900:4567"
     ];
     environment = {
       DOWNLOAD_AS_CBZ = "true";

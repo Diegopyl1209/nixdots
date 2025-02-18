@@ -14,7 +14,7 @@ in {
   };
 
   systemd.tmpfiles.rules = [
-    "d '${data_folder}' 0700 ${username} ${group} - -"
+    "d '${data_folder}' 0700 ${username} users - -"
   ];
 
   systemd.services.autobrr = {
